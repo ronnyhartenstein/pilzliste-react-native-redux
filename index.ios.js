@@ -1,5 +1,5 @@
-import React from 'react'
-import { AppRegistry, View } from 'react-native'
+import React, { Component } from 'react'
+import { AppRegistry, View, StyleSheet } from 'react-native'
 import Fusszeile from './src/Fusszeile'
 import Kopfzeile from './src/Kopfzeile'
 import Liste from './src/Liste'
@@ -7,7 +7,7 @@ import Liste from './src/Liste'
 class Pilzliste extends Component {
   render() {
     return (
-      <View style={style.container}>
+      <View style={styles.container}>
         <Kopfzeile />
         <Liste />
         <Fusszeile />
@@ -15,5 +15,13 @@ class Pilzliste extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  kopfzeile: {
+    height: 50, 
+    padding: 10,
+    backgroundColor: 'powderblue'
+  }
+});
 
 AppRegistry.registerComponent('Pilzliste', () => Pilzliste)

@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements'
 class Fusszeile extends Component {
   render() {
     return (
-      <View style={style.fusszeile}>
+      <View style={styles.fusszeile}>
           <Text>Menüicons...</Text>
           <Button
             raised

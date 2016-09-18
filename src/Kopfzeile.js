@@ -9,7 +9,7 @@ class Kopfzeile extends Component {
   }
   render() {
     return (
-      <View style={style.kopfzeile}>
+      <View style={styles.kopfzeile}>
           <SearchBar
             lightTheme
             onChangeText={(text) => this.setState({text})}
