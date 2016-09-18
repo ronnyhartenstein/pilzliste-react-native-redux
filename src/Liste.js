@@ -7,23 +7,30 @@ import daten from '../daten/pilze.json'
 class Liste extends Component {
   constructor(props) {
     super(props);
-    // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    // this.state = {
-    //   dataSource: ds.cloneWithRows(daten)
-    // };
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows(daten)
+    };
   }
+
+    renderRow (rowData, sectionID) {
+        return (
+            <ListItem
+                key={sectionID}
+                title={rowData.name}
+                subtitle={rowData.lat}
+            />
+        )
+    }
+
   render() {
     return (
       <ScrollView style={styles.liste}>
-        <List containerStyle={{marginBottom: 20}}>
-            {
-                daten.map((l, i) => (
-                    <ListItem
-                        key={i}
-                        title={l.name}
-                    />
-                ))
-            }
+        <List>
+            <ListView
+                renderRow={this.renderRow}
+                dataSource={this.state.dataSource}
+            />
         </List>
       </ScrollView>
     );
