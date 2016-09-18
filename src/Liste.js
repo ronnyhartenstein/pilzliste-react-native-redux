@@ -4,6 +4,8 @@ import { List, ListItem } from 'react-native-elements'
 
 import daten from '../daten/pilze.json'
 
+// https://github.com/react-native-community/React-Native-Elements#lists
+
 class Liste extends Component {
   constructor(props) {
     super(props);
@@ -17,8 +19,8 @@ class Liste extends Component {
         return (
             <ListItem
                 key={sectionID}
-                title={rowData.name}
-                subtitle={rowData.lat}
+                title={rowData.name != "" ? rowData.name : "?"}
+                subtitle={rowData.lat != "" ? rowData.lat : "?"}
             />
         )
     }
