@@ -17,10 +17,10 @@ class Pilzliste extends Component {
 }
 
 const styles = StyleSheet.create({
-  kopfzeile: {
-    height: 50, 
-    padding: 10,
-    backgroundColor: 'powderblue'
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 });
 

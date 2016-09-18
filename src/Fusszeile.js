@@ -7,10 +7,6 @@ class Fusszeile extends Component {
     return (
       <View style={styles.fusszeile}>
           <Text>Menüicons...</Text>
-          <Button
-            raised
-            icon={{name: 'cached'}}
-            title='RAISED WITH ICON' />
       </View>
     )
   }

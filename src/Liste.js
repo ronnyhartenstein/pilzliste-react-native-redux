@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, ListView, StyleSheet, Text } from 'react-native'
+import { View, ScrollView, ListView, StyleSheet, Text } from 'react-native'
+
 import daten from '../daten/pilze.json'
 
 class Liste extends Component {
@@ -12,12 +13,12 @@ class Liste extends Component {
   }
   render() {
     return (
-      <View style={styles.liste}>
+      <ScrollView style={styles.liste}>
         <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Text>{rowData.name}</Text>}
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) => <Text>{rowData.name}</Text>}
         />
-      </View>
+      </ScrollView>
     );
   }
 }
