@@ -2,16 +2,21 @@ import React, { Component } from 'react'
 import { View, ScrollView, ListView, StyleSheet, Text } from 'react-native'
 import { List, ListItem } from 'react-native-elements'
 
-import daten from '../daten/pilze.json'
-
 // https://github.com/react-native-community/React-Native-Elements#lists
 
 class Liste extends Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(daten)
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
+      })
+    };
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    if (this.props.items) {
+      this.state.dataSource = this.state.dataSource.cloneWithRows(
+        dataSource: ds.cloneWithRows(this.props.items)
+      );
     };
   }
 

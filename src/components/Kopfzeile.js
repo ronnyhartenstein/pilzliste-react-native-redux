@@ -2,18 +2,23 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 
+// SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
+// erweitert TextInput: https://facebook.github.io/react-native/docs/textinput.html
 class Kopfzeile extends Component {
   constructor(props) {
     super(props);
-    this.state = {text: ''};
+  }
+  onChange(searchterm) {
+    this.props.doSearch(searchterm);
   }
   render() {
     return (
       <View style={styles.kopfzeile}>
           <SearchBar
             lightTheme
-            onChangeText={(text) => this.setState({text})}
-            placeholder='Name? Farbe? Hut? Unterseite?' />
+            onChangeText={this.onChange}
+            placeholder='Name? Farbe? Hut? Unterseite?'
+            value={this.props.activeSearch} />
       </View>
     )
   }
