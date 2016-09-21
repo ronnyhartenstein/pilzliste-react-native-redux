@@ -21,7 +21,7 @@ class Kopfzeile extends Component {
 
 const styles = StyleSheet.create({
   kopfzeile: {
-    height: 50,
+    height: 48,
     marginTop: 30, 
     //padding: 10,
     backgroundColor: 'powderblue'

@@ -14,7 +14,7 @@ class Fusszeile extends Component {
 
 const styles = StyleSheet.create({
   fusszeile: {
-    height: 50, 
+    height: 0, 
     backgroundColor: 'steelblue'
   }
 });

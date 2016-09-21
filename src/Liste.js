@@ -27,8 +27,8 @@ class Liste extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.liste}>
-        <List>
+      <ScrollView style={styles.container}>
+        <List style={styles.liste}>
             <ListView
                 renderRow={this.renderRow}
                 dataSource={this.state.dataSource}
@@ -40,11 +40,11 @@ class Liste extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+    },
   liste: {
     flex: 1, 
-    //backgroundColor: 'skyblue',
-    //marginTop: 0,
-    //paddingTop: 0
+    backgroundColor: 'skyblue',
   }
 });
 
