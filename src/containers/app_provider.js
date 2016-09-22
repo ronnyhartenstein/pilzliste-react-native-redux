@@ -7,7 +7,7 @@ export default class AppProvider extends Component {
   render() {
     return (
         <Provider store={store}>
-        {() => <App />}
+          <App />
         </Provider>
     )
   }

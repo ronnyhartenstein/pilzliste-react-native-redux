@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
-import { loadItem } from '../actions/itemActions';
 import Liste from './Liste'
 import { connect } from 'react-redux'
 // import FuzzySearch from 'fuzzy-search'
 import _ from 'lodash'
-
-// beim Laden befüllen..
-import daten from '../../daten/pilze.json'
-_.each(daten, item => {
-    store.dispatch(loadItem(item)) 
-});
 
 const mapStateToProps = (state) => {
   // https://www.npmjs.com/package/fuzzy-search
@@ -23,8 +16,9 @@ const mapStateToProps = (state) => {
           }
       }
   } 
+//   console.log("INIT Liste Redux", state)
   return {
-    items: _.isEmpty(state.search) ? state.items : searchengine().search(state.search)
+    items: _.isEmpty(state.search) || state.search.length < 3 ? state.items : searchengine().search(state.search)
   }
 }
 
