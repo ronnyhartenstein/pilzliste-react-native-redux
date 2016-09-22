@@ -5,6 +5,10 @@ import { SearchBar } from 'react-native-elements'
 // SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
 // erweitert TextInput: https://facebook.github.io/react-native/docs/textinput.html
 class Kopfzeile extends Component {
+  propTypes = {
+    doSearch: PropTypes.func.isRequired,
+    activeSearch: PropTypes.string.isRequired
+  }
   constructor(props) {
     super(props);
   }
