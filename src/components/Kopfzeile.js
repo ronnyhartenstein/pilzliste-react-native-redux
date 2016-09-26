@@ -11,12 +11,14 @@ class Kopfzeile extends Component {
   // }
   constructor(props) {
     super(props);
+    // console.log("Kopfzeile const", props)
   }
   onChange(searchterm) {
-    console.log("suche nach .. ", searchterm, this.props)
+    // console.log("suche nach .. ", searchterm, this.props)
     this.props.doSearch(searchterm);
   }
   render() {
+    // console.log("Kopf render", this.props)
     return (
       <View style={styles.kopfzeile}>
           <SearchBar

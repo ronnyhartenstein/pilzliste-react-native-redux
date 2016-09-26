@@ -21,8 +21,8 @@ class Liste extends Component {
         rowHasChanged: (r1, r2) => r1 !== r2
       })
     }
-    if (this.props.items) {
-      this.state.dataSource = this.state.dataSource.cloneWithRows(this.props.items)
+    if (this.props.filteredItems) {
+      this.state.dataSource = this.state.dataSource.cloneWithRows(this.props.filteredItems)
     }
     // console.log("Liste dataSource", this.state.dataSource)
   }
