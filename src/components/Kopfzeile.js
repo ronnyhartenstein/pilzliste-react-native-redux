@@ -11,20 +11,18 @@ class Kopfzeile extends Component {
   // }
   constructor(props) {
     super(props);
-    // console.log("Kopfzeile const", props)
   }
   onChange(searchterm) {
     // console.log("suche nach .. ", searchterm, this.props)
     this.props.doSearch(searchterm);
   }
   render() {
-    // console.log("Kopf render", this.props)
     return (
       <View style={styles.kopfzeile}>
           <SearchBar
             lightTheme
             onChangeText={term => this.onChange(term)}
-            placeholder='Name? Farbe? Hut? Unterseite?'
+            placeholder='Name? Farbe? Hut? Unterseite? (mind. 3 Zeichen)'
             value={this.props.activeSearch} />
       </View>
     )
@@ -35,15 +33,8 @@ const styles = StyleSheet.create({
   kopfzeile: {
     height: 48,
     marginTop: 30, 
-    //padding: 10,
     backgroundColor: 'powderblue'
   },
-  // input: {
-  //   height: 30, 
-  //   borderColor: 'gray', 
-  //   borderWidth: 1,
-  //   backgroundColor: 'white'
-  // }
 });
 
 export default Kopfzeile

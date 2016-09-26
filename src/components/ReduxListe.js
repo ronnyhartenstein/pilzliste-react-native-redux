@@ -12,14 +12,13 @@ const getItems = (state) => state.items
 const getVisibleItems = createSelector(
   [ getSearch, getItems ],
   (search, items) => {
-    // if (_.isEmpty(search) || search.length < 3) {
-    //   return items
-    // } else {
+    if (_.isEmpty(search) || search.length < 3) {
+      return items
+    } else {
       const r = new RegExp(search, 'i')
       const filtered = _.filter(items, itm => ( r.test(itm.name) || r.test(itm.lat) ))
-      // console.log("Filtered: ", filtered)
       return filtered
-    // }
+    }
   }
 )
 
@@ -32,7 +31,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onItemClick: (nr) => {
-        console.log("TODO zeige Details-Szene")
+      console.log("TODO zeige Details-Szene")
       //dispatch(showDetails(nr))
     }
   }

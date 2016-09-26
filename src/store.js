@@ -11,19 +11,17 @@ const createStoreWithMiddleware = applyMiddleware(logger)(createStore);
 
 import daten from '../daten/pilze.json'
 // erstmal nur Name und Lat und 3 wg. Log
-const daten_preload = _.map(_.take(daten, 10000), itm => ( { name: itm.name, lat: itm.lat } ))
+// const daten_preload = _.map(_.take(daten, 10000), itm => ( { name: itm.name, lat: itm.lat } ))
 // console.log("daten preload: ", daten_preload)
 
 // beim Laden befüllen..
 // http://stackoverflow.com/questions/33749759/read-stores-initial-state-in-redux-reducer#33791942
-// const reducers = combineReducers({ search, items });
 function reducers(state = {}, action) {
   return {
     search: search(state.search, action),
     items: items(state.items, action)
   };
 }
-// const store = createStoreWithMiddleware(reducers);
-const store = createStore(reducers, { items: daten_preload, search: "" });
+const store = createStore(reducers, { items: daten });
 
 export default store;
