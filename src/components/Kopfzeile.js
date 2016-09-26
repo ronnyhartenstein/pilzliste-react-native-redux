@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TextInput } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 
 // SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
@@ -21,8 +21,7 @@ class Kopfzeile extends Component {
     // console.log("Kopf render", this.props)
     return (
       <View style={styles.kopfzeile}>
-          <TextInput
-            style={styles.input}
+          <SearchBar
             lightTheme
             onChangeText={term => this.onChange(term)}
             placeholder='Name? Farbe? Hut? Unterseite?'
@@ -39,12 +38,12 @@ const styles = StyleSheet.create({
     //padding: 10,
     backgroundColor: 'powderblue'
   },
-  input: {
-    height: 30, 
-    borderColor: 'gray', 
-    borderWidth: 1,
-    backgroundColor: 'white'
-  }
+  // input: {
+  //   height: 30, 
+  //   borderColor: 'gray', 
+  //   borderWidth: 1,
+  //   backgroundColor: 'white'
+  // }
 });
 
 export default Kopfzeile

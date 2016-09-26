@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, ScrollView, ListView, StyleSheet, Text } from 'react-native'
-// import { List, ListItem } from 'react-native-elements'
+import { List, ListItem } from 'react-native-elements'
 
 // https://github.com/react-native-community/React-Native-Elements#lists
 // ListView https://facebook.github.io/react-native/docs/listview.html
@@ -29,7 +29,6 @@ class Liste extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log("WAT?", nextProps)
     if (nextProps.filteredItems !== this.props.filteredItems) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(nextProps.filteredItems)
@@ -40,29 +39,29 @@ class Liste extends Component {
     renderRow (rowData, sectionID) {
       // console.log("renderRow", rowData)
         return (
-            <Text>{rowData.name != "" ? rowData.name : "?"}</Text>
-            // <ListItem
-            //     onClick={itm => this.onClick(itm)}
-            //     key={sectionID}
-            //     title={rowData.name != "" ? rowData.name : "?"}
-            //     subtitle={rowData.lat != "" ? rowData.lat : "?"}
-            // />
+            <ListItem
+                onClick={itm => this.onClick(itm)}
+                key={sectionID}
+                title={rowData.name != "" ? rowData.name : "?"}
+                subtitle={rowData.lat != "" ? rowData.lat : "?"}
+            />
         )
     }
-    // onClick (itm) {
-    //   console.log("click auf item", itm)
-    //   // this.props.onItemClick();
-    // }
+    onClick (itm) {
+      console.log("click auf item", itm)
+      // this.props.onItemClick();
+    }
 
   render() {
-    // <List style={styles.liste}>
         
     return (
       <ScrollView style={styles.container}>
+        <List style={styles.liste}>
             <ListView
                 renderRow={this.renderRow}
                 dataSource={this.state.dataSource}
             />
+        </List>
       </ScrollView>
     );
   }

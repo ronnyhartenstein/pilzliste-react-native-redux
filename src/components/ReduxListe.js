@@ -17,7 +17,7 @@ const getVisibleItems = createSelector(
     // } else {
       const r = new RegExp(search, 'i')
       const filtered = _.filter(items, itm => ( r.test(itm.name) || r.test(itm.lat) ))
-      console.log("Filtered: ", filtered)
+      // console.log("Filtered: ", filtered)
       return filtered
     // }
   }
