@@ -6,16 +6,24 @@ import items from './reducers/items';
 import _ from 'lodash'
 import { loadItem } from './actions/itemActions';
 
-import daten from '../daten/pilze.json'
-
 const logger = createLogger();
 const createStoreWithMiddleware = applyMiddleware(logger)(createStore);
-const reducers = combineReducers({ search, items });
-const store = createStoreWithMiddleware(reducers);
+
+import daten from '../daten/pilze.json'
+// erstmal nur Name und Lat und 3 wg. Log
+const daten_preload = _.map(_.take(daten, 3), itm => ( { name: itm.name, lat: itm.lat } ))
+console.log("daten preload: ", daten_preload)
 
 // beim Laden befüllen..
-_.each(_.take(daten, 10), item => {
-    store.dispatch(loadItem(item)) 
-});
+// http://stackoverflow.com/questions/33749759/read-stores-initial-state-in-redux-reducer#33791942
+// const reducers = combineReducers({ search, items });
+function reducers(state = {}, action) {
+  return {
+    search: search(state.search, action),
+    items: items(state.items, action)
+  };
+}
+// const store = createStoreWithMiddleware(reducers);
+const store = createStore(reducers, { items: daten_preload });
 
 export default store;
