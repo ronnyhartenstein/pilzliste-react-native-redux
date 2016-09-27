@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, ListView, StyleSheet, Text } from 'react-native'
+import { View, ScrollView, ListView, StyleSheet, Text, Image } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
 import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-lazyload';
 
@@ -57,7 +57,10 @@ class Liste extends Component {
           contentContainerStyle={styles.content}
           name="lazyload-list"
       >
-      { this.state.items.map((item, i) => ( 
+      { this.state.items.map((item, i) => {
+        const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + item.name.replace(' ','%20') + '.jpg.png'
+        console.log("image: ", image_uri)
+        return ( 
           <View
               key={i}
               style={styles.view}
@@ -66,13 +69,23 @@ class Liste extends Component {
                 host="lazyload-list"
                 style={styles.item}
             >
+              <Image
+                style={styles.image}
+                source={{uri: image_uri}}
+                // onLoad={(e) => console.log("loaded")}
+                // onLoadStart={(e) => console.log("onLoadStart", e)}
+                // onLoadEnd={(e) => console.log("onLoadEnd", e)}
+                onError={({nativeEvent: {error}}) => console.log("Image load error: ", error)}
+                onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
+              />
               <View style={styles.name}>
                   <Text style={styles.nameText}>{item.name}</Text>
                   <Text style={styles.latText}>{item.lat}</Text>
               </View>
             </LazyloadView>
           </View>
-      )) }
+          )
+      }) }
       </LazyloadScrollView>
     );
   }
@@ -88,7 +101,14 @@ const styles = StyleSheet.create({
       borderTopColor: "gray",
       height: 50
     },
+    image: {
+      width: 30, 
+      height: 30,
+      marginRight: 10
+    },
     item: {
+      flex: 1, 
+      flexDirection: 'row',
       margin: 10
     },
     // nameText: {
