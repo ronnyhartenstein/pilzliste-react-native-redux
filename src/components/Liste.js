@@ -58,7 +58,14 @@ class Liste extends Component {
           name="lazyload-list"
       >
       { this.state.items.map((item, i) => {
-        const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + item.name.replace(' ','%20') + '.jpg.png'
+        // escapeURIComponent, escape .. :(
+        const name_escaped = item.name
+            .replace(/ä/g, 'a%CC%88')
+            .replace(/ü/g, 'u%CC%88')
+            .replace(/ö/g, 'o%CC%88')
+            .replace(/ß/g, '%C3%9F')
+            .replace(/ /g, '%20')
+        const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + name_escaped + '.jpg.png'
         // console.log("image: ", image_uri)
         return ( 
           <View
