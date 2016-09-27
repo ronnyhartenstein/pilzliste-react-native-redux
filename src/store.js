@@ -1,17 +1,18 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
-import createLogger from 'redux-logger';
-// import reducers from './reducers';
+// import createLogger from 'redux-logger';
 import search from './reducers/search';
 import items from './reducers/items';
 import _ from 'lodash'
 import { loadItem } from './actions/itemActions';
 
-const logger = createLogger();
-const createStoreWithMiddleware = applyMiddleware(logger)(createStore);
+// Logging Redux
+// const logger = createLogger();
+// const createStoreWithMiddleware = applyMiddleware(logger)(createStore);
 
 import daten from '../daten/pilze.json'
 // erstmal nur Name und Lat und 3 wg. Log
-// const daten_preload = _.map(_.take(daten, 10000), itm => ( { name: itm.name, lat: itm.lat } ))
+const daten_preload = daten
+// const daten_preload = _.map(_.take(daten, 5), itm => ( { name: itm.name, lat: itm.lat } ))
 // console.log("daten preload: ", daten_preload)
 
 // beim Laden befüllen..
@@ -22,6 +23,6 @@ function reducers(state = {}, action) {
     items: items(state.items, action)
   };
 }
-const store = createStore(reducers, { items: daten });
+const store = createStore(reducers, { items: daten_preload });
 
 export default store;

@@ -16,7 +16,6 @@ class Liste extends Component {
   // }
   constructor(props) {
     super(props)
-    console.log("Liste props", this.props)
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { SearchBar } from 'react-native-elements'
+import _ from 'lodash'
 
 // SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
 // erweitert TextInput: https://facebook.github.io/react-native/docs/textinput.html
@@ -13,7 +14,7 @@ class Kopfzeile extends Component {
     super(props);
   }
   onChange(searchterm) {
-    // console.log("suche nach .. ", searchterm, this.props)
+    console.log("suche nach .. ", searchterm, this.props)
     this.props.doSearch(searchterm);
   }
   render() {
@@ -21,7 +22,7 @@ class Kopfzeile extends Component {
       <View style={styles.kopfzeile}>
           <SearchBar
             lightTheme
-            onChangeText={term => this.onChange(term)}
+            onChangeText={_.debounce(term => this.onChange(term), 1000)}
             placeholder='Name? Farbe? Hut? Unterseite? (mind. 3 Zeichen)'
             value={this.props.activeSearch} />
       </View>
