@@ -24,6 +24,8 @@ class Kopfzeile extends Component {
             lightTheme
             onChangeText={term => this.onChange(term)}
             placeholder='Name? Farbe? Hut? Unterseite? (mind. 3 Zeichen)'
+            inputStyle={styles.inputText}
+            containerStyle={styles.inputCont}
             value={this.props.activeSearch} />
       </View>
     )
@@ -32,10 +34,17 @@ class Kopfzeile extends Component {
 
 const styles = StyleSheet.create({
   kopfzeile: {
-    height: 48,
-    marginTop: 30, 
-    backgroundColor: 'powderblue'
+    height: 55,
+    marginTop: 25, 
+    backgroundColor: 'white'
   },
+  inputText: {
+    height: 35,
+    color: 'black'
+  },
+  inputCont: {
+    height: 55
+  }
 });
 
 export default Kopfzeile
