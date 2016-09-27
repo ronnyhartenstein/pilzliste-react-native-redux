@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { View, ScrollView, ListView, StyleSheet, Text } from 'react-native'
-import { List, ListItem } from 'react-native-elements'
+// import { List, ListItem } from 'react-native-elements'
+import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-lazyload';
 
 // https://github.com/react-native-community/React-Native-Elements#lists
 // ListView https://facebook.github.io/react-native/docs/listview.html
+// Lazy load https://github.com/magicismight/react-native-lazyload
 
 class Liste extends Component {
   // propTypes = {
@@ -17,12 +19,7 @@ class Liste extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2
-      })
-    }
-    if (this.props.filteredItems) {
-      this.state.dataSource = this.state.dataSource.cloneWithRows(this.props.filteredItems)
+      items: this.props.filteredItems
     }
   }
 
@@ -32,7 +29,7 @@ class Liste extends Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.filteredItems !== this.props.filteredItems) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(nextProps.filteredItems)
+        items: nextProps.filteredItems
       })
     }
   }
@@ -55,25 +52,52 @@ class Liste extends Component {
   render() {
         
     return (
-      <ScrollView style={styles.container}>
-        <List style={styles.liste}>
-            <ListView
-                renderRow={this.renderRow}
-                dataSource={this.state.dataSource}
-            />
-        </List>
-      </ScrollView>
+      <LazyloadScrollView
+          style={styles.container}
+          contentContainerStyle={styles.content}
+          name="lazyload-list"
+      >
+      { this.state.items.map((item, i) => ( 
+          <View
+              key={i}
+              style={styles.view}
+          >
+            <LazyloadView
+                host="lazyload-list"
+                style={styles.item}
+            >
+              <View style={styles.name}>
+                  <Text style={styles.nameText}>{item.name}</Text>
+                  <Text style={styles.latText}>{item.lat}</Text>
+              </View>
+            </LazyloadView>
+          </View>
+      )) }
+      </LazyloadScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
     container: {
+      flex: 1, 
+      backgroundColor: 'white'
     },
-  liste: {
-    flex: 1, 
-    backgroundColor: 'skyblue',
-  }
+    view: {
+      borderTopWidth: 1,
+      borderTopColor: "gray",
+      height: 50
+    },
+    item: {
+      margin: 10
+    },
+    // nameText: {
+    //   fontSize: 12
+    // },
+    latText: {
+      color: 'gray',
+      fontSize: 10
+    } 
 });
 
 export default Liste
