@@ -25,9 +25,11 @@ class Liste extends Component {
     if (this.props.filteredItems) {
       this.state.dataSource = this.state.dataSource.cloneWithRows(this.props.filteredItems)
     }
-    // console.log("Liste dataSource", this.state.dataSource)
   }
 
+  // kein Neubau der Komponente bei Änderung
+  // sondern per Props-Änderung 
+  // https://github.com/reactjs/redux/issues/683
   componentWillReceiveProps (nextProps) {
     if (nextProps.filteredItems !== this.props.filteredItems) {
       this.setState({
@@ -37,7 +39,6 @@ class Liste extends Component {
   }
 
     renderRow (rowData, sectionID) {
-      // console.log("renderRow", rowData)
         return (
             <ListItem
                 onClick={itm => this.onClick(itm)}

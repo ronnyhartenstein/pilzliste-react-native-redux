@@ -7,13 +7,6 @@ export function createItem(name, lat, beschreibung) {
   };
 }
 
-export function loadItem(item) {
-  return {
-    type: actions.LOAD,
-    item
-  };
-}
-
 export function updateItem(nr, name, lat, beschreibung) {
   return {
     type: actions.UPDATE,

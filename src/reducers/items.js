@@ -3,12 +3,6 @@ import _ from 'lodash';
 
 export default function itemsReducer (items = [], action = {}) {
   switch (action.type) {
-    case actions.LOAD:
-      // console.log("LOAD ", action)
-      return [
-        ...items,
-        Object.assign({}, action.item)
-      ];
     case actions.CREATE:
       const nr = parseInt(_.maxBy(items, n => ( n.nr )) + 1);
       return [
