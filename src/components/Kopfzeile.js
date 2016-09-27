@@ -22,7 +22,7 @@ class Kopfzeile extends Component {
       <View style={styles.kopfzeile}>
           <SearchBar
             lightTheme
-            onChangeText={_.debounce(term => this.onChange(term), 1000)}
+            onChangeText={term => this.onChange(term)}
             placeholder='Name? Farbe? Hut? Unterseite? (mind. 3 Zeichen)'
             value={this.props.activeSearch} />
       </View>
