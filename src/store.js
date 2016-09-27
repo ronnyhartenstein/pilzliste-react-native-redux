@@ -11,8 +11,8 @@ import { loadItem } from './actions/itemActions';
 
 import daten from '../daten/pilze.json'
 // erstmal nur Name und Lat und 3 wg. Log
-// const daten_preload = daten
-const daten_preload = _.take(daten, 10)
+const daten_preload = daten
+// const daten_preload = _.take(daten, 20)
 // console.log("daten preload: ", daten_preload)
 
 // beim Laden befüllen..

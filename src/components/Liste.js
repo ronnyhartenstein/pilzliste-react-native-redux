@@ -59,7 +59,7 @@ class Liste extends Component {
       >
       { this.state.items.map((item, i) => {
         const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + item.name.replace(' ','%20') + '.jpg.png'
-        console.log("image: ", image_uri)
+        // console.log("image: ", image_uri)
         return ( 
           <View
               key={i}
@@ -69,15 +69,16 @@ class Liste extends Component {
                 host="lazyload-list"
                 style={styles.item}
             >
-              <Image
-                style={styles.image}
-                source={{uri: image_uri}}
-                // onLoad={(e) => console.log("loaded")}
-                // onLoadStart={(e) => console.log("onLoadStart", e)}
-                // onLoadEnd={(e) => console.log("onLoadEnd", e)}
-                onError={({nativeEvent: {error}}) => console.log("Image load error: ", error)}
-                onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
-              />
+              <LazyloadImage
+                  host="lazyload-list"
+                  style={styles.image}
+                  source={{uri: image_uri}}
+                  // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
+                  // onLoadStart={() => console.log("onLoadStart", item.name)}
+                  // onLoadEnd={() => console.log("onLoadEnd", item.name)}
+                  onError={({nativeEvent: {error}}) => console.warn(image_uri, error)}
+                  // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
+                />
               <View style={styles.name}>
                   <Text style={styles.nameText}>{item.name}</Text>
                   <Text style={styles.latText}>{item.lat}</Text>
