@@ -16,8 +16,19 @@ const getVisibleItems = createSelector(
       return items
     } else {
       const r = new RegExp(search, 'i')
-      const filtered = _.filter(items, itm => ( r.test(itm.name) || r.test(itm.lat) ))
-      return filtered
+      return _.filter(items, itm => ( 
+           r.test(itm.name) 
+        || r.test(itm.lat)
+        || r.test(itm.gattung)
+        || r.test(itm.hut_oben)
+        || r.test(itm.hut_unten)
+        || r.test(itm.stiel)
+        || r.test(itm.fleisch)
+        || r.test(itm.vorkommen)
+        || r.test(itm.zeitraum)
+        || r.test(itm.bedeutung)
+        || r.test(itm.merkmal) 
+        ))
     }
   }
 )
