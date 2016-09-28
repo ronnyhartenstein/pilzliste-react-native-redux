@@ -11,22 +11,32 @@ class Kopfzeile extends Component {
   //   activeSearch: PropTypes.string.isRequired
   // }
   constructor(props) {
-    super(props);
+    super(props); 
+    this.state = {
+      activeSearch: this.props.activeSearch
+    }
   }
-  onChange(searchterm) {
-    // console.log("suche nach .. ", searchterm, this.props)
-    this.props.doSearch(searchterm);
+  componentWillMount() {
+    this.doSearch = _.debounce(this.doSearch, 1000)
+  }
+  onChange(term) {
+    this.setState({ activeSearch: term })
+    this.doSearch(term)
+  }
+  doSearch(term) {
+    // console.log("suche nach .. ", term, this.props)
+    this.props.doSearch(term);      
   }
   render() {
     return (
       <View style={styles.kopfzeile}>
           <SearchBar
             lightTheme
-            onChangeText={term => this.onChange(term)}
+            onChangeText={(term) => this.onChange(term)}
             placeholder='Name? Farbe? Hut? Unterseite? (mind. 3 Zeichen)'
             inputStyle={styles.inputText}
             containerStyle={styles.inputCont}
-            value={this.props.activeSearch} />
+            value={this.state.searchterm} />
       </View>
     )
   }
