@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
 import { LazyloadView, LazyloadImage } from 'react-native-lazyload';
 import escapeUri from '../lib/escapeUri'
@@ -29,7 +29,7 @@ export default class ListeItem extends Component {
     }
     return ( 
         <View style={viewStyles}>
-        <TouchableHighlight onPress={() => this.onPressItem()}>
+        <TouchableOpacity onPress={() => this.onPressItem()}>
             <LazyloadView
                 host="lazyload-list"
             >
@@ -53,7 +53,7 @@ export default class ListeItem extends Component {
                     {this.state.details ? <ListeItemDetails item={item} show={this.state.details} /> : <Text/>}
                 </View>
             </LazyloadView>
-        </TouchableHighlight>
+        </TouchableOpacity>
         </View>
     )
   }
