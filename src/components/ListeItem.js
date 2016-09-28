@@ -21,8 +21,14 @@ export default class ListeItem extends Component {
     const item = this.props.item
     const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + escapeUri(item.name) + '.jpg.png'
     // console.log("image: ", image_uri)
+    const viewStyles = [styles.view]
+    if (this.state.details) {
+        viewStyles.push(styles.viewDetailsAktiv)
+    } else {
+        viewStyles.push(styles.viewDetailsInaktiv)
+    }
     return ( 
-        <View style={[styles.view, this.state.details && styles.viewDetailsAktiv]}>
+        <View style={viewStyles}>
         <TouchableHighlight onPress={() => this.onPressItem()}>
             <LazyloadView
                 host="lazyload-list"
@@ -43,7 +49,7 @@ export default class ListeItem extends Component {
                         <Text style={styles.latText}>{item.lat}</Text>
                     </View>
                 </View>
-                <View  style={{height: this.state.details ? 200 : 0}}>
+                <View>
                     {this.state.details ? <ListeItemDetails item={item} show={this.state.details} /> : <Text/>}
                 </View>
             </LazyloadView>
@@ -68,6 +74,9 @@ const styles = StyleSheet.create({
     viewDetailsAktiv: {
         // height: 250,
         backgroundColor: 'burlywood'
+    },
+    viewDetailsInaktiv: {
+        height: 50
     },
     image: {
       width: 30, 
