@@ -14,7 +14,7 @@ class Kopfzeile extends Component {
     super(props);
   }
   onChange(searchterm) {
-    console.log("suche nach .. ", searchterm, this.props)
+    // console.log("suche nach .. ", searchterm, this.props)
     this.props.doSearch(searchterm);
   }
   render() {

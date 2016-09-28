@@ -3,6 +3,9 @@ import { ScrollView, View, StyleSheet, Text, Image } from 'react-native'
 import escapeUri from '../lib/escapeUri'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
+// Image: https://facebook.github.io/react-native/docs/images.html
+// Stylesheet: https://facebook.github.io/react-native/docs/stylesheet.html
+
 
 class Infozeile extends Component {
   render() {

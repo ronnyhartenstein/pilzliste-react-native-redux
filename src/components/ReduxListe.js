@@ -3,8 +3,10 @@ import Liste from './Liste'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import _ from 'lodash'
+import fuzzy from 'fuzzy'
 
-// Memoized Selectors -> http://redux.js.org/docs/recipes/ComputingDerivedData.html
+// Memoized Selectors: http://redux.js.org/docs/recipes/ComputingDerivedData.html
+// Fuzzy Search: https://github.com/mattyork/fuzzy
 
 const getSearch = (state) => state.search
 const getItems = (state) => state.items
@@ -16,19 +18,11 @@ const getVisibleItems = createSelector(
       return items
     } else {
       const r = new RegExp(search, 'i')
-      return _.filter(items, itm => ( 
-           r.test(itm.name) 
-        || r.test(itm.lat)
-        || r.test(itm.gattung)
-        || r.test(itm.hut_oben)
-        || r.test(itm.hut_unten)
-        || r.test(itm.stiel)
-        || r.test(itm.fleisch)
-        || r.test(itm.vorkommen)
-        || r.test(itm.zeitraum)
-        || r.test(itm.bedeutung)
-        || r.test(itm.merkmal) 
-        ))
+      const result = fuzzy.filter('bcn', items, { extract: item => (_.join(_.values(item), ' ')) })
+      const indexes = _.map(result, res => (res.index))
+      const founded = _.filter(items, (itm, idx) => _.indexOf(indexes, idx) !== -1) 
+      console.log(indexes.length, "found", founded)
+      return founded
     }
   }
 )
