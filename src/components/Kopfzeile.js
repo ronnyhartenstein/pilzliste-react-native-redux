@@ -5,6 +5,8 @@ import _ from 'lodash'
 
 // SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
 // erweitert TextInput: https://facebook.github.io/react-native/docs/textinput.html
+// Debounce: http://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
+
 class Kopfzeile extends Component {
   // propTypes = {
   //   doSearch: PropTypes.func.isRequired,
