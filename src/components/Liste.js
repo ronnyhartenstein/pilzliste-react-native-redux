@@ -8,6 +8,7 @@ import escapeUri from '../lib/escapeUri'
 // https://github.com/react-native-community/React-Native-Elements#lists
 // ListView https://facebook.github.io/react-native/docs/listview.html
 // Lazy load https://github.com/magicismight/react-native-lazyload
+// Layout: https://facebook.github.io/react-native/docs/flexbox.html
 
 export default class Liste extends Component {
   // propTypes = {
@@ -54,28 +55,31 @@ export default class Liste extends Component {
               key={i}
               style={styles.view}
           >
-            <LazyloadView
-                host="lazyload-list"
-                style={styles.item}
-            >
-              <LazyloadImage
+            <TouchableHighlight onPress={() => this.onPressItem(i)}>
+              <LazyloadView
                   host="lazyload-list"
-                  style={styles.image}
-                  source={{uri: image_uri}}
-                  // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
-                  // onLoadStart={() => console.log("onLoadStart", item.name)}
-                  // onLoadEnd={() => console.log("onLoadEnd", item.name)}
-                  onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
-                  // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
-                />
-              <TouchableHighlight onPress={() => this.onPressItem(i)}>
-                <View style={styles.name}>
-                    <Text style={styles.nameText}>{item.name}</Text>
-                    <Text style={styles.latText}>{item.lat}</Text>
-                </View>
-              </TouchableHighlight>
-              {this.state.details === i ? <ListeItemDetails item={item} /> : <Text></Text>}
-            </LazyloadView>
+              >
+                <View style={styles.item}>
+                  <LazyloadImage
+                      host="lazyload-list"
+                      style={styles.image}
+                      source={{uri: image_uri}}
+                      // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
+                      // onLoadStart={() => console.log("onLoadStart", item.name)}
+                      // onLoadEnd={() => console.log("onLoadEnd", item.name)}
+                      onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
+                      // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
+                    />
+                    <View style={styles.name}>
+                        <Text style={styles.nameText}>{item.name}</Text>
+                        <Text style={styles.latText}>{item.lat}</Text>
+                    </View>
+                  </View>
+                  <View>
+                    {this.state.details === i ? <ListeItemDetails item={item} /> : <Text></Text>}
+                  </View>
+              </LazyloadView>
+            </TouchableHighlight>
           </View>
           )
       }) }

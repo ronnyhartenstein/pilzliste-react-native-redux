@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, Image } from 'react-native'
 
+// Text: https://facebook.github.io/react-native/docs/text.html
+
 export default class ListeItemDetails extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,8 @@ export default class ListeItemDetails extends Component {
 
 const styles = StyleSheet.create({
     details: {
-      flex: 1, 
+      flex: 1,
+      height: 200, 
       backgroundColor: 'lightgray'
     }
 });
