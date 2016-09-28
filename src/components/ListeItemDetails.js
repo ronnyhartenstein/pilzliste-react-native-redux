@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, View, StyleSheet, Text, Image } from 'react-native'
+import escapeUri from '../lib/escapeUri'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
 
@@ -22,7 +23,8 @@ export default class ListeItemDetails extends Component {
     super(props);
   }
   render() {
-      const item = this.props.item
+    const item = this.props.item
+    const image_uri = 'https://uli.rh-flow.de/pilzbilder/' + escapeUri(item.name) + '.jpg'
     return (
         <View style={styles.details}>
             <Infozeile label='Gattung' text={item.gattung} />
@@ -34,6 +36,8 @@ export default class ListeItemDetails extends Component {
             <Infozeile label='Zeitraum' text={item.zeitraum} />
             <Infozeile label='Bedeutung' text={item.bedeutung} />
             <Infozeile label='Merkmal' text={item.merkmal} />
+            <Image style={styles.image} source={{uri: image_uri}} />
+                    
         </View>
     )
   }
@@ -50,6 +54,11 @@ const styles = StyleSheet.create({
     zeileLabel: {
       color: 'gray',
       fontSize: 10
+    },
+    image: {
+      // width: 300,
+      height: 300,
+      margin: 10
     },
     // text {  
     // }
