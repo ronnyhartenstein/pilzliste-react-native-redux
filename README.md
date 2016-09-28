@@ -9,4 +9,6 @@ TODOs:
 - [x] Suchbegriff als State halten
 - [x] Suchbegriff zum Filtern der Liste nutzen
 - [x] nach Tap auf Item Details + Bild zum Pilz (externe URL)
+- [x] Details-Bild mit Progress-Bar
+- [ ] Images HTTP Cachen
 - [ ] Bottom-Navi für Anzahl Treffer und "Neuer Eintrag"

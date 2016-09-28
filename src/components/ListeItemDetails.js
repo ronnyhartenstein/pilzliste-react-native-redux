@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import { ScrollView, View, StyleSheet, Text, Image } from 'react-native'
+import { ScrollView, View, StyleSheet, Text } from 'react-native'
 import escapeUri from '../lib/escapeUri'
+import Image from 'react-native-image-progress';
+import ProgressBar from 'react-native-progress/Bar';
 
 // Text: https://facebook.github.io/react-native/docs/text.html
 // Image: https://facebook.github.io/react-native/docs/images.html
 // Stylesheet: https://facebook.github.io/react-native/docs/stylesheet.html
+// Progress: https://github.com/oblador/react-native-progress
+// Image Progress: https://github.com/oblador/react-native-image-progress
 
 
 class Infozeile extends Component {
@@ -39,7 +43,11 @@ export default class ListeItemDetails extends Component {
             <Infozeile label='Zeitraum' text={item.zeitraum} />
             <Infozeile label='Bedeutung' text={item.bedeutung} />
             <Infozeile label='Merkmal' text={item.merkmal} />
-            <Image style={styles.image} source={{uri: image_uri}} />
+            <Image 
+              style={styles.image} 
+              source={{uri: image_uri}}
+              indicator={ProgressBar} 
+              />
                     
         </View>
     )
