@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { View, ScrollView, ListView, StyleSheet, Text, Image } from 'react-native'
+import { View, ScrollView, ListView, StyleSheet, Text, TouchableHighlight } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
 import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-lazyload';
+import ListeItemDetails from './ListeItemDetails'
+import escapeUri from '../lib/escapeUri'
 
 // https://github.com/react-native-community/React-Native-Elements#lists
 // ListView https://facebook.github.io/react-native/docs/listview.html
 // Lazy load https://github.com/magicismight/react-native-lazyload
 
-class Liste extends Component {
+export default class Liste extends Component {
   // propTypes = {
   //   items:  PropTypes.arrayOf(PropTypes.shape({
   //     nr: PropTypes.number.isRequired,
@@ -19,7 +21,8 @@ class Liste extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: this.props.filteredItems
+      items: this.props.filteredItems,
+      details: false
     }
   }
 
@@ -34,21 +37,6 @@ class Liste extends Component {
     }
   }
 
-    renderRow (rowData, sectionID) {
-        return (
-            <ListItem
-                onClick={itm => this.onClick(itm)}
-                key={sectionID}
-                title={rowData.name != "" ? rowData.name : "?"}
-                subtitle={rowData.lat != "" ? rowData.lat : "?"}
-            />
-        )
-    }
-    onClick (itm) {
-      console.log("click auf item", itm)
-      // this.props.onItemClick();
-    }
-
   render() {
         
     return (
@@ -59,13 +47,7 @@ class Liste extends Component {
       >
       { this.state.items.map((item, i) => {
         // escapeURIComponent, escape .. :(
-        const name_escaped = item.name
-            .replace(/ä/g, 'a%CC%88')
-            .replace(/ü/g, 'u%CC%88')
-            .replace(/ö/g, 'o%CC%88')
-            .replace(/ß/g, '%C3%9F')
-            .replace(/ /g, '%20')
-        const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + name_escaped + '.jpg.png'
+        const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + escapeUri(item.name) + '.jpg.png'
         // console.log("image: ", image_uri)
         return ( 
           <View
@@ -83,19 +65,28 @@ class Liste extends Component {
                   // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
                   // onLoadStart={() => console.log("onLoadStart", item.name)}
                   // onLoadEnd={() => console.log("onLoadEnd", item.name)}
-                  onError={({nativeEvent: {error}}) => console.warn(image_uri, error)}
+                  onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
                   // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
                 />
-              <View style={styles.name}>
-                  <Text style={styles.nameText}>{item.name}</Text>
-                  <Text style={styles.latText}>{item.lat}</Text>
-              </View>
+              <TouchableHighlight onPress={() => this.onPressItem(i)}>
+                <View style={styles.name}>
+                    <Text style={styles.nameText}>{item.name}</Text>
+                    <Text style={styles.latText}>{item.lat}</Text>
+                </View>
+              </TouchableHighlight>
+              {this.state.details === i ? <ListeItemDetails item={item} /> : <Text></Text>}
             </LazyloadView>
           </View>
           )
       }) }
       </LazyloadScrollView>
     );
+  }
+
+  onPressItem(i) {
+    this.setState({
+      details: this.state.details === i ? false : i
+    })
   }
 }
 
@@ -127,5 +118,3 @@ const styles = StyleSheet.create({
       fontSize: 10
     } 
 });
-
-export default Liste
