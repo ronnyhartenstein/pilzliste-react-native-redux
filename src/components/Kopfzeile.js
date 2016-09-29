@@ -19,7 +19,7 @@ class Kopfzeile extends Component {
     }
   }
   componentWillMount() {
-    this.doSearch = _.debounce(this.doSearch, 1000)
+    this.doSearch = _.debounce(this.doSearch, 300)
   }
   onChange(term) {
     this.setState({ activeSearch: term })
