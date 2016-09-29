@@ -22,12 +22,13 @@ const daten_preload = daten
 import { thumbnailUri } from './lib/imageUri'
 import prefetchImages from './lib/prefetchImages'
 // unter Android Fehler "ImagePipelineFactory was not initialized!"
-if (Platform.OS === 'ios') {
-  const imageUriList = _.map(daten_preload, (itm) => {
-    return thumbnailUri(itm.name)
-  })
-  prefetchImages(imageUriList)
-}
+// erstmal deaktiviert bis die URLs alle funktionieren (JPG->jpg, Sonderzeichen)  
+// if (Platform.OS === 'ios') {
+//   const imageUriList = _.map(daten_preload, (itm) => {
+//     return thumbnailUri(itm.name)
+//   })
+//   prefetchImages(imageUriList)
+// }
 
 // beim Laden befüllen..
 // http://stackoverflow.com/questions/33749759/read-stores-initial-state-in-redux-reducer#33791942
