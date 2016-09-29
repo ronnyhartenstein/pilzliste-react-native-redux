@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
-import { LazyloadView, LazyloadImage } from 'react-native-lazyload';
+import { LazyloadView } from 'react-native-lazyload';
 import escapeUri from '../lib/escapeUri'
 import ListeItemDetails from './ListeItemDetails'
 
@@ -34,8 +34,7 @@ export default class ListeItem extends Component {
                 host="lazyload-list"
             >
                 <View style={styles.item}>
-                    <LazyloadImage
-                        host="lazyload-list"
+                    <Image
                         style={styles.image}
                         source={{uri: image_uri}}
                         // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
