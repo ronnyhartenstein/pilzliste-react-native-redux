@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
 import { LazyloadView } from 'react-native-lazyload';
-import escapeUri from '../lib/escapeUri'
+import { thumbnailUri } from '../lib/imageUri'
 import ListeItemDetails from './ListeItemDetails'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
@@ -19,7 +19,7 @@ export default class ListeItem extends Component {
   }
   render() {
     const item = this.props.item
-    const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + escapeUri(item.name) + '.jpg.png'
+    const image_uri = thumbnailUri(item.name)
     // console.log("image: ", image_uri)
     const viewStyles = [styles.view]
     if (this.state.details) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, View, StyleSheet, Text } from 'react-native'
-import escapeUri from '../lib/escapeUri'
+import { imageUri } from '../lib/imageUri'
 import Image from 'react-native-image-progress';
 import ProgressBar from 'react-native-progress/Bar';
 
@@ -31,7 +31,7 @@ export default class ListeItemDetails extends Component {
   }
   render() {
     const item = this.props.item
-    const image_uri = 'https://uli.rh-flow.de/pilzbilder/' + escapeUri(item.name) + '.jpg'
+    const image_uri = imageUri(item.name)
     return (
         <View style={styles.details}>
             <Infozeile label='Gattung' text={item.gattung} />
