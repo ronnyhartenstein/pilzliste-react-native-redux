@@ -67,7 +67,7 @@ export default class ListeItem extends Component {
 const styles = StyleSheet.create({
     view: {
       borderTopWidth: 1,
-      borderColor: 'black',
+      borderColor: 'gray',
     //   height: 50
     },
     viewDetailsAktiv: {
