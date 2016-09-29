@@ -10,5 +10,6 @@ TODOs:
 - [x] Suchbegriff zum Filtern der Liste nutzen
 - [x] nach Tap auf Item Details + Bild zum Pilz (externe URL)
 - [x] Details-Bild mit Progress-Bar
-- [ ] Images HTTP Cachen
+- [ ] Images in Liste cachen (prefetch)
 - [ ] Bottom-Navi für Anzahl Treffer und "Neuer Eintrag"
+- [ ] Pilze faven
