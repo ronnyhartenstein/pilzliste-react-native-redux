@@ -9,24 +9,39 @@ import ListeItemDetails from './ListeItemDetails'
 // Lazy load https://github.com/magicismight/react-native-lazyload
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
 // Colors: https://facebook.github.io/react-native/docs/colors.html
+// Image cachen mit prefetch() https://facebook.github.io/react-native/docs/image.html#prefetch
+
 
 export default class ListeItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      details: false
+      events: [],
+      details: false,
+      startLoadPrefetched: false,
+      mountTime: new Date(),
     }
   }
+
+  componentWillMount() {
+    this.setState({mountTime: new Date()});
+  }
+
   render() {
     const item = this.props.item
     const image_uri = 'https://uli.rh-flow.de/pilzbilder_klein/' + escapeUri(item.name) + '.jpg.png'
     // console.log("image: ", image_uri)
+
+    const prefetchTask = Image.prefetch(image_uri)
+
+
     const viewStyles = [styles.view]
     if (this.state.details) {
         viewStyles.push(styles.viewDetailsAktiv)
     } else {
         viewStyles.push(styles.viewDetailsInaktiv)
     }
+
     return ( 
         <View style={viewStyles}>
         <TouchableOpacity onPress={() => this.onPressItem()}>
@@ -37,11 +52,19 @@ export default class ListeItem extends Component {
                     <Image
                         style={styles.image}
                         source={{uri: image_uri}}
-                        // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
-                        // onLoadStart={() => console.log("onLoadStart", item.name)}
-                        // onLoadEnd={() => console.log("onLoadEnd", item.name)}
-                        onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
-                        // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
+                        onLoadStart={() => this._loadEventFired(`✔ (prefetched) onLoadStart (+${new Date() - mountTime}ms) for ${image_uri}`)}
+                        onLoad={(event) => this._loadEventFired(`✔ (prefetched) onLoad (+${new Date() - mountTime}ms) for ${image_uri}`)}
+                        onLoadEnd={() => {
+                                    this._loadEventFired(`✔ onLoadEnd (+${new Date() - mountTime}ms) for ${image_uri}`);
+                                    this.setState({startLoadPrefetched: true}, () => {
+                                    prefetchTask.then(() => {
+                                        this._loadEventFired(`✔ Prefetch OK (+${new Date() - mountTime}ms) for ${image_uri}`);
+                                    }, error => {
+                                        this._loadEventFired(`✘ Prefetch failed (+${new Date() - mountTime}ms) for ${image_uri}`);
+                                    });
+                                    });
+                                }}
+                        onError={({nativeEvent: {error}}) => this._loadEventFired(`✘ onError ${error} (+${new Date() - mountTime}ms) for ${image_uri}`)}
                     />
                     <View style={styles.name}>
                         <Text style={styles.nameText}>{item.name}</Text>
@@ -49,12 +72,18 @@ export default class ListeItem extends Component {
                     </View>
                 </View>
                 <View>
-                    {this.state.details ? <ListeItemDetails item={item} show={this.state.details} /> : <Text/>}
+                    {this.state.details ? <ListeItemDetails item={item} show={this.state.details} /> : null}
                 </View>
             </LazyloadView>
         </TouchableOpacity>
         </View>
     )
+  }
+
+  _loadEventFired(event) {
+    this.setState((state) => {
+      return state.events = [...state.events, event];
+    });
   }
 
   onPressItem() {
@@ -80,7 +109,8 @@ const styles = StyleSheet.create({
     image: {
       width: 30, 
       height: 30,
-      marginRight: 10
+      marginRight: 10,
+      borderRadius: 5
     },
     item: {
       flex: 1, 
