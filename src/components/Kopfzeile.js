@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Platform } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
 
@@ -47,7 +47,7 @@ class Kopfzeile extends Component {
 const styles = StyleSheet.create({
   kopfzeile: {
     height: 55,
-    marginTop: 25, 
+    marginTop: Platform.OS === 'ios' ? 25 : 0, 
     backgroundColor: 'white'
   },
   inputText: {

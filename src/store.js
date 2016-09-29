@@ -1,4 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
+import React from 'react'
+import { Platform } from 'react-native'
 // import createLogger from 'redux-logger';
 import search from './reducers/search';
 import items from './reducers/items';
@@ -19,11 +21,13 @@ const daten_preload = daten
 // Prefetch
 import { thumbnailUri } from './lib/imageUri'
 import prefetchImages from './lib/prefetchImages'
-const imageUriList = _.map(daten_preload, (itm) => {
-  return thumbnailUri(itm.name)
-})
-prefetchImages(imageUriList)
-
+// unter Android Fehler "ImagePipelineFactory was not initialized!"
+if (Platform.OS === 'ios') {
+  const imageUriList = _.map(daten_preload, (itm) => {
+    return thumbnailUri(itm.name)
+  })
+  prefetchImages(imageUriList)
+}
 
 // beim Laden befüllen..
 // http://stackoverflow.com/questions/33749759/read-stores-initial-state-in-redux-reducer#33791942
