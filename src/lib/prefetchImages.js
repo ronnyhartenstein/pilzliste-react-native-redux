@@ -16,7 +16,7 @@ const prefetch = function(uris, i) {
     Image.prefetch(uri).then(() => {
         // console.log(`✔ Prefetch OK (+${new Date() - startTime}ms) from ${uri}`)
     }, error => {
-        // console.log(`✘ Prefetch failed (+${new Date() - startTime}ms) from ${uri}`)
+        console.log(`✘ Prefetch failed (+${new Date() - startTime}ms) from ${uri}`)
     }).then(() => {
         if (i+2 <= uris.length) {
             prefetch(uris, i+1)
