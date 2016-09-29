@@ -13,8 +13,10 @@
     "react-native-image-progress": "^0.6.0",
     "react-native-lazyload": "^1.1.0",
     "react-native-progress": "^3.1.0",
+    "react-native-realm-cache-image": "^1.0.9",
     "react-native-vector-icons": "^2.1.0",
     "react-redux": "^4.4.5",
+    "realm": "^0.14.3",
     "redux": "^3.6.0",
     "redux-logger": "^2.6.1",
     "reselect": "^2.5.4"

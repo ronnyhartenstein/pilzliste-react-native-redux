@@ -12,6 +12,9 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.List;
 
+// https://github.com/johanneslumpe/react-native-fs#usage-android
+import com.rnfs.RNFSPackage;  
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -23,7 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+          new RNFSPackage() // react-native-fs 
       );
     }
   };

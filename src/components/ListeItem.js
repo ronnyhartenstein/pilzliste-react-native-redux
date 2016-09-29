@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
-import { LazyloadView, LazyloadImage } from 'react-native-lazyload';
+import { LazyloadView } from 'react-native-lazyload';
 import escapeUri from '../lib/escapeUri'
 import ListeItemDetails from './ListeItemDetails'
+import { CacheImage }  from 'react-native-realm-cache-image'
+import { Realm } from 'realm'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
 // Lazy load https://github.com/magicismight/react-native-lazyload
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
 // Colors: https://facebook.github.io/react-native/docs/colors.html
+// Cache Image mit Realm-Backend: https://github.com/machei/react-native-realm-cache-image
+//   nutzt FS-Backend: https://github.com/johanneslumpe/react-native-fs
+
+
+CacheImage.setup(new Realm({schema: CacheImage.getSchemaRealm()}))
 
 export default class ListeItem extends Component {
   constructor(props) {
@@ -34,8 +41,7 @@ export default class ListeItem extends Component {
                 host="lazyload-list"
             >
                 <View style={styles.item}>
-                    <LazyloadImage
-                        host="lazyload-list"
+                    <CacheImage
                         style={styles.image}
                         source={{uri: image_uri}}
                         // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
@@ -43,6 +49,7 @@ export default class ListeItem extends Component {
                         // onLoadEnd={() => console.log("onLoadEnd", item.name)}
                         onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
                         // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
+                        cacheId={"thumb_"+this.props.key}
                     />
                     <View style={styles.name}>
                         <Text style={styles.nameText}>{item.name}</Text>
