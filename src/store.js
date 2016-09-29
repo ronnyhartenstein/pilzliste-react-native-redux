@@ -16,6 +16,15 @@ const daten_preload = daten
 // const daten_preload = _.filter(daten, itm => /rasling/.test(itm.name))
 // console.log("daten preload: ", daten_preload)
 
+// Prefetch
+import { thumbnailUri } from './lib/imageUri'
+import prefetchImages from './lib/prefetchImages'
+const imageUriList = _.map(daten, (itm) => {
+  return thumbnailUri(itm.name)
+})
+prefetchImages(imageUriList)
+
+
 // beim Laden befüllen..
 // http://stackoverflow.com/questions/33749759/read-stores-initial-state-in-redux-reducer#33791942
 function reducers(state = {}, action) {
