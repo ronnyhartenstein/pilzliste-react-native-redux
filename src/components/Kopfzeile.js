@@ -26,7 +26,6 @@ class Kopfzeile extends Component {
     this.doSearch(term)
   }
   doSearch(term) {
-    // console.log("suche nach .. ", term, this.props)
     this.props.doSearch(term);      
   }
   render() {
