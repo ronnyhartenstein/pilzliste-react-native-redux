@@ -49,7 +49,9 @@ export default class ListeItem extends Component {
                     </View>
                 </View>
                 <View>
-                    {this.state.details ? <ListeItemDetails item={item} show={this.state.details} /> : <Text/>}
+                    {this.state.details 
+                        ? <ListeItemDetails item={item} show={this.state.details} /> 
+                        : null}
                 </View>
             </LazyloadView>
         </TouchableOpacity>
