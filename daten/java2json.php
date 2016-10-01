@@ -33,6 +33,7 @@ foreach(glob('PilzDaten20*.java') as $file) {
     }
 }
 
+print "Anzahl: ".count($json)."\n";
 file_put_contents('pilze.json', json_encode($json, JSON_PRETTY_PRINT));
 
 // hochgeladen zu http://uli.rh-flow.de/pilzbilder/pilze.json
