@@ -15,8 +15,8 @@ import { loadItem } from './actions/itemActions';
 
 import daten from '../daten/pilze.json'
 // erstmal nur Name und Lat und 3 wg. Log
-// let daten_preload = daten
-let daten_preload = _.take(daten, 10)
+let daten_preload = daten
+// let daten_preload = _.take(daten, 10)
 // let daten_preload = _.filter(daten, itm => /rasling/.test(itm.name))
 // console.log("daten preload: ", daten_preload)
 
