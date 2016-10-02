@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { doSearch } from '../actions/searchActions';
+import { doSearch } from '../actions/searchActions'
 import Kopfzeile from './Kopfzeile'
 import { connect } from 'react-redux'
 

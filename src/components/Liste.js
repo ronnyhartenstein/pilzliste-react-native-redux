@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
-import { LazyloadScrollView } from 'react-native-lazyload';
+import { LazyloadScrollView } from 'react-native-lazyload'
 import ListeItem from './ListeItem'
+import GalerieItem from './GalerieItem'
 
 // https://github.com/react-native-community/React-Native-Elements#lists
 // ListView https://facebook.github.io/react-native/docs/listview.html
@@ -20,7 +21,8 @@ export default class Liste extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: this.props.filteredItems
+      items: this.props.filteredItems,
+      activeTab: this.props.activeTab
     }
   }
 
@@ -32,19 +34,44 @@ export default class Liste extends Component {
       this.setState({
         items: nextProps.filteredItems
       })
+      this.updateNumberItems()  
     }
+    if (nextProps.activeTab !== this.props.activeTab) {
+      this.setState({
+        activeTab: nextProps.activeTab
+      })
+    }
+  }
+  componentWillMount () {
+    // hier weiß man wieviele Items wirklich im State sind
+    this.updateNumberItems()
+  }
+  componentDidUpdate () {
+    // und hier dann bei Updates über componentWillReceiveProps
+    this.updateNumberItems()
+  }
+
+  updateNumberItems() {
+    // für Fusszeile die akt. Anzahl Items melden
+    this.props.updateNumberItems(this.state.items.length)
   }
 
   render() {
+    const { items, activeTab } = this.state
+    console.log('render Liste', activeTab)
     return (
       <LazyloadScrollView
           style={styles.container}
           contentContainerStyle={styles.content}
           name="lazyload-list"
       >
-        { this.state.items.map((item, i) => ( 
-          <ListeItem key={i} item={item} /> 
-        )) }
+        { items.map((item, i) => {
+          switch (activeTab) {
+            case 'liste': return <ListeItem key={i} item={item} />
+            case 'galerie': return <GalerieItem key={i} item={item} />
+            case 'gesternt': return item.stern ? <ListeItem key={i} item={item} /> : null
+          }
+        }) }
       </LazyloadScrollView>
     );
   }

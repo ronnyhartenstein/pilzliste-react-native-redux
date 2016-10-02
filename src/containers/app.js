@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
-import Fusszeile from '../components/Fusszeile'
+import ReduxFusszeile from '../components/ReduxFusszeile'
 import ReduxKopfzeile from '../components/ReduxKopfzeile'
 import ReduxListe from '../components/ReduxListe'
 
@@ -15,7 +15,7 @@ export default class Pilzliste extends Component {
         <View style={styles.container}>
             <ReduxKopfzeile />
             <ReduxListe />
-            <Fusszeile />
+            <ReduxFusszeile />
         </View>
     )
   }

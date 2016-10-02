@@ -7,7 +7,7 @@ import _ from 'lodash'
 // erweitert TextInput: https://facebook.github.io/react-native/docs/textinput.html
 // Debounce: http://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
 
-class Kopfzeile extends Component {
+export default class Kopfzeile extends Component {
   // propTypes = {
   //   doSearch: PropTypes.func.isRequired,
   //   activeSearch: PropTypes.string.isRequired
@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
   },
   inputText: {
     height: 35,
-    color: 'black'
+    color: 'black',
+    backgroundColor: 'white'
   },
   inputCont: {
-    height: 55
+    height: 55,
+    backgroundColor: 'oldlace'
   }
 });
-
-export default Kopfzeile

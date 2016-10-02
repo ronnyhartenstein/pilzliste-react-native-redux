@@ -1,4 +1,4 @@
-import * as actions from './actionTypes';
+import * as actions from './actionTypes'
 
 export function createItem(name, lat, beschreibung) {
   return {
@@ -18,5 +18,14 @@ export function deleteItem(nr) {
   return {
     type: actions.DELETE,
     nr
+  };
+}
+
+
+export function updateNumberItems(number) {
+  // console.log(`neue Anzahl ${number}..`)
+  return {
+    type: actions.NUMBER_ITEMS,
+    number
   };
 }

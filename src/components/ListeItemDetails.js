@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, View, StyleSheet, Text } from 'react-native'
 import { imageUri } from '../lib/imageUri'
-import Image from 'react-native-image-progress';
-import ProgressBar from 'react-native-progress/Bar';
+import Image from 'react-native-image-progress'
+import ProgressBar from 'react-native-progress/Bar'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
 // Image: https://facebook.github.io/react-native/docs/images.html

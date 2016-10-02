@@ -1,22 +1,90 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Button } from 'react-native-elements'
+import { View, StyleSheet, Text } from 'react-native'
+import { Tabs, Tab, Icon } from 'react-native-elements'
 
-class Fusszeile extends Component {
+
+// Flex Layout: https://facebook.github.io/react-native/docs/flexbox.html
+//   alle Props: https://facebook.github.io/react-native/docs/layout-props.html
+// Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons 
+//   Material Icons: https://design.google.com/icons/
+
+export default class Fusszeile extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedTab: this.props.activeTab,
+      numberItems: this.props.numberItems
+    }
+  }
+  // kein Neubau der Komponente bei Änderung
+  // sondern per Props-Änderung 
+  // https://github.com/reactjs/redux/issues/683
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      selectedTab: nextProps.activeTab,
+      numberItems: nextProps.numberItems
+    })
+  }
+
+  changeTab(selectedTab) {
+    // console.log("Tab", selectedTab)
+    // this.setState({selectedTab})
+    this.props.switchTab(selectedTab)
+  }
+
   render() {
+    const { numberItems, selectedTab } = this.state
+    const colActive = '#f50'
+    const colInactive = 'gray'
+    console.log('render Fusszeile', selectedTab)
     return (
-      <View style={styles.fusszeile}>
-          <Text>Menüicons...</Text>
+      <View style={styles.container}>
+        <View style={styles.iconRow}>
+          <Icon
+            iconStyle={styleIcon}
+            name='view-list'
+            color={selectedTab === 'liste' ? colActive : colInactive}
+            onPress={() => this.changeTab('liste')} />
+          <Icon
+            iconStyle={styleIcon}
+            name='view-module'
+            color={selectedTab === 'galerie' ? colActive : colInactive}
+            onPress={() => this.changeTab('galerie')} />
+          <Icon
+            iconStyle={styleIcon}
+            name='star'
+            color={selectedTab === 'gesternt' ? colActive : colInactive}
+            onPress={() => this.changeTab('gesternt')} />
+
+          <Text style={styles.treffer}>{numberItems} Pilze gefunden</Text>
+        </View>
       </View>
     )
   }
 }
 
+const styleIcon = {
+    margin: 5,
+    marginLeft: 10,
+    marginRight: 10
+  }
+
 const styles = StyleSheet.create({
-  fusszeile: {
-    height: 0, 
-    backgroundColor: 'steelblue'
+  container: {
+    height: 50, 
+    backgroundColor: 'oldlace',
+    borderTopWidth: 1,
+    borderColor: 'olive' 
+  },
+  iconRow: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  treffer: {
+    color: 'gray',
+    flex: 1,
+    textAlign: 'right',
+    marginTop: 15,
+    marginRight: 10
   }
 });
-
-export default Fusszeile

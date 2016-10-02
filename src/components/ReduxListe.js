@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Liste from './Liste'
+import { updateNumberItems } from '../actions/itemActions'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import _ from 'lodash'
@@ -17,7 +18,7 @@ const getVisibleItems = createSelector(
       return items
     } else {
       // Suchbegriffe mit Leerzeichen getrennt..
-      const terms = search.split(' ')
+      const terms = search.trim().split(' ')
       const startTime = new Date()
       const result = _.filter(items, itm => { 
           const haystack = _.values(itm).join(' ')
@@ -32,7 +33,8 @@ const getVisibleItems = createSelector(
 
 const mapStateToProps = (state) => {
   return {
-    filteredItems: getVisibleItems(state)
+    filteredItems: getVisibleItems(state),
+    activeTab: state.tab
   } 
 }
 
@@ -41,6 +43,10 @@ const mapDispatchToProps = (dispatch) => {
     onItemClick: (nr) => {
       console.log("TODO zeige Details-Szene")
       //dispatch(showDetails(nr))
+    },
+    // wirkliche Anzahl Ergebnisse in Store für Fusszeile zurückfunken
+    updateNumberItems: (number) => {
+      dispatch(updateNumberItems(number))
     }
   }
 }
