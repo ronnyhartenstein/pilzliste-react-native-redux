@@ -4,11 +4,15 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import { LazyloadView } from 'react-native-lazyload'
 import { thumbnailUri } from '../lib/imageUri'
 import ListeItemDetails from './ListeItemDetails'
+import { Icon } from 'react-native-elements'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
 // Lazy load https://github.com/magicismight/react-native-lazyload
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
 // Colors: https://facebook.github.io/react-native/docs/colors.html
+
+// Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons 
+//   Material Icons: https://design.google.com/icons/
 
 export default class ListeItem extends Component {
   constructor(props) {
@@ -48,6 +52,12 @@ export default class ListeItem extends Component {
                         <Text style={styles.nameText}>{item.name}</Text>
                         <Text style={styles.latText}>{item.lat}</Text>
                     </View>
+                    <Icon
+                        containerStyle={styleIconContainer}
+                        iconStyle={styleIcon}
+                        name={item.stern ? 'star' : 'star-border'} 
+                        color={item.stern ? 'goldenrod' : 'gold'}
+                        onPress={() => this.switchStern()} />
                 </View>
                 <View>
                     {this.state.details 
@@ -60,12 +70,25 @@ export default class ListeItem extends Component {
     )
   }
 
+  switchStern() {
+    console.log("switchStern")
+  }
+
   onPressItem() {
     this.setState({
       details: !this.state.details
     })
   }
 }
+
+const styleIcon = {
+  margin: 5
+}
+const styleIconContainer = {
+  position: 'absolute',
+  top: 0,
+  right: 0
+} 
 
 const styles = StyleSheet.create({
     view: {

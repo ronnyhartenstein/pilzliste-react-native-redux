@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { Tabs, Tab, Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 
 
 // Flex Layout: https://facebook.github.io/react-native/docs/flexbox.html

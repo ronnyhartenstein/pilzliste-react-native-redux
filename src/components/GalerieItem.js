@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'rea
 // import { List, ListItem } from 'react-native-elements'
 import { LazyloadView } from 'react-native-lazyload'
 import { galerieUri } from '../lib/imageUri'
-// import ListeItemDetails from './ListeItemDetails'
+import { Icon } from 'react-native-elements'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
 // Lazy load https://github.com/magicismight/react-native-lazyload
@@ -12,6 +12,9 @@ import { galerieUri } from '../lib/imageUri'
 
 // Layout Beispiel Loginscreen: https://github.com/browniefed/react-native-screens
 //   Code: https://github.com/browniefed/react-native-screens/blob/master/app/screens/login/login1.js
+
+// Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons 
+//   Material Icons: https://design.google.com/icons/
 
 export default class GalerieItem extends Component {
   constructor(props) {
@@ -58,6 +61,12 @@ export default class GalerieItem extends Component {
                         onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
                         // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
                     />
+                    <Icon
+                        containerStyle={styleIconContainer}
+                        iconStyle={styleIcon}
+                        name={item.stern ? 'star' : 'star-border'} 
+                        color={item.stern ? 'yellow' : 'goldenrod'}
+                        onPress={() => this.switchStern()} />
                     <View style={[styles.name, {width: halfWidth - 10}]}>
                         <Text style={styles.nameText}>{item.name}</Text>
                         <Text style={styles.latText}>{item.lat}</Text>
@@ -69,12 +78,26 @@ export default class GalerieItem extends Component {
     )
   }
 
+  switchStern() {
+    console.log("switchStern")
+  }
+
   onPressItem() {
     this.setState({
       details: !this.state.details
     })
   }
 }
+
+
+const styleIcon = {
+  margin: 5
+}
+const styleIconContainer = {
+  position: 'absolute',
+  top: 0,
+  right: 0
+} 
 
 const styles = StyleSheet.create({
     view: {
