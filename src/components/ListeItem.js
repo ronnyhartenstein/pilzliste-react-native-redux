@@ -27,7 +27,7 @@ export default class ListeItem extends Component {
     } else {
         viewStyles.push(styles.viewDetailsInaktiv)
     }
-    console.log('render ListItem', item.name)
+    // console.log('render ListItem', item.name)
     return ( 
         <View style={viewStyles}>
         <TouchableOpacity onPress={() => this.onPressItem()}>

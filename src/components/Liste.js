@@ -58,11 +58,14 @@ export default class Liste extends Component {
 
   render() {
     const { items, activeTab } = this.state
-    console.log('render Liste', activeTab)
+    // console.log('render Liste', activeTab)
     return (
       <LazyloadScrollView
           style={styles.container}
-          contentContainerStyle={styles.content}
+          contentContainerStyle={[styles.content, activeTab == 'galerie' && {
+            justifyContent: 'center',
+            flexDirection: 'row',
+            flexWrap: 'wrap'}]}
           name="lazyload-list"
       >
         { items.map((item, i) => {

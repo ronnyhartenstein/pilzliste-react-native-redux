@@ -36,7 +36,7 @@ export default class Fusszeile extends Component {
     const { numberItems, selectedTab } = this.state
     const colActive = '#f50'
     const colInactive = 'gray'
-    console.log('render Fusszeile', selectedTab)
+    // console.log('render Fusszeile', selectedTab)
     return (
       <View style={styles.container}>
         <View style={styles.iconRow}>
@@ -56,7 +56,7 @@ export default class Fusszeile extends Component {
             color={selectedTab === 'gesternt' ? colActive : colInactive}
             onPress={() => this.changeTab('gesternt')} />
 
-          <Text style={styles.treffer}>{numberItems} Pilze gefunden</Text>
+          <Text style={styles.treffer}>{numberItems} Pilze</Text>
         </View>
       </View>
     )

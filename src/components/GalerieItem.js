@@ -24,6 +24,8 @@ export default class GalerieItem extends Component {
     const item = this.props.item
     const image_uri = imageUri(item.name)
     // console.log("image: ", image_uri)
+    const { height, width } = Dimensions.get('window');
+    const halfWidth = parseInt(width / 2)
 
     const viewStyles = [styles.view]
     // if (this.state.details) {
@@ -31,15 +33,15 @@ export default class GalerieItem extends Component {
     // } else {
     //     viewStyles.push(styles.viewDetailsInaktiv)
     // }
+    viewStyles.push({width: halfWidth - 10, height: halfWidth - 10})
     
-    const { height, width } = Dimensions.get('window');
-    const imgContainerWidth = parseInt(width / 2) - 25
+    const imgContainerWidth = halfWidth - 12
     // console.log("ImgContW", imgContainerWidth)
-    const stylesImage = {
+    const imageStyles = {
         height: imgContainerWidth,
         width: imgContainerWidth
     }
-    console.log('render GalerieItem', item.name)
+    // console.log('render GalerieItem', item.name)
     return ( 
         <View style={viewStyles}>
         <TouchableOpacity onPress={() => this.onPressItem()}>
@@ -48,7 +50,7 @@ export default class GalerieItem extends Component {
             >
                 <View style={styles.item}>
                     <Image
-                        style={stylesImage}
+                        style={imageStyles}
                         source={{uri: image_uri}}
                         // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
                         // onLoadStart={() => console.log("onLoadStart", item.name)}
@@ -56,7 +58,7 @@ export default class GalerieItem extends Component {
                         onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
                         // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
                     />
-                    <View style={styles.name}>
+                    <View style={[styles.name, {width: halfWidth - 10}]}>
                         <Text style={styles.nameText}>{item.name}</Text>
                         <Text style={styles.latText}>{item.lat}</Text>
                     </View>
@@ -76,11 +78,9 @@ export default class GalerieItem extends Component {
 
 const styles = StyleSheet.create({
     view: {
-      flex: 0.5,
       borderWidth: 1,
-      borderColor: 'gray',
+      borderColor: 'lightgray',
       margin: 5
-    //   height: 50
     },
     // viewDetailsAktiv: {
     //     // height: 250,
@@ -91,19 +91,23 @@ const styles = StyleSheet.create({
     // },
     name: {
         position: 'absolute',
-        bottom: 10,
-        left: 10
+        bottom: 0,
+        left: 0,
+        opacity: 0.9
     },
-    item: {
-      flex: 1, 
-      flexDirection: 'row',
-      margin: 10
-    },
-    // nameText: {
-    //   fontSize: 12
+    // item: {
+    //   flex: 1, 
+    //   flexDirection: 'row',
+    //   margin: 10
     // },
+    nameText: {
+      paddingTop: 5,
+      paddingLeft: 5
+    },
     latText: {
       color: 'gray',
-      fontSize: 10
+      fontSize: 10,
+      paddingBottom: 5,
+      paddingLeft: 5
     } 
 });
