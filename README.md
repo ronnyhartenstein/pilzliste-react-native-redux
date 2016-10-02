@@ -1,6 +1,8 @@
 Kleines Beispielprojekt um React Native mit Redux auszuprobieren.
 
-![Screenshot iOS](screenshot-ios.png)
+
+![Screenshot iOS: Listenansicht nach Suchbegriff gefiltertert](screenshot-ios-liste-mit-suche.png) 
+![Screenshot iOS: Galerieansicht](screenshot-ios-galerie.png)
 
 TODOs:
 - [x] React App Komponenten Liste + Kopfzeile
