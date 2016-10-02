@@ -1,9 +1,15 @@
 import escapeUri from '../lib/escapeUri'
 
+const domain = 'https://pilze.rh-flow.de'
+
 export const thumbnailUri = function (name) {
-    return 'https://uli.rh-flow.de/pilzbilder_klein/' + escapeUri(name) + '.jpg.png'
+    return domain+'/thumbnails/' + escapeUri(name) + '.jpg.png'
 }
 
 export const imageUri = function(name) {
-    return 'https://uli.rh-flow.de/pilzbilder/' + escapeUri(name) + '.jpg'
+    return domain+'/original/' + escapeUri(name) + '.jpg'
+}
+
+export const galerieUri = function(name) {
+    return domain+'/galerie/' + escapeUri(name) + '.jpg'
 }

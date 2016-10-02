@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
 import { LazyloadView } from 'react-native-lazyload'
-import { imageUri } from '../lib/imageUri'
+import { galerieUri } from '../lib/imageUri'
 // import ListeItemDetails from './ListeItemDetails'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
@@ -22,7 +22,7 @@ export default class GalerieItem extends Component {
   }
   render() {
     const item = this.props.item
-    const image_uri = imageUri(item.name)
+    const image_uri = galerieUri(item.name)
     // console.log("image: ", image_uri)
     const { height, width } = Dimensions.get('window');
     const halfWidth = parseInt(width / 2)
