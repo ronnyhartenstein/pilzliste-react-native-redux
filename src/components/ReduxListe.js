@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Liste from './Liste'
-import { updateNumberItems } from '../actions/itemActions'
+import { updateNumberItems, setStar, unsetStar } from '../actions/itemActions'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
 import _ from 'lodash'
@@ -47,6 +47,12 @@ const mapDispatchToProps = (dispatch) => {
     // wirkliche Anzahl Ergebnisse in Store für Fusszeile zurückfunken
     updateNumberItems: (number) => {
       dispatch(updateNumberItems(number))
+    },
+    setStar: (item) => {
+      dispatch(setStar(item.id))
+    },
+    unsetStar: (item) => {
+      dispatch(unsetStar(item.id))
     }
   }
 }

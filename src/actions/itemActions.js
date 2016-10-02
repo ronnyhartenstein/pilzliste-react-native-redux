@@ -7,20 +7,35 @@ export function createItem(name, lat, beschreibung) {
   };
 }
 
-export function updateItem(nr, name, lat, beschreibung) {
+export function updateItem(id, name, lat, beschreibung) {
   return {
     type: actions.UPDATE,
-    item: { nr, name, lat, beschreibung }
+    item: { id, name, lat, beschreibung }
   };
 }
 
-export function deleteItem(nr) {
+export function deleteItem(id) {
   return {
     type: actions.DELETE,
-    nr
+    id
   };
 }
 
+export function setStar(id) {
+  // console.log('action setStar', id)
+  return {
+    type: actions.SET_STAR,
+    id
+  };
+}
+
+export function unsetStar(id) {
+  // console.log('action unsetStar', id)
+  return {
+    type: actions.UNSET_STAR,
+    id
+  };
+}
 
 export function updateNumberItems(number) {
   // console.log(`neue Anzahl ${number}..`)

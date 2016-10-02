@@ -58,6 +58,7 @@ export default class Liste extends Component {
 
   render() {
     const { items, activeTab } = this.state
+    const { setStar, unsetStar } = this.props
     // console.log('render Liste', activeTab)
     return (
       <LazyloadScrollView
@@ -70,9 +71,9 @@ export default class Liste extends Component {
       >
         { items.map((item, i) => {
           switch (activeTab) {
-            case 'liste': return <ListeItem key={i} item={item} />
-            case 'galerie': return <GalerieItem key={i} item={item} />
-            case 'gesternt': return item.stern ? <ListeItem key={i} item={item} /> : null
+            case 'liste': return <ListeItem key={i} item={item} setStar={setStar} unsetStar={unsetStar} />
+            case 'galerie': return <GalerieItem key={i} item={item} setStar={setStar} unsetStar={unsetStar} />
+            case 'gesternt': return item.stern ? <ListeItem key={i} item={item} setStar={setStar} unsetStar={unsetStar} /> : null
           }
         }) }
       </LazyloadScrollView>

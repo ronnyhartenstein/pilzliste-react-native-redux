@@ -71,7 +71,11 @@ export default class ListeItem extends Component {
   }
 
   switchStern() {
-    console.log("switchStern")
+    if (!this.props.item.stern) {
+      this.props.setStar(this.props.item)
+    } else {
+      this.props.unsetStar(this.props.item)
+    }
   }
 
   onPressItem() {

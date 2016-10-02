@@ -9,12 +9,16 @@ import { Icon } from 'react-native-elements'
 // Lazy load https://github.com/magicismight/react-native-lazyload
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
 // Colors: https://facebook.github.io/react-native/docs/colors.html
+// Dimensions: https://facebook.github.io/react-native/docs/dimensions.html
 
 // Layout Beispiel Loginscreen: https://github.com/browniefed/react-native-screens
 //   Code: https://github.com/browniefed/react-native-screens/blob/master/app/screens/login/login1.js
 
 // Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons 
 //   Material Icons: https://design.google.com/icons/
+
+// Grid-Layout: https://github.com/yelled3/react-native-grid-example
+
 
 export default class GalerieItem extends Component {
   constructor(props) {
@@ -79,7 +83,11 @@ export default class GalerieItem extends Component {
   }
 
   switchStern() {
-    console.log("switchStern")
+    if (!this.props.item.stern) {
+      this.props.setStar(this.props.item)
+    } else {
+      this.props.unsetStar(this.props.item)
+    }
   }
 
   onPressItem() {
@@ -116,7 +124,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left: 0,
-        opacity: 0.9
+        opacity: 0.8
     },
     // item: {
     //   flex: 1, 
