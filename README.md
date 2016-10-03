@@ -13,8 +13,10 @@ TODOs:
 - [x] nach Tap auf Item Details + Bild zum Pilz (externe URL)
 - [x] Details-Bild mit Progress-Bar
 - [-] Images in Liste cachen (prefetch)
-- [ ] Bottom-Navi für Anzahl Treffer und "Neuer Eintrag"
-- [ ] Pilze faven
+- [x] Bottom-Navi für Anzahl Treffer
+- [x] Pilze faven
+- [ ] Suchfilter: Farben, Arten, essbar/giftig
+  - Overlay wie http://stackoverflow.com/questions/30638739/transparent-overlay-in-react-native
 - [ ] Infos von Wiki in WebView
   - https://de.m.wikipedia.org/wiki/Speisepilz
   - https://de.m.wikipedia.org/wiki/Wikipedia:Hinweise_zum_Pilzesammeln

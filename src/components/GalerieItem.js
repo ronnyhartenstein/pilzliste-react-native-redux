@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
-import { LazyloadView } from 'react-native-lazyload'
+// import { LazyloadView } from 'react-native-lazyload'
 import { galerieUri } from '../lib/imageUri'
 import { Icon } from 'react-native-elements'
 
@@ -52,33 +52,29 @@ export default class GalerieItem extends Component {
     // console.log('render GalerieItem', item.name)
     return ( 
         <View style={viewStyles}>
-        <TouchableOpacity onPress={() => this.onPressItem()}>
-            <LazyloadView
-                host="lazyload-list"
-            >
-                <View style={styles.item}>
-                    <Image
-                        style={imageStyles}
-                        source={{uri: image_uri}}
-                        // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
-                        // onLoadStart={() => console.log("onLoadStart", item.name)}
-                        // onLoadEnd={() => console.log("onLoadEnd", item.name)}
-                        onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
-                        // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
-                    />
-                    <Icon
-                        containerStyle={styleIconContainer}
-                        iconStyle={styleIcon}
-                        name={item.stern ? 'star' : 'star-border'} 
-                        color={item.stern ? 'yellow' : 'goldenrod'}
-                        onPress={() => this.switchStern()} />
-                    <View style={[styles.name, {width: halfWidth - 10}]}>
-                        <Text style={styles.nameText}>{item.name}</Text>
-                        <Text style={styles.latText}>{item.lat}</Text>
-                    </View>
+          <TouchableOpacity onPress={() => this.onPressItem()}>
+            <View style={styles.item}>
+                <Image
+                    style={imageStyles}
+                    source={{uri: image_uri}}
+                    // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
+                    // onLoadStart={() => console.log("onLoadStart", item.name)}
+                    // onLoadEnd={() => console.log("onLoadEnd", item.name)}
+                    onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
+                    // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
+                />
+                <Icon
+                    containerStyle={styleIconContainer}
+                    iconStyle={styleIcon}
+                    name={item.stern ? 'star' : 'star-border'} 
+                    color={item.stern ? 'yellow' : 'goldenrod'}
+                    onPress={() => this.switchStern()} />
+                <View style={[styles.name, {width: halfWidth - 10}]}>
+                    <Text style={styles.nameText}>{item.name}</Text>
+                    <Text style={styles.latText}>{item.lat}</Text>
                 </View>
-            </LazyloadView>
-        </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
         </View>
     )
   }
@@ -110,8 +106,6 @@ const styleIconContainer = {
 
 const styles = StyleSheet.create({
     view: {
-      borderWidth: 1,
-      borderColor: 'lightgray',
       margin: 5
     },
     // viewDetailsAktiv: {
@@ -125,7 +119,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left: 0,
-        opacity: 0.8
+        // opacity: 0.8
+        backgroundColor: 'black'
     },
     // item: {
     //   flex: 1, 
@@ -134,10 +129,11 @@ const styles = StyleSheet.create({
     // },
     nameText: {
       paddingTop: 5,
-      paddingLeft: 5
+      paddingLeft: 5,
+      color: 'white'
     },
     latText: {
-      color: 'gray',
+      color: 'white',
       fontSize: 10,
       paddingBottom: 5,
       paddingLeft: 5

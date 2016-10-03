@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
-import { LazyloadView } from 'react-native-lazyload'
+// import { LazyloadView } from 'react-native-lazyload'
 import { thumbnailUri } from '../lib/imageUri'
 import ListeItemDetails from './ListeItemDetails'
 import { Icon } from 'react-native-elements'
@@ -34,38 +34,34 @@ export default class ListeItem extends Component {
     // console.log('render ListItem', item.name)
     return ( 
         <View style={viewStyles}>
-        <TouchableOpacity onPress={() => this.onPressItem()}>
-            <LazyloadView
-                host="lazyload-list"
-            >
-                <View style={styles.item}>
-                    <Image
-                        style={styles.image}
-                        source={{uri: image_uri}}
-                        // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
-                        // onLoadStart={() => console.log("onLoadStart", item.name)}
-                        // onLoadEnd={() => console.log("onLoadEnd", item.name)}
-                        onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
-                        // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
-                    />
-                    <View style={styles.name}>
-                        <Text style={styles.nameText}>{item.name}</Text>
-                        <Text style={styles.latText}>{item.lat}</Text>
-                    </View>
-                    <Icon
-                        containerStyle={styleIconContainer}
-                        iconStyle={styleIcon}
-                        name={item.stern ? 'star' : 'star-border'} 
-                        color={item.stern ? 'goldenrod' : 'gold'}
-                        onPress={() => this.switchStern()} />
+          <TouchableOpacity onPress={() => this.onPressItem()}>
+            <View style={styles.item}>
+                <Image
+                    style={styles.image}
+                    source={{uri: image_uri}}
+                    // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
+                    // onLoadStart={() => console.log("onLoadStart", item.name)}
+                    // onLoadEnd={() => console.log("onLoadEnd", item.name)}
+                    onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
+                    // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
+                />
+                <View style={styles.name}>
+                    <Text style={styles.nameText}>{item.name}</Text>
+                    <Text style={styles.latText}>{item.lat}</Text>
                 </View>
-                <View>
-                    {this.state.details 
-                        ? <ListeItemDetails item={item} show={this.state.details} /> 
-                        : null}
-                </View>
-            </LazyloadView>
-        </TouchableOpacity>
+                <Icon
+                    containerStyle={styleIconContainer}
+                    iconStyle={styleIcon}
+                    name={item.stern ? 'star' : 'star-border'} 
+                    color={item.stern ? 'goldenrod' : 'gold'}
+                    onPress={() => this.switchStern()} />
+            </View>
+            <View>
+                {this.state.details 
+                    ? <ListeItemDetails item={item} show={this.state.details} /> 
+                    : null}
+            </View>
+          </TouchableOpacity>
         </View>
     )
   }
@@ -95,13 +91,9 @@ const styleIconContainer = {
 } 
 
 const styles = StyleSheet.create({
-    view: {
-      borderTopWidth: 1,
-      borderColor: 'gray',
-    //   height: 50
-    },
+    // view: {
+    // },
     viewDetailsAktiv: {
-        // height: 250,
         backgroundColor: 'burlywood'
     },
     viewDetailsInaktiv: {
