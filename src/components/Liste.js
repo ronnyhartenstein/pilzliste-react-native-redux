@@ -30,6 +30,7 @@ export default class Liste extends Component {
     super(props)
     this.state = {
       items: ds.cloneWithRowsAndSections(this.getSectionBlob(this.props.filteredItems)),
+      numberItems: this.props.filteredItems.length,
       activeTab: this.props.activeTab
     }
   }
@@ -42,7 +43,8 @@ export default class Liste extends Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.filteredItems !== this.props.filteredItems) {
       this.setState({
-        items: ds.cloneWithRowsAndSections(this.getSectionBlob(nextProps.filteredItems))
+        items: ds.cloneWithRowsAndSections(this.getSectionBlob(nextProps.filteredItems)),
+        numberItems: nextProps.filteredItems.length
       })
       this.updateNumberItems()  
     }
@@ -63,7 +65,7 @@ export default class Liste extends Component {
 
   updateNumberItems() {
     // für Fusszeile die akt. Anzahl Items melden
-    this.props.updateNumberItems(this.state.items.length)
+    this.props.updateNumberItems(this.state.numberItems)
   }
 
   render() {
