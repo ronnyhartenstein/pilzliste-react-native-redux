@@ -13,6 +13,7 @@ import { Icon } from 'react-native-elements'
 
 // Layout Beispiel Loginscreen: https://github.com/browniefed/react-native-screens
 //   Code: https://github.com/browniefed/react-native-screens/blob/master/app/screens/login/login1.js
+// Layout Spielwiese: http://www.reactnativeexpress.com/flexbox
 
 // Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons 
 //   Material Icons: https://design.google.com/icons/
