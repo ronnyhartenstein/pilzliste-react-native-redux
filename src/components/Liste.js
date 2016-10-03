@@ -130,10 +130,11 @@ const styles = StyleSheet.create({
       backgroundColor: 'white'
     },
     section: {
-      backgroundColor: 'oldlace'
+      backgroundColor: '#F0F0F0'
     },
     sectionText: {
-      padding: 10,
-      fontWeight: 'bold'
+      padding: 5,
+      fontWeight: 'bold',
+      textAlign: 'center'
     }
 });
