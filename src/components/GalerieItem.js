@@ -43,7 +43,7 @@ export default class GalerieItem extends Component {
     // }
     viewStyles.push({width: halfWidth - 10, height: halfWidth - 10})
     
-    const imgContainerWidth = halfWidth - 12
+    const imgContainerWidth = halfWidth - 10
     // console.log("ImgContW", imgContainerWidth)
     const imageStyles = {
         height: imgContainerWidth,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     name: {
         position: 'absolute',
         bottom: 0,
-        left: 0,
+        left: 1,
         // opacity: 0.8
         backgroundColor: 'black'
     },
