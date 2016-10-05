@@ -34,15 +34,15 @@ export default class ListeItemDetails extends Component {
     const image_uri = imageUri(item.name)
     return (
         <View style={styles.details}>
-            <Infozeile label='Gattung' text={item.gattung} />
-            <Infozeile label='Hut oben' text={item.hut_oben} />
-            <Infozeile label='Hut unten' text={item.hut_unten} />
-            <Infozeile label='Stiel' text={item.stiel} />
-            <Infozeile label='Fleisch' text={item.fleisch} />
-            <Infozeile label='Vorkommen' text={item.vorkommen} />
-            <Infozeile label='Zeitraum' text={item.zeitraum} />
-            <Infozeile label='Bedeutung' text={item.bedeutung} />
-            <Infozeile label='Merkmal' text={item.merkmal} />
+            <Infozeile label='Gattung' text={item.gattung.trim()} />
+            <Infozeile label='Hut oben' text={item.hut_oben.trim()} />
+            <Infozeile label='Hut unten' text={item.hut_unten.trim()} />
+            <Infozeile label='Stiel' text={item.stiel.trim()} />
+            <Infozeile label='Fleisch' text={item.fleisch.trim()} />
+            <Infozeile label='Vorkommen' text={item.vorkommen.trim()} />
+            <Infozeile label='Zeitraum' text={item.zeitraum.trim()} />
+            <Infozeile label='Bedeutung' text={item.bedeutung.trim()} />
+            <Infozeile label='Merkmal' text={item.merkmal.trim()} />
             <Image 
               style={styles.image} 
               source={{uri: image_uri}}

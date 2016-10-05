@@ -18,7 +18,8 @@ export default class ListeItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      details: false
+      details: false,
+      stern: this.props.item.stern
     }
   }
   render() {
@@ -52,8 +53,8 @@ export default class ListeItem extends Component {
                 <Icon
                     containerStyle={styleIconContainer}
                     iconStyle={styleIcon}
-                    name={item.stern ? 'star' : 'star-border'} 
-                    color={item.stern ? 'goldenrod' : 'gold'}
+                    name={this.state.stern ? 'star' : 'star-border'} 
+                    color={this.state.stern ? 'goldenrod' : 'gold'}
                     onPress={() => this.switchStern()} />
             </View>
             <View>
@@ -67,11 +68,14 @@ export default class ListeItem extends Component {
   }
 
   switchStern() {
-    if (!this.props.item.stern) {
+    if (!this.state.stern) {
       this.props.setStar(this.props.item)
     } else {
       this.props.unsetStar(this.props.item)
     }
+    this.setState({
+      stern: !this.state.stern
+    })
   }
 
   onPressItem() {

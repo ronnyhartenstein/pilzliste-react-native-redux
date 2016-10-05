@@ -16,19 +16,19 @@ import { loadItem } from './actions/itemActions';
 import daten from '../daten/pilze.json'
 // erstmal nur Name und Lat und 3 wg. Log
 let daten_preload = daten
-// let daten_preload = _.take(daten, 100)
+// let daten_preload = _.take(daten, 2)
 // let daten_preload = _.filter(daten, itm => /rasling/.test(itm.name))
 // console.log("daten preload: ", daten_preload)
 
 // Sortieren und Dubletten entfernen...
-daten_preload = _.sortedUniqBy(daten_preload, itm => ( itm.name ))
+daten_preload = _.sortedUniqBy(daten_preload, itm => ( itm.name.trim() ))
 // ID hinzu
 _.each(daten_preload, (itm, idx) => { 
   itm.id = idx+1
 })
 // Favouriten: testweise sternen
 _.each(daten_preload, (itm, idx) => {
-  itm.stern = idx % 5 == 0 // jeden 20. Pilz = 50 
+  itm.stern = idx % 50 == 0 // jeden 20. Pilz = 50 
 })
 // console.log('daten preload: ', daten_preload)
 

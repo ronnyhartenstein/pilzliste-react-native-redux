@@ -13,12 +13,6 @@ import _ from 'lodash'
 // SectionHeaders in ListView: http://richardkho.com/section-headers-in-react-native-listview-components/
 // Grid-Layout in ListView: https://github.com/yelled3/react-native-grid-example
 
-const ds = new ListView.DataSource({
-  // TODO hier kommt er nicht vorbei um zu checken?!!
-  rowHasChanged: (r1, r2) => { /*console.log(r1, '!=', r2);*/ return r1.stern !== r2.stern },
-  sectionHeaderHasChanged: (s1, s2) => s1 !== s2
-});
-
 export default class Liste extends Component {
   // propTypes = {
   //   items:  PropTypes.arrayOf(PropTypes.shape({
@@ -34,8 +28,13 @@ export default class Liste extends Component {
     const items = this.props.activeTab == 'gesternt' 
         ? this.onlyStaredItems(this.props.filteredItems) 
         : this.props.filteredItems
+   const ds = new ListView.DataSource({
+      // TODO hier kommt er nicht vorbei um zu checken?!!
+      rowHasChanged: (r1,r2) => this.rowHasChanged(r1,r2),
+      sectionHeaderHasChanged: (s1,s2) => this.sectionHeaderHasChanged(s1,s2)
+    });
     this.state = {
-      items: this.props.activeTab == 'liste' 
+      dataSource: this.props.activeTab == 'liste' 
               ? ds.cloneWithRowsAndSections(this.getSectionBlob(items)) 
               : ds.cloneWithRows(items),
       numberItems: this.props.filteredItems.length,
@@ -43,7 +42,9 @@ export default class Liste extends Component {
     }
   }
   getSectionBlob(items) {
-    return _.groupBy(items, itm => ( itm.name.substr(0,1) ))
+    const items_grouped = _.groupBy(items, itm => ( itm.name.substr(0,1) ))
+    // console.log('getSectionBlob', items_grouped)
+    return items_grouped
   }
   onlyStaredItems(items) {
     return _.filter(items, itm => ( itm.stern ))
@@ -55,14 +56,14 @@ export default class Liste extends Component {
     if (nextProps.filteredItems !== this.props.filteredItems
     || nextProps.activeTab !== this.props.activeTab
     ) {
-      // console.log("Liste componentWillReceiveProps")
+      // console.log("Liste componentWillReceiveProps", nextProps)
       const items = nextProps.activeTab == 'gesternt' 
           ? this.onlyStaredItems(nextProps.filteredItems) 
           : nextProps.filteredItems;
       this.setState({
-        items: nextProps.activeTab == 'liste' 
-              ? ds.cloneWithRowsAndSections(this.getSectionBlob(items))
-              : ds.cloneWithRows(items),
+        dataSource: nextProps.activeTab == 'liste' 
+              ? this.state.dataSource.cloneWithRowsAndSections(this.getSectionBlob(items))
+              : this.state.dataSource.cloneWithRows(items),
         numberItems: nextProps.filteredItems.length,
       })
       this.updateNumberItems()  
@@ -90,6 +91,8 @@ export default class Liste extends Component {
   render() {
     const { items, activeTab } = this.state
     // console.log('render Liste', activeTab)
+
+    // ==> Lösung vermutlich: separate Komponente für jeden Listentyp ..
     return (
       <ListView
           listSize={1000}
@@ -99,7 +102,7 @@ export default class Liste extends Component {
           // offscreen child views are removed from their native backing superview when offscreen.
           removeClippedSubviews={true}
           
-          dataSource={this.state.items}
+          dataSource={this.state.dataSource}
           renderRow={(item, sectionID, rowID, highlightRow) => this.renderRow(item, sectionID, rowID, highlightRow)}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
           renderSeparator={this.renderSeparator}
@@ -113,6 +116,24 @@ export default class Liste extends Component {
           name="lazyload-list"
       />
     );
+  }
+  rowHasChanged(r1, r2) {
+    // ändert sich immer - vermutlich Immutable von Redux sei Dank
+    return r1 !== r2
+
+    // ==> Lösung vermutlich: separate Komponente für jeden Listentyp .. 
+
+    // r1 und r2 sind gleich - warum? k.A.
+    // console.log('rowHasChanged?', r1.id, r1.stern, r2.stern, r1, r2)
+    // if (r1.stern !== r2.stern) console.log('rowHasChanged!', r1.id)
+    // return r1.stern !== r2.stern
+
+    // wir ändern eh keine daten - 
+    // aber die Stern-Liste muss beräumt werden
+    // if (this.state.activeTab == 'gesternt') {
+    //   return r1 !== r2
+    // }
+    // return false    
   }
   renderRow(item, sectionID, rowID, highlightRow) {
     // console.log("render",sectionID, rowID)
@@ -135,6 +156,9 @@ export default class Liste extends Component {
         }}
       />
     )
+  }
+  sectionHeaderHasChanged(s1, s2) {
+    return s1 !== s2
   }
   renderSectionHeader(sectionData, sectionID) {
     // console.log('sectionHeader', sectionData)

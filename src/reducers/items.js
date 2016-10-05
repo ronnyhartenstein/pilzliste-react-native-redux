@@ -30,6 +30,7 @@ export default function itemsReducer (items = [], action = {}) {
       }
       item.stern = true
       index = _.findIndex(items, (item) => item.id === action.id)
+      // console.log('reducer SET_STAR', item, index)
       if (index === undefined) {
         return items
       }
@@ -46,6 +47,7 @@ export default function itemsReducer (items = [], action = {}) {
       }
       item.stern = false
       index = _.findIndex(items, (item) => item.id === action.id)
+      // console.log('reducer UNSET_STAR', item, index)
       if (index === undefined) {
         return items
       }
