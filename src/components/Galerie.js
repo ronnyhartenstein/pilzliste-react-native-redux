@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { StyleSheet, ListView, View, RecyclerViewBackedScrollView, Text } from 'react-native'
-import ListeItem from './ListeItem'
+import GalerieItem from './GalerieItem'
 import _ from 'lodash'
 
 // ListView https://facebook.github.io/react-native/docs/listview.html
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
-// ListView vs. ScrollView: http://stackoverflow.com/questions/9820679/difference-between-scrollview-and-listview
-// SectionHeaders in ListView: http://richardkho.com/section-headers-in-react-native-listview-components/
+// Grid-Layout in ListView: https://github.com/yelled3/react-native-grid-example
 
-export default class Liste extends Component {
+export default class Galerie extends Component {
   constructor(props) {
     super(props)
     // console.log("Liste constructor")
@@ -18,14 +17,9 @@ export default class Liste extends Component {
       sectionHeaderHasChanged: (s1,s2) => this.sectionHeaderHasChanged(s1,s2)
     });
     this.state = {
-      dataSource: ds.cloneWithRowsAndSections(this.getSectionBlob(items)),
+      dataSource: ds.cloneWithRows(items),
       numberItems: this.props.filteredItems.length
     }
-  }
-  getSectionBlob(items) {
-    const items_grouped = _.groupBy(items, itm => ( itm.name.substr(0,1) ))
-    // console.log('getSectionBlob', items_grouped)
-    return items_grouped
   }
   // kein Neubau der Komponente bei Änderung
   // sondern per Props-Änderung 
@@ -35,7 +29,7 @@ export default class Liste extends Component {
       // console.log("Liste componentWillReceiveProps", nextProps)
       const items = nextProps.filteredItems
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRowsAndSections(this.getSectionBlob(items)),
+        dataSource: this.state.dataSource.cloneWithRows(items),
         numberItems: nextProps.filteredItems.length,
       })
       this.updateNumberItems()  
@@ -58,22 +52,18 @@ export default class Liste extends Component {
   render() {
     const { items, activeTab } = this.state
     // console.log('render Liste', activeTab)
-
-    // ==> Lösung vermutlich: separate Komponente für jeden Listentyp ..
     return (
       <ListView
           listSize={1000}
-          pageSize={11}
+          pageSize={8}
           // "How early to start rendering rows before they come on screen, in pixels."
-          scrollRenderAheadDistance={100}
+          scrollRenderAheadDistance={200}
           // offscreen child views are removed from their native backing superview when offscreen.
           removeClippedSubviews={true}
           
           dataSource={this.state.dataSource}
           renderRow={(item, sectionID, rowID, highlightRow) => this.renderRow(item, sectionID, rowID, highlightRow)}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={this.renderSeparator}
-          renderSectionHeader={this.renderSectionHeader}
 
           style={styles.container}
           contentContainerStyle={styles.content}
@@ -83,48 +73,12 @@ export default class Liste extends Component {
   rowHasChanged(r1, r2) {
     // ändert sich immer - vermutlich Immutable von Redux sei Dank
     return r1 !== r2
-
-    // ==> Lösung vermutlich: separate Komponente für jeden Listentyp .. 
-
-    // r1 und r2 sind gleich - warum? k.A.
-    // console.log('rowHasChanged?', r1.id, r1.stern, r2.stern, r1, r2)
-    // if (r1.stern !== r2.stern) console.log('rowHasChanged!', r1.id)
-    // return r1.stern !== r2.stern
-
-    // wir ändern eh keine daten - 
-    // aber die Stern-Liste muss beräumt werden
-    // if (this.state.activeTab == 'gesternt') {
-    //   return r1 !== r2
-    // }
-    // return false    
   }
   renderRow(item, sectionID, rowID, highlightRow) {
     // console.log("render",sectionID, rowID)
     const { setStar, unsetStar } = this.props
     const key = `${sectionID}-${rowID}`
-    return <ListeItem key={key} item={item} setStar={setStar} unsetStar={unsetStar} />
-  }
-  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
-    return (
-      <View
-        key={`${sectionID}-${rowID}`}
-        style={{
-          height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-        }}
-      />
-    )
-  }
-  sectionHeaderHasChanged(s1, s2) {
-    return s1 !== s2
-  }
-  renderSectionHeader(sectionData, sectionID) {
-    // console.log('sectionHeader', sectionData)
-    return (
-      <View style={styles.section}>
-        <Text style={styles.sectionText}>{sectionID}</Text>
-      </View>
-    )
+    return <GalerieItem key={key} item={item} setStar={setStar} unsetStar={unsetStar} />
   }
 }
 
@@ -133,12 +87,9 @@ const styles = StyleSheet.create({
       flex: 1, 
       backgroundColor: 'white'
     },
-    section: {
-      backgroundColor: '#F0F0F0'
-    },
-    sectionText: {
-      padding: 5,
-      fontWeight: 'bold',
-      textAlign: 'center'
+    content: {
+      justifyContent: 'center',
+      flexDirection: 'row',
+      flexWrap: 'wrap'
     }
 });

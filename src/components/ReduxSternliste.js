@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import Liste from './Liste'
+import Sternliste from './Sternliste'
 import { updateNumberItems, setStar, unsetStar } from '../actions/itemActions'
 import { connect } from 'react-redux'
-import getVisibleItems from '../selectors/visibleItems'  
+import getStaredItems from '../selectors/staredItems'  
 import _ from 'lodash'
 
 const mapStateToProps = (state) => {
   return {
-    filteredItems: getVisibleItems(state)
+    staredItems: getStaredItems(state)
   } 
 }
 
@@ -21,18 +21,15 @@ const mapDispatchToProps = (dispatch) => {
     updateNumberItems: (number) => {
       dispatch(updateNumberItems(number))
     },
-    setStar: (item) => {
-      dispatch(setStar(item.id))
-    },
     unsetStar: (item) => {
       dispatch(unsetStar(item.id))
     }
   }
 }
 
-const ReduxListe = connect(
+const ReduxSternliste = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Liste);
+)(Sternliste);
 
-export default ReduxListe
+export default ReduxSternliste

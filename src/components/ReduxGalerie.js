@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Liste from './Liste'
+import Galerie from './Galerie'
 import { updateNumberItems, setStar, unsetStar } from '../actions/itemActions'
 import { connect } from 'react-redux'
-import getVisibleItems from '../selectors/visibleItems'  
+import getVisibleItems from '../selectors/visibleItems'
 import _ from 'lodash'
 
 const mapStateToProps = (state) => {
@@ -13,10 +13,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onItemClick: (nr) => {
-    //   console.log("TODO zeige Details-Szene")
-    //   //dispatch(showDetails(nr))
-    // },
     // wirkliche Anzahl Ergebnisse in Store für Fusszeile zurückfunken
     updateNumberItems: (number) => {
       dispatch(updateNumberItems(number))
@@ -30,9 +26,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const ReduxListe = connect(
+const ReduxGalerie = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Liste);
+)(Galerie);
 
-export default ReduxListe
+export default ReduxGalerie

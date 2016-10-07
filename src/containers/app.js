@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import ReduxFusszeile from '../components/ReduxFusszeile'
 import ReduxKopfzeile from '../components/ReduxKopfzeile'
-import ReduxListe from '../components/ReduxListe'
+import ReduxListSwitcher from '../components/ReduxListSwitcher'
 
 
 export default class Pilzliste extends Component {
@@ -14,7 +14,7 @@ export default class Pilzliste extends Component {
     return (
         <View style={styles.container}>
             <ReduxKopfzeile />
-            <ReduxListe />
+            <ReduxListSwitcher />
             <ReduxFusszeile />
         </View>
     )
