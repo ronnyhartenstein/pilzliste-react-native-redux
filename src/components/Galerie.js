@@ -13,8 +13,7 @@ export default class Galerie extends Component {
     // console.log("Liste constructor")
     const items = this.props.filteredItems
    const ds = new ListView.DataSource({
-      rowHasChanged: (r1,r2) => this.rowHasChanged(r1,r2),
-      sectionHeaderHasChanged: (s1,s2) => this.sectionHeaderHasChanged(s1,s2)
+      rowHasChanged: (r1,r2) => this.rowHasChanged(r1,r2)
     });
     this.state = {
       dataSource: ds.cloneWithRows(items),

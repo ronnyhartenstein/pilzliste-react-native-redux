@@ -65,7 +65,7 @@ export default class Liste extends Component {
           listSize={1000}
           pageSize={11}
           // "How early to start rendering rows before they come on screen, in pixels."
-          scrollRenderAheadDistance={100}
+          scrollRenderAheadDistance={300}
           // offscreen child views are removed from their native backing superview when offscreen.
           removeClippedSubviews={true}
           

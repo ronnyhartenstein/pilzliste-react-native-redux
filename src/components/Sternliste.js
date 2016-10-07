@@ -64,7 +64,7 @@ export default class Sternliste extends Component {
     // console.log("render",sectionID, rowID)
     const { unsetStar } = this.props
     const key = `${sectionID}-${rowID}`
-    return <ListeItem key={key} item={item} unsetStar={unsetStar} />
+    return <ListeItem key={key} item={item} setStar={null} unsetStar={unsetStar} />
   }
   renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
     return (

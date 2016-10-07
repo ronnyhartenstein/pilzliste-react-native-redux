@@ -73,9 +73,12 @@ export default class ListeItem extends Component {
     } else {
       this.props.unsetStar(this.props.item)
     }
-    this.setState({
-      stern: !this.state.stern
-    })
+    // in Sternliste sollen entsterne Items entfallen
+    if (this.props.setStar !== null) {
+      this.setState({
+        stern: !this.state.stern
+      })
+    }
   }
 
   onPressItem() {
