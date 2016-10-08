@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { ScrollView, Text, StyleSheet } from 'react-native'
+import ListeItemDetails from '../components/ListeItemDetails'
 
 // Router forward/backward?  https://github.com/aksonov/react-native-router-flux/blob/master/docs/MINI_TUTORIAL.md#going-forward-or-backwards
 
@@ -10,15 +11,16 @@ export default class DetailsScene extends Component {
 
   render() {
     return (
-        <View style={styles.container}>
-            <Text>{this.props.item.name}</Text>
-        </View>
+        <ScrollView style={styles.container}>
+            <ListeItemDetails item={this.props.item} />
+        </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-      marginTop: 80
+      marginTop: 64,
+      backgroundColor: 'bisque'
   }
 });

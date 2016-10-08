@@ -40,13 +40,11 @@ export default class GalerieItem extends Component {
     // } else {
     //     viewStyles.push(styles.viewDetailsInaktiv)
     // }
-    viewStyles.push({width: halfWidth - 10, height: halfWidth - 10})
-    
-    const imgContainerWidth = halfWidth - 10
-    // console.log("ImgContW", imgContainerWidth)
+    const containerSize = halfWidth - 12
+    viewStyles.push({width: containerSize, height: containerSize})
     const imageStyles = {
-        height: imgContainerWidth,
-        width: imgContainerWidth
+        height: containerSize,
+        width: containerSize
     }
     // console.log('render GalerieItem', item.name)
     return ( 
@@ -68,7 +66,7 @@ export default class GalerieItem extends Component {
                     name={item.stern ? 'star' : 'star-border'} 
                     color={item.stern ? 'yellow' : 'goldenrod'}
                     onPress={() => this.switchStern()} />
-                <View style={[styles.name, {width: halfWidth - 10}]}>
+                <View style={[styles.name, {width: containerSize}]}>
                     <Text style={styles.nameText}>{item.name}</Text>
                     <Text style={styles.latText}>{item.lat}</Text>
                 </View>
@@ -90,7 +88,8 @@ export default class GalerieItem extends Component {
     this.setState({
       details: !this.state.details
     })
-    Actions.details({item: this.props.item})
+    const name = this.props.item.name
+    Actions.details({title: name, item: this.props.item})
   }
 }
 

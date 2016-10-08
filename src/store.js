@@ -61,7 +61,7 @@ const store = createStore(reducers, {
   search: '',
   items: daten_preload, 
   numberItems: 0,
-  tab: 'liste'
+  tab: 'galerie'
 });
 
 export default store;

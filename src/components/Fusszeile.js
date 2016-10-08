@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { Icon } from 'react-native-elements'
-
+import { Actions } from 'react-native-router-flux';
 
 // Flex Layout: https://facebook.github.io/react-native/docs/flexbox.html
 //   alle Props: https://facebook.github.io/react-native/docs/layout-props.html
@@ -24,12 +24,6 @@ export default class Fusszeile extends Component {
       selectedTab: nextProps.activeTab,
       numberItems: nextProps.numberItems
     })
-  }
-
-  changeTab(selectedTab) {
-    // console.log("Tab", selectedTab)
-    // this.setState({selectedTab})
-    this.props.switchTab(selectedTab)
   }
 
   render() {
@@ -55,11 +49,27 @@ export default class Fusszeile extends Component {
             name='star'
             color={selectedTab === 'gesternt' ? colActive : colInactive}
             onPress={() => this.changeTab('gesternt')} />
+          <Icon
+            iconStyle={styleIcon}
+            name='help-outline'
+            color={colInactive}
+            onPress={Actions.help} />
+          <Icon
+            iconStyle={styleIcon}
+            name='error-outline'
+            color={colInactive}
+            onPress={() => Actions.error('Beispiel für eine Fehlermeldung')} />
 
           <Text style={styles.treffer}>{numberItems} Pilze</Text>
         </View>
       </View>
     )
+  }
+
+  changeTab(selectedTab) {
+    // console.log("Tab", selectedTab)
+    // this.setState({selectedTab})
+    this.props.switchTab(selectedTab)
   }
 }
 

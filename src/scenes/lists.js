@@ -22,7 +22,6 @@ export default class ListsScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 37,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between'

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   inputCont: {
     height: 55,
-    backgroundColor: 'oldlace',
+    backgroundColor: '#EFEFF2',
     flex: 1
   },
 });
