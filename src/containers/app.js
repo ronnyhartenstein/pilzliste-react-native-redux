@@ -7,6 +7,8 @@ import GalerieScene from '../scenes/galerie'
 import SternlisteScene from '../scenes/sternliste'
 import SearchScene from '../scenes/search'
 import DetailsScene from '../scenes/details'
+import HelpScene from '../scenes/help'
+import WebviewScene from '../scenes/webview'
 import Error from '../components/Error'
 
 // Mini-Tutorial: https://github.com/aksonov/react-native-router-flux/blob/master/docs/MINI_TUTORIAL.md
@@ -30,6 +32,8 @@ export default class App extends Component {
                 <Scene key="sternliste" component={SternlisteScene} title="Gesternte" type={ActionConst.REPLACE} />
                 <Scene key="details" hideNavBar={false} component={DetailsScene} title="Details" />
                 <Scene key="search" hideNavBar={false} direction="vertical" component={SearchScene} title="Erweiterte Suche" />
+                <Scene key="help" hideNavBar={false} component={HelpScene} title="Hilfe" />
+                <Scene key="webview" hideNavBar={false} component={WebviewScene} title="WebView" />
               </Scene>
               <Scene key="error" component={Error}/>
             </Scene>
