@@ -12,7 +12,6 @@ export default class Fusszeile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: this.props.activeTab,
       numberItems: this.props.numberItems
     }
   }
@@ -21,34 +20,34 @@ export default class Fusszeile extends Component {
   // https://github.com/reactjs/redux/issues/683
   componentWillReceiveProps (nextProps) {
     this.setState({
-      selectedTab: nextProps.activeTab,
       numberItems: nextProps.numberItems
     })
   }
 
   render() {
-    const { numberItems, selectedTab } = this.state
+    const { numberItems } = this.state
+    const { activeTab } = this.props
     const colActive = '#f50'
     const colInactive = 'gray'
-    // console.log('render Fusszeile', selectedTab)
+    // console.log('render Fusszeile', activeTab)
     return (
       <View style={styles.container}>
         <View style={styles.iconRow}>
           <Icon
             iconStyle={styleIcon}
             name='view-list'
-            color={selectedTab === 'liste' ? colActive : colInactive}
-            onPress={() => this.changeTab('liste')} />
+            color={activeTab === 'liste' ? colActive : colInactive}
+            onPress={() => Actions.liste()} />
           <Icon
             iconStyle={styleIcon}
             name='view-module'
-            color={selectedTab === 'galerie' ? colActive : colInactive}
-            onPress={() => this.changeTab('galerie')} />
+            color={activeTab === 'galerie' ? colActive : colInactive}
+            onPress={() => Actions.galerie()} />
           <Icon
             iconStyle={styleIcon}
             name='star'
-            color={selectedTab === 'gesternt' ? colActive : colInactive}
-            onPress={() => this.changeTab('gesternt')} />
+            color={activeTab === 'gesternt' ? colActive : colInactive}
+            onPress={() => Actions.sternliste()} />
           <Icon
             iconStyle={styleIcon}
             name='help-outline'
@@ -64,12 +63,6 @@ export default class Fusszeile extends Component {
         </View>
       </View>
     )
-  }
-
-  changeTab(selectedTab) {
-    // console.log("Tab", selectedTab)
-    // this.setState({selectedTab})
-    this.props.switchTab(selectedTab)
   }
 }
 

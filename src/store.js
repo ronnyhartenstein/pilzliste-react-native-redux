@@ -5,7 +5,6 @@ import { Platform } from 'react-native'
 import search from './reducers/search';
 import items from './reducers/items';
 import numberItems from './reducers/numberItems';
-import tab from './reducers/tab';
 import routes from './reducers/routes';
 import _ from 'lodash'
 import { loadItem } from './actions/itemActions';
@@ -53,15 +52,13 @@ function reducers(state = {}, action) {
     search: search(state.search, action),
     items: items(state.items, action),
     numberItems: numberItems(state.numberItems, action),
-    tab: tab(state.tab, action),
     routes: routes(state.routes, action)
   };
 }
 const store = createStore(reducers, { 
   search: '',
   items: daten_preload, 
-  numberItems: 0,
-  tab: 'galerie'
+  numberItems: 0
 });
 
 export default store;

@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import store from '../store';
 import { Provider, connect } from 'react-redux';
 import { Router, Scene, Modal, ActionConst } from 'react-native-router-flux';
-import ListsScene from '../scenes/lists'
+import ListeScene from '../scenes/liste'
+import GalerieScene from '../scenes/galerie'
+import SternlisteScene from '../scenes/sternliste'
 import SearchScene from '../scenes/search'
 import DetailsScene from '../scenes/details'
 import Error from '../components/Error'
@@ -23,7 +25,9 @@ export default class App extends Component {
           <RouterWithRedux>
             <Scene key="modal" component={Modal} sceneStyle={{backgroundColor:'#F7F7F7'}}>
               <Scene key="root" hideNavBar={true}>
-                <Scene key="lists" component={ListsScene} title="Listen" initial={true} type={ActionConst.REPLACE} />
+                <Scene key="liste" component={ListeScene} title="Liste" initial={true} type={ActionConst.REPLACE} />
+                <Scene key="galerie" component={GalerieScene} title="Galerie" type={ActionConst.REPLACE} />
+                <Scene key="sternliste" component={SternlisteScene} title="Gesternte" type={ActionConst.REPLACE} />
                 <Scene key="details" hideNavBar={false} component={DetailsScene} title="Details" />
                 <Scene key="search" hideNavBar={false} direction="vertical" component={SearchScene} title="Erweiterte Suche" />
               </Scene>

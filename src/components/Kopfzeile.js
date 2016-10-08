@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Platform, Dimensions } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
 import { Icon } from 'react-native-elements'
@@ -60,7 +60,6 @@ const styleIcon = {
 const styles = StyleSheet.create({
   container: {
     height: 55,
-    marginTop: Platform.OS === 'ios' ? 25 : 0, 
     backgroundColor: 'white',
   },
   row: {
