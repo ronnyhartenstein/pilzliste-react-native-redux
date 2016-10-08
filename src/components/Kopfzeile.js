@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Platform } from 'react-native'
+import { View, StyleSheet, Platform, Dimensions } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
+import { Icon } from 'react-native-elements'
+import EnhancedSearch from './EnhancedSearch'
 
 // SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
 // erweitert TextInput: https://facebook.github.io/react-native/docs/textinput.html
 // Debounce: http://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
 
+// Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons 
+//   Material Icons: https://design.google.com/icons/
+
 export default class Kopfzeile extends Component {
-  // propTypes = {
-  //   doSearch: PropTypes.func.isRequired,
-  //   activeSearch: PropTypes.string.isRequired
-  // }
   constructor(props) {
     super(props); 
     this.state = {
-      activeSearch: this.props.activeSearch
+      activeSearch: this.props.activeSearch,
+      showEnhancedSearch: false
     }
   }
   componentWillMount() {
@@ -30,7 +32,13 @@ export default class Kopfzeile extends Component {
   }
   render() {
     return (
-      <View style={styles.kopfzeile}>
+      <View style={styles.container}>
+        { this.state.showEnhancedSearch ? 
+            <View style={styles.enhancedSearchContainer}>
+              <EnhancedSearch />
+            </View>
+            : null }
+        <View style={styles.row}>
           <SearchBar
             lightTheme
             onChangeText={(term) => this.onChange(term)}
@@ -38,16 +46,39 @@ export default class Kopfzeile extends Component {
             inputStyle={styles.inputText}
             containerStyle={styles.inputCont}
             value={this.state.searchterm} />
+          <Icon
+            iconStyle={styleIcon}
+            name='details'
+            color='darkgray'
+            onPress={() => this.toggleEnhancedSearch()} />
+        </View>
       </View>
     )
   }
+  toggleEnhancedSearch() {
+    this.setState({
+      showEnhancedSearch: !this.state.showEnhancedSearch
+    })
+  }
+}
+
+const { height, width } = Dimensions.get('window');
+
+const styleIcon = {
+    flex: 0.2,
+    margin: 10,
+    height: 55,
 }
 
 const styles = StyleSheet.create({
-  kopfzeile: {
+  container: {
     height: 55,
     marginTop: Platform.OS === 'ios' ? 25 : 0, 
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row'
   },
   inputText: {
     height: 35,
@@ -56,6 +87,17 @@ const styles = StyleSheet.create({
   },
   inputCont: {
     height: 55,
-    backgroundColor: 'oldlace'
+    backgroundColor: 'oldlace',
+    flex: 1
+  },
+  enhancedSearchContainer: {
+    zIndex: 2,
+    position: 'absolute',
+    top: 20,
+    right: 0,
+    width: width,
+    height: parseInt(height * 0.5),
+    opacity: 0.8,
+    backgroundColor: 'white'
   }
 });
