@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
 import { thumbnailUri } from '../lib/imageUri'
-import ListeItemDetails from './ListeItemDetails'
 import { Icon } from 'react-native-elements'
+import { Actions } from 'react-native-router-flux';
 
 // Text: https://facebook.github.io/react-native/docs/text.html
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
@@ -16,7 +16,6 @@ export default class ListeItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      details: false,
       stern: this.props.item.stern
     }
   }
@@ -25,11 +24,6 @@ export default class ListeItem extends Component {
     const image_uri = thumbnailUri(item.name)
     // console.log("image: ", image_uri)
     const viewStyles = [styles.view]
-    if (this.state.details) {
-        viewStyles.push(styles.viewDetailsAktiv)
-    } else {
-        viewStyles.push(styles.viewDetailsInaktiv)
-    }
     // console.log('render ListItem', item.name)
     return ( 
         <View style={viewStyles}>
@@ -55,11 +49,6 @@ export default class ListeItem extends Component {
                     color={this.state.stern ? 'goldenrod' : 'gold'}
                     onPress={() => this.switchStern()} />
             </View>
-            <View>
-                {this.state.details 
-                    ? <ListeItemDetails item={item} show={this.state.details} /> 
-                    : null}
-            </View>
           </TouchableOpacity>
         </View>
     )
@@ -80,9 +69,8 @@ export default class ListeItem extends Component {
   }
 
   onPressItem() {
-    this.setState({
-      details: !this.state.details
-    })
+    const name = this.props.item.name
+    Actions.details({title: name, item: this.props.item})
   }
 }
 
@@ -98,12 +86,6 @@ const styleIconContainer = {
 const styles = StyleSheet.create({
     // view: {
     // },
-    viewDetailsAktiv: {
-        backgroundColor: 'burlywood'
-    },
-    viewDetailsInaktiv: {
-        height: 50
-    },
     image: {
       width: 30, 
       height: 30,

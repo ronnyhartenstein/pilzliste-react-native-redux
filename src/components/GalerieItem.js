@@ -23,9 +23,6 @@ import { Actions } from 'react-native-router-flux';
 export default class GalerieItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      details: false
-    }
   }
   render() {
     const item = this.props.item
@@ -35,11 +32,6 @@ export default class GalerieItem extends Component {
     const halfWidth = parseInt(width / 2)
 
     const viewStyles = [styles.view]
-    // if (this.state.details) {
-    //     viewStyles.push(styles.viewDetailsAktiv)
-    // } else {
-    //     viewStyles.push(styles.viewDetailsInaktiv)
-    // }
     const containerSize = halfWidth - 12
     viewStyles.push({width: containerSize, height: containerSize})
     const imageStyles = {
@@ -85,9 +77,6 @@ export default class GalerieItem extends Component {
   }
 
   onPressItem() {
-    this.setState({
-      details: !this.state.details
-    })
     const name = this.props.item.name
     Actions.details({title: name, item: this.props.item})
   }
@@ -107,13 +96,6 @@ const styles = StyleSheet.create({
     view: {
       margin: 5
     },
-    // viewDetailsAktiv: {
-    //     // height: 250,
-    //     backgroundColor: 'burlywood'
-    // },
-    // viewDetailsInaktiv: {
-    //     height: 50
-    // },
     name: {
         position: 'absolute',
         bottom: 0,
