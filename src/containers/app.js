@@ -1,30 +1,32 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
-import ReduxFusszeile from '../components/ReduxFusszeile'
-import ReduxKopfzeile from '../components/ReduxKopfzeile'
-import ReduxListSwitcher from '../components/ReduxListSwitcher'
+import store from '../store';
+import { Provider, connect } from 'react-redux';
+import { Router, Scene } from 'react-native-router-flux';
+import ListsScene from '../scenes/lists'
+import SearchScene from '../scenes/search'
+import DetailsScene from '../scenes/details'
 
+// Mini-Tutorial: https://github.com/aksonov/react-native-router-flux/blob/master/docs/MINI_TUTORIAL.md
+// Redux-Flux: https://github.com/aksonov/react-native-router-flux/blob/master/docs/REDUX_FLUX.md
 
-export default class Pilzliste extends Component {
+const RouterWithRedux = connect()(Router);
+
+export default class App extends Component {
     constructor(props) {
         super(props);
     }
 
   render() {
     return (
-        <View style={styles.container}>
-            <ReduxKopfzeile />
-            <ReduxListSwitcher />
-            <ReduxFusszeile />
-        </View>
+        <Provider store={store}>
+          <RouterWithRedux>
+            <Scene key="root">
+              <Scene key="lists" component={ListsScene} title="Listen" initial={true} />
+              <Scene key="details" component={DetailsScene} title="Details" />
+              <Scene key="search" component={SearchScene} title="Erweiterte Suche" />
+            </Scene>
+          </RouterWithRedux>
+        </Provider>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  }
-});

@@ -3,7 +3,7 @@ import { View, StyleSheet, Platform, Dimensions } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
 import { Icon } from 'react-native-elements'
-import EnhancedSearch from './EnhancedSearch'
+import { Actions } from 'react-native-router-flux';
 
 // SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
 // erweitert TextInput: https://facebook.github.io/react-native/docs/textinput.html
@@ -16,8 +16,7 @@ export default class Kopfzeile extends Component {
   constructor(props) {
     super(props); 
     this.state = {
-      activeSearch: this.props.activeSearch,
-      showEnhancedSearch: false
+      activeSearch: this.props.activeSearch
     }
   }
   componentWillMount() {
@@ -33,11 +32,6 @@ export default class Kopfzeile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        { this.state.showEnhancedSearch ? 
-            <View style={styles.enhancedSearchContainer}>
-              <EnhancedSearch />
-            </View>
-            : null }
         <View style={styles.row}>
           <SearchBar
             lightTheme
@@ -50,19 +44,12 @@ export default class Kopfzeile extends Component {
             iconStyle={styleIcon}
             name='details'
             color='darkgray'
-            onPress={() => this.toggleEnhancedSearch()} />
+            onPress={Actions.search} />
         </View>
       </View>
     )
   }
-  toggleEnhancedSearch() {
-    this.setState({
-      showEnhancedSearch: !this.state.showEnhancedSearch
-    })
-  }
 }
-
-const { height, width } = Dimensions.get('window');
 
 const styleIcon = {
     flex: 0.2,
@@ -90,14 +77,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'oldlace',
     flex: 1
   },
-  enhancedSearchContainer: {
-    zIndex: 2,
-    position: 'absolute',
-    top: 20,
-    right: 0,
-    width: width,
-    height: parseInt(height * 0.5),
-    opacity: 0.8,
-    backgroundColor: 'white'
-  }
 });

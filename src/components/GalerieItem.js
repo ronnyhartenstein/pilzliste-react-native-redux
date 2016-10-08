@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'rea
 // import { List, ListItem } from 'react-native-elements'
 import { galerieUri } from '../lib/imageUri'
 import { Icon } from 'react-native-elements'
+import { Actions } from 'react-native-router-flux';
 
 // Text: https://facebook.github.io/react-native/docs/text.html
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
@@ -89,6 +90,7 @@ export default class GalerieItem extends Component {
     this.setState({
       details: !this.state.details
     })
+    Actions.details({item: this.props.item})
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
 import { AppRegistry } from 'react-native'
-import AppProvider from './src/containers/app_provider';
+import App from './src/containers/app';
 
-AppRegistry.registerComponent('Pilzliste', () => AppProvider)
+AppRegistry.registerComponent('Pilzliste', () => App)

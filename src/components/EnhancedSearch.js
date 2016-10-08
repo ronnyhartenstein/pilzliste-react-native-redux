@@ -9,7 +9,7 @@ export default class EnhancedSearch extends Component {
   }
   render() {
     return (
-      <Text>Erweiterte Suche</Text>
+      <Text>TODO Suchparameter...</Text>
     )
   }
 }
