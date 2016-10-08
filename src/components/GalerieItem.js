@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
-// import { LazyloadView } from 'react-native-lazyload'
 import { galerieUri } from '../lib/imageUri'
 import { Icon } from 'react-native-elements'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
-// Lazy load https://github.com/magicismight/react-native-lazyload
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
 // Colors: https://facebook.github.io/react-native/docs/colors.html
 // Dimensions: https://facebook.github.io/react-native/docs/dimensions.html

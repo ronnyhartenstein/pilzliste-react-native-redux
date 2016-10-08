@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
-// import { LazyloadView } from 'react-native-lazyload'
 import { thumbnailUri } from '../lib/imageUri'
 import ListeItemDetails from './ListeItemDetails'
 import { Icon } from 'react-native-elements'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
-// Lazy load https://github.com/magicismight/react-native-lazyload
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
 // Colors: https://facebook.github.io/react-native/docs/colors.html
 
