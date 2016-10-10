@@ -87,18 +87,20 @@ const styles = StyleSheet.create({
     // view: {
     // },
     image: {
-      width: 30, 
-      height: 30,
-      marginRight: 10
+      width: 40, 
+      height: 40,
+      marginRight: 10,
+      borderRadius: 20
     },
     item: {
       flex: 1, 
       flexDirection: 'row',
-      margin: 10
+      margin: 5
     },
-    // nameText: {
-    //   fontSize: 12
-    // },
+    nameText: {
+      marginTop: 8,
+      color: 'black'
+    },
     latText: {
       color: 'gray',
       fontSize: 10

@@ -65,7 +65,7 @@ export default class Galerie extends Component {
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
 
           style={styles.container}
-          contentContainerStyle={styles.content}
+          contentContainerStyle={styles.list}
       />
     );
   }
@@ -84,11 +84,13 @@ export default class Galerie extends Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: 'white'
+      // backgroundColor: 'white'
     },
-    content: {
-      justifyContent: 'center',
+    list: {
+      flex: 1,
+      // justifyContent: 'center',
       flexDirection: 'row',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      alignItems: 'flex-start'
     }
 });

@@ -28,23 +28,13 @@ export default class GalerieItem extends Component {
     const item = this.props.item
     const image_uri = galerieUri(item.name)
     // console.log("image: ", image_uri)
-    const { height, width } = Dimensions.get('window');
-    const halfWidth = parseInt(width / 2)
-
-    const viewStyles = [styles.view]
-    const containerSize = halfWidth - 12
-    viewStyles.push({width: containerSize, height: containerSize})
-    const imageStyles = {
-        height: containerSize,
-        width: containerSize
-    }
     // console.log('render GalerieItem', item.name)
     return ( 
-        <View style={viewStyles}>
+        <View style={styles.view}>
           <TouchableOpacity onPress={() => this.onPressItem()}>
             <View style={styles.item}>
                 <Image
-                    style={imageStyles}
+                    style={styles.image}
                     source={{uri: image_uri}}
                     // onLoad={() => console.log(item.nr, "loaded: ", item.name)}
                     // onLoadStart={() => console.log("onLoadStart", item.name)}
@@ -58,7 +48,7 @@ export default class GalerieItem extends Component {
                     name={item.stern ? 'star' : 'star-border'} 
                     color={item.stern ? 'yellow' : 'goldenrod'}
                     onPress={() => this.switchStern()} />
-                <View style={[styles.name, {width: containerSize}]}>
+                <View style={styles.name}>
                     <Text style={styles.nameText}>{item.name}</Text>
                     <Text style={styles.latText}>{item.lat}</Text>
                 </View>
@@ -92,16 +82,27 @@ const styleIconContainer = {
   right: 0
 } 
 
+const { height, width } = Dimensions.get('window')
+const halfWidth = parseInt(width / 2)
+const containerSize = halfWidth - 15  // padding
+
 const styles = StyleSheet.create({
     view: {
-      margin: 5
+      padding: 5,
+      width: halfWidth, 
+      height: halfWidth
     },
     name: {
         position: 'absolute',
         bottom: 0,
         left: 1,
         // opacity: 0.8
-        backgroundColor: 'black'
+        backgroundColor: 'black',
+        width: containerSize - 1
+    },
+    image: {
+        height: containerSize,
+        width: containerSize
     },
     // item: {
     //   flex: 1, 
