@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Platform } from 'react-native'
 import EnhancedSearch from '../components/EnhancedSearch'
 
 export default class SearchScene extends Component {
@@ -18,7 +18,8 @@ export default class SearchScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-      backgroundColor: 'yellow',
-      marginTop: 65
+      marginTop: Platform.OS === 'ios' ? 64 : 54,
+      backgroundColor: 'white',
+      opacity: 0.7
   }
 });

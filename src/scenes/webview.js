@@ -20,6 +20,6 @@ export default class WebviewScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-      marginTop: 65,
+      marginTop: Platform.OS === 'ios' ? 64 : 54,
   }
 });
