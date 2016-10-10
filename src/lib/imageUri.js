@@ -3,7 +3,7 @@ import escapeUri from '../lib/escapeUri'
 const domain = 'https://pilze.rh-flow.de'
 
 export const thumbnailUri = function (name) {
-    return domain+'/thumbnails/' + escapeUri(name) + '.jpg.png'
+    return domain+'/thumbnails/' + escapeUri(name) + '.jpg'
 }
 
 export const imageUri = function(name) {
