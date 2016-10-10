@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, StyleSheet } from 'react-native'
+import { ScrollView, Text, StyleSheet, Platform } from 'react-native'
 import ListeItemDetails from '../components/ListeItemDetails'
 
 // Router forward/backward?  https://github.com/aksonov/react-native-router-flux/blob/master/docs/MINI_TUTORIAL.md#going-forward-or-backwards
@@ -20,7 +20,7 @@ export default class DetailsScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-      marginTop: 64,
+      marginTop: Platform.OS === 'ios' ? 64 : 54,
       backgroundColor: 'bisque'
   }
 });
