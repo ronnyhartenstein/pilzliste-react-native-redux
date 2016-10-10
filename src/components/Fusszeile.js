@@ -53,12 +53,7 @@ export default class Fusszeile extends Component {
             name='help-outline'
             color={colInactive}
             onPress={Actions.help} />
-          <Icon
-            iconStyle={styleIcon}
-            name='error-outline'
-            color={colInactive}
-            onPress={() => Actions.error('Beispiel für eine Fehlermeldung')} />
-
+            
           <Text style={styles.treffer}>{numberItems} Pilze</Text>
         </View>
       </View>

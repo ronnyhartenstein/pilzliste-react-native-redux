@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Platform } from 'react-native'
+import { View, Text, StyleSheet, Platform } from 'react-native'
 import { List, ListItem } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 
@@ -8,6 +8,14 @@ import { Actions } from 'react-native-router-flux';
 const links = [
     { name: 'Speisepilze', link: 'https://de.m.wikipedia.org/wiki/Speisepilz' },
     { name: 'Hinweise zum Pilzesammeln', link: 'https://de.m.wikipedia.org/wiki/Wikipedia:Hinweise_zum_Pilzesammeln' }
+]
+const demos = [
+    { name: 'Fehlermeldung', callback: function() {
+        Actions.error('Beispiel für eine Fehlermeldung')
+    }},
+    { name: 'Login-Dialog', callback: function() {
+        Actions.login_demo()
+    }}
 ]
 
 export default class HelpScene extends Component {
@@ -18,12 +26,22 @@ export default class HelpScene extends Component {
   render() {
     return (
         <View style={styles.container}>
-            <List containerStyle={{marginBottom: 20}}>
+            <List containerStyle={styles.list}>
             { links.map((l, i) => (
                 <ListItem
                     key={i}
                     title={l.name}
                     onPress={() => this.openLink(l)}
+                />
+                )) }
+            </List>
+            <Text style={styles.sectionHead}>Demos</Text>
+            <List containerStyle={styles.list}>
+            { demos.map((d, i) => (
+                <ListItem
+                    key={i}
+                    title={d.name}
+                    onPress={d.callback}
                 />
                 )) }
             </List>
@@ -38,6 +56,14 @@ export default class HelpScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-      marginTop: 65,
+      marginTop: Platform.OS === 'ios' ? 64 : 54,
+  },
+  list: {
+      marginBottom: 20,
+  },
+  sectionHead: {
+      fontWeight: 'bold',
+      marginTop: 10,
+      marginLeft: 20
   }
 });
