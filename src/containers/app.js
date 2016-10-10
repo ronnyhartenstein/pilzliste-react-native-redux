@@ -10,6 +10,7 @@ import DetailsScene from '../scenes/details'
 import HelpScene from '../scenes/help'
 import WebviewScene from '../scenes/webview'
 import Error from '../components/Error'
+import LoginDemoScene from '../scenes/login_demo'
 
 // Mini-Tutorial: https://github.com/aksonov/react-native-router-flux/blob/master/docs/MINI_TUTORIAL.md
 // Redux-Flux: https://github.com/aksonov/react-native-router-flux/blob/master/docs/REDUX_FLUX.md
@@ -34,6 +35,7 @@ export default class App extends Component {
                 <Scene key="search" hideNavBar={false} direction="vertical" component={SearchScene} title="Erweiterte Suche" />
                 <Scene key="help" hideNavBar={false} component={HelpScene} title="Hilfe" />
                 <Scene key="webview" hideNavBar={false} component={WebviewScene} title="WebView" />
+                <Scene key="login_demo" hideNavBar={true} component={LoginDemoScene} sceneStyle={{backgroundColor:'black'}}/>
               </Scene>
               <Scene key="error" component={Error}/>
             </Scene>
