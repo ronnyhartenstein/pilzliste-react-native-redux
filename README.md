@@ -15,12 +15,17 @@ TODOs:
 - [-] Images in Liste cachen (prefetch)
 - [x] Bottom-Navi für Anzahl Treffer
 - [x] Pilze faven
+- [x] Navigator und Szenen
 - [ ] Suchfilter: Farben, Arten, essbar/giftig
   - Overlay wie http://stackoverflow.com/questions/30638739/transparent-overlay-in-react-native
-- [ ] Infos von Wiki in WebView
+  - Blur in Scene?
+- [x] Infos von Wiki in WebView
   - https://de.m.wikipedia.org/wiki/Speisepilz
   - https://de.m.wikipedia.org/wiki/Wikipedia:Hinweise_zum_Pilzesammeln
 - [ ] Pilze von Wiki einlesen -> JSON
   - https://de.m.wikipedia.org/wiki/Kategorie:Speisepilzart
-
-  - 
+- [ ] Formular in Details nach Klick auf Bearbeiten
+  - mit Material Kit: http://www.xinthink.com/react-native-material-kit/
+- [ ] Offline-Mode: https://github.com/rauchy/react-native-offline-mode
+- [ ] Demo: Login-Dialog bei Start der App: https://github.com/browniefed/react-native-screens 
+- [ ] Splashscreen: https://github.com/remobile/react-native-splashscreen
