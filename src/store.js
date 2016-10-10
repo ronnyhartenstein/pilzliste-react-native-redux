@@ -27,9 +27,9 @@ _.each(daten_preload, (itm, idx) => {
   itm.id = idx+1
 })
 // Favouriten: testweise sternen
-_.each(daten_preload, (itm, idx) => {
-  itm.stern = idx % 50 == 0 // jeden 20. Pilz = 50 
-})
+// _.each(daten_preload, (itm, idx) => {
+//   itm.stern = idx % 50 == 0 // jeden 20. Pilz = 50 
+// })
 // console.log('daten preload: ', daten_preload)
 
 
