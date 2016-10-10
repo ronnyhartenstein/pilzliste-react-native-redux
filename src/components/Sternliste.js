@@ -47,7 +47,15 @@ export default class Sternliste extends Component {
 
   render() {
     // console.log('render Sternliste', activeTab)
-    return (
+    if (this.props.staredItems.length == 0) {
+      return (
+        <View style={styles.empty}>
+          <Text>Bislang wurden noch</Text>
+          <Text>keine Pilze gesternt.</Text>
+        </View>
+      )
+    } else {
+      return (
       <ListView
           listSize={this.props.staredItems.length}
           pageSize={11}
@@ -58,7 +66,8 @@ export default class Sternliste extends Component {
           style={styles.container}
           contentContainerStyle={styles.content}
       />
-    );
+      );
+    }
   }
   renderRow(item, sectionID, rowID, highlightRow) {
     // console.log("render",sectionID, rowID)
@@ -84,4 +93,9 @@ const styles = StyleSheet.create({
       flex: 1, 
       backgroundColor: 'white'
     },
+    empty: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center"
+    } 
 });
