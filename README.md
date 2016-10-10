@@ -27,5 +27,5 @@ TODOs:
 - [ ] Formular in Details nach Klick auf Bearbeiten
   - mit Material Kit: http://www.xinthink.com/react-native-material-kit/
 - [ ] Offline-Mode: https://github.com/rauchy/react-native-offline-mode
-- [ ] Demo: Login-Dialog bei Start der App: https://github.com/browniefed/react-native-screens 
+- [x] Demo: Login-Dialog: https://github.com/browniefed/react-native-screens 
 - [ ] Splashscreen: https://github.com/remobile/react-native-splashscreen
