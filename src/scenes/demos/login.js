@@ -12,10 +12,10 @@ export default class LoginDemoScene extends Component {
     super(props);
   }
   render() {
-    let bgImg = require('../../images/demo_login/background.jpg')
-    let headerImg = require('../../images/demo_login/header.png');
-    let userImg = require('../../images/demo_login/user.png')
-    let pwdImg = require('../../images/demo_login/password.png')
+    let bgImg = require('../../../images/demo_login/background.jpg')
+    let headerImg = require('../../../images/demo_login/header.png');
+    let userImg = require('../../../images/demo_login/user.png')
+    let pwdImg = require('../../../images/demo_login/password.png')
     return (
         <View style={styles.container}>
             <Image style={styles.bg} source={bgImg} />

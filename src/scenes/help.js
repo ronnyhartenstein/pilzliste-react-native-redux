@@ -10,12 +10,9 @@ const links = [
     { name: 'Hinweise zum Pilzesammeln', link: 'https://de.m.wikipedia.org/wiki/Wikipedia:Hinweise_zum_Pilzesammeln' }
 ]
 const demos = [
-    { name: 'Fehlermeldung', callback: function() {
-        Actions.error('Beispiel für eine Fehlermeldung')
-    }},
-    { name: 'Login-Dialog', callback: function() {
-        Actions.login_demo()
-    }}
+    { name: 'Fehlermeldung', callback: () => Actions.error('Beispiel für eine Fehlermeldung') },
+    { name: 'Login-Dialog', callback: () => Actions.demo_login() },
+    { name: 'Material-Design-Kit', callback: () => Actions.demo_rnmk() }
 ]
 
 export default class HelpScene extends Component {

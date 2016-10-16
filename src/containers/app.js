@@ -12,7 +12,7 @@ import WebviewScene from '../scenes/webview'
 import Error from '../components/Error'
 
 import DemoLoginScene from '../scenes/demos/login'
-import DemoMaterialKitScene from '../scenes/demos/mkd'
+import DemoMaterialKitScene from '../scenes/demos/rnmk'
 
 // Mini-Tutorial: https://github.com/aksonov/react-native-router-flux/blob/master/docs/MINI_TUTORIAL.md
 // Redux-Flux: https://github.com/aksonov/react-native-router-flux/blob/master/docs/REDUX_FLUX.md
@@ -39,7 +39,7 @@ export default class App extends Component {
                 <Scene key="webview" hideNavBar={false} component={WebviewScene} title="WebView" />
 
                 <Scene key="demo_login" hideNavBar={true} component={DemoLoginScene} sceneStyle={{backgroundColor:'black'}}/>
-                <Scene key="demo_mkd" hideNavBar={true} component={DemoMaterialKitScene} />
+                <Scene key="demo_rnmk" hideNavBar={true} component={DemoMaterialKitScene} />
               </Scene>
               <Scene key="error" component={Error}/>
             </Scene>
