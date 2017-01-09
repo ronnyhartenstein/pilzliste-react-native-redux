@@ -15,5 +15,3 @@ fastlane gym --scheme "Pilzliste" --clean --silent --export_method development
 # ideviceinstaller: http://www.libimobiledevice.org
 
 ideviceinstaller -i Pilzliste.ipa
-
-# Simulator: https://github.com/phonegap/ios-sim

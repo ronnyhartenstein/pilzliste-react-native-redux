@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, AsyncStorage } from 'react-native'
 // import createLogger from 'redux-logger';
 import search from './reducers/search';
 import items from './reducers/items';
@@ -26,12 +26,22 @@ daten_preload = _.sortedUniqBy(daten_preload, itm => ( itm.name.trim() ))
 _.each(daten_preload, (itm, idx) => { 
   itm.id = idx+1
 })
+
 // Favouriten: testweise sternen
 // _.each(daten_preload, (itm, idx) => {
 //   itm.stern = idx % 50 == 0 // jeden 20. Pilz = 50 
 // })
 // console.log('daten preload: ', daten_preload)
 
+// Favouriten lesen
+let STORAGE_KEY = '@Pilzliste:stars'
+AsyncStorage.getItem(STORAGE_KEY, function(stars) {
+  stars = JSON.parse(stars)
+  console.log("Sterne: ", stars)
+  _.each(stars, function(id) {
+    daten_preload[id - 1].stern = true
+  })
+}).done()
 
 // Image Prefetch
 import { thumbnailUri } from './lib/imageUri'

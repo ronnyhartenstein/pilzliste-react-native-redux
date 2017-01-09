@@ -1,8 +1,12 @@
+import React from 'react'
+import { AsyncStorage } from 'react-native'
 import * as actions from '../actions/actionTypes';
 import _ from 'lodash';
 
+let STORAGE_KEY = '@Pilzliste:stars'
+
 export default function itemsReducer (items = [], action = {}) {
-  let index, item
+  let index, item, itemsList, itemIdsWithStar
   switch (action.type) {
 
     case actions.CREATE:
@@ -34,12 +38,17 @@ export default function itemsReducer (items = [], action = {}) {
       if (index === undefined) {
         return items
       }
-      return [
+      newItems = [
         ...items.slice(0, index),
         Object.assign({}, item),
         ...items.slice(index + 1)
       ]
-
+      itemIdsWithStar = _.filter(newItems, function(o) { return o.stern })
+      itemIdsWithStar = _.map(itemIdsWithStar, function(o) { return o.id })
+      console.log("gesternt. ", itemIdsWithStar)
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(itemIdsWithStar))
+      return newItems
+      
     case actions.UNSET_STAR:
       item = _.find(items, itm => ( itm.id == action.id ))
       if (item === undefined) {
@@ -51,11 +60,16 @@ export default function itemsReducer (items = [], action = {}) {
       if (index === undefined) {
         return items
       }
-      return [
+      newItems = [
         ...items.slice(0, index),
         Object.assign({}, item),
         ...items.slice(index + 1)
       ]
+      itemIdsWithStar = _.filter(newItems, function(o) { return o.stern })
+      itemIdsWithStar = _.map(itemIdsWithStar, function(o) { return o.id })
+      console.log("entsternt. ", itemIdsWithStar)
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(itemIdsWithStar))
+      return newItems
 
     case actions.DELETE:
       index = _.findIndex(items, (item) => item.id === action.id)
