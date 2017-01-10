@@ -8,6 +8,8 @@ import numberItems from './reducers/numberItems';
 import routes from './reducers/routes';
 import _ from 'lodash'
 import { loadItem } from './actions/itemActions';
+import { persistStore, autoRehydrate } from 'redux-persist'
+import { Actions } from 'react-native-router-flux';
 
 // Logging Redux
 // const logger = createLogger();
@@ -33,18 +35,6 @@ _.each(daten_preload, (itm, idx) => {
 // })
 // console.log('daten preload: ', daten_preload)
 
-// Favouriten lesen
-// http://stackoverflow.com/questions/40849614/react-native-await-asyncstorage-before-export
-async function loadStarsFromStorage() {
-  const STORAGE_KEY = '@Pilzliste:stars'
-  const stars = await AsyncStorage.getItem(STORAGE_KEY)
-  stars = JSON.parse(stars)
-  console.log("Sterne: ", stars)
-  _.each(stars, function(id) {
-    daten_preload[id - 1].stern = true
-  })
-}
-await loadStarsFromStorage()
 
 // Image Prefetch
 import { thumbnailUri } from './lib/imageUri'
@@ -66,12 +56,24 @@ function reducers(state = {}, action) {
     items: items(state.items, action),
     numberItems: numberItems(state.numberItems, action),
     routes: routes(state.routes, action)
-  };
+  }
 }
 const store = createStore(reducers, { 
   search: '',
   items: daten_preload, 
   numberItems: 0
-});
+}, autoRehydrate(/*{log: true}*/))
 
-export default store;
+// Favouriten speichern & lesen (^ autoRehydrate)
+// mit redux-persist: https://github.com/rt2zz/redux-persist
+persistStore(store, {
+    storage: AsyncStorage, 
+    whitelist: ['items'], 
+    debounce: 1000
+  }, 
+  function() {
+    // console.log("Rehydrated")
+    Actions.liste()
+  })
+
+export default store

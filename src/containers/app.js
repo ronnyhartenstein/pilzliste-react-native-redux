@@ -9,6 +9,7 @@ import SearchScene from '../scenes/search'
 import DetailsScene from '../scenes/details'
 import HelpScene from '../scenes/help'
 import WebviewScene from '../scenes/webview'
+import InitScene from '../scenes/init'
 import Error from '../components/Error'
 
 import DemoLoginScene from '../scenes/demos/login'
@@ -30,7 +31,8 @@ export default class App extends Component {
           <RouterWithRedux>
             <Scene key="modal" component={Modal} sceneStyle={{backgroundColor:'#F7F7F7'}}>
               <Scene key="root" hideNavBar={true}>
-                <Scene key="liste" component={ListeScene} title="Liste" initial={true} type={ActionConst.REPLACE} />
+                <Scene key="init" component={InitScene} initial={true} />
+                <Scene key="liste" component={ListeScene} title="Liste" type={ActionConst.REPLACE} />
                 <Scene key="galerie" component={GalerieScene} title="Galerie" type={ActionConst.REPLACE} />
                 <Scene key="sternliste" component={SternlisteScene} title="Gesternte" type={ActionConst.REPLACE} />
                 <Scene key="details" hideNavBar={false} component={DetailsScene} title="Details" />
