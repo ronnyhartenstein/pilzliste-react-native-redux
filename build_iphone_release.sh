@@ -13,5 +13,10 @@ fastlane gym --scheme "Pilzliste" --clean --silent --export_method development
 # http://stackoverflow.com/questions/14535392/how-to-install-an-ipa-app-file-into-iphone-with-command-line/14652288#14652288
 # Generate and Install IPA's file in device through Command Line: https://gist.github.com/phynet/38afad2170907d2c1ccd
 # ideviceinstaller: http://www.libimobiledevice.org
-
+# Install via: 
+#    brew install --HEAD libimobiledevice
+#    brew install ideviceinstaller
+# Fix lockdownd rights: https://github.com/libimobiledevice/ideviceinstaller/issues/47
+# sudo chmod -R 777 /var/db/lockdown/
 ideviceinstaller -i Pilzliste.ipa
+# Unlock developer account on iDevice: Settings -> Allgemein -> Geräteverwaltung
