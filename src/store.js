@@ -34,14 +34,17 @@ _.each(daten_preload, (itm, idx) => {
 // console.log('daten preload: ', daten_preload)
 
 // Favouriten lesen
-let STORAGE_KEY = '@Pilzliste:stars'
-AsyncStorage.getItem(STORAGE_KEY, function(stars) {
+// http://stackoverflow.com/questions/40849614/react-native-await-asyncstorage-before-export
+async function loadStarsFromStorage() {
+  const STORAGE_KEY = '@Pilzliste:stars'
+  const stars = await AsyncStorage.getItem(STORAGE_KEY)
   stars = JSON.parse(stars)
   console.log("Sterne: ", stars)
   _.each(stars, function(id) {
     daten_preload[id - 1].stern = true
   })
-}).done()
+}
+await loadStarsFromStorage()
 
 // Image Prefetch
 import { thumbnailUri } from './lib/imageUri'
