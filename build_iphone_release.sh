@@ -5,6 +5,8 @@
 # http://stackoverflow.com/questions/5010062/xcodebuild-simulator-or-device
 # http://stackoverflow.com/questions/34003723/build-and-run-an-app-on-simulator-using-xcodebuild?rq=1
 
+cd ios
+
 # Fastlane: https://fastlane.tools
 # Gym: https://github.com/fastlane/fastlane/tree/master/gym
 fastlane gym --scheme "Pilzliste" --clean --silent --export_method development
