@@ -64,16 +64,20 @@ const store = createStore(reducers, {
   numberItems: 0
 }, autoRehydrate(/*{log: true}*/))
 
-// Favouriten speichern & lesen (^ autoRehydrate)
-// mit redux-persist: https://github.com/rt2zz/redux-persist
 persistStore(store, {
     storage: AsyncStorage, 
     whitelist: ['items'], 
     debounce: 1000
   }, 
   function() {
-    // console.log("Rehydrated")
-    Actions.liste()
+    const f = function() { 
+      if (typeof Actions.liste == "function") {
+        Actions.liste()
+      } else {
+        window.setTimeout(f, 1000)
+      }
+    }
+    f()
   })
 
 export default store
