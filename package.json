@@ -12,14 +12,14 @@
     "react-native-button": "^1.7.1",
     "react-native-elements": "^0.5.0",
     "react-native-image-progress": "^0.6.0",
-    "react-native-material-kit": "^0.3.2",
+    "react-native-material-kit": "^0.4.1",
     "react-native-progress": "^3.1.0",
     "react-native-router-flux": "^3.36.0",
     "react-native-vector-icons": "^2.1.0",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "redux-logger": "^2.6.1",
-    "redux-persist": "^4.0.1",
+    "redux-persist": "^5.3.0",
     "reselect": "^2.5.4"
   }
 }
