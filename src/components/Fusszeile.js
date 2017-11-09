@@ -82,7 +82,7 @@ class Fusszeile extends Component {
             color={activeTab === 'gesternt' ? colActive : colInactive}
             onPress={() => Actions.sternliste()} />*/}
           <TouchableOpacity onPress={() => Actions.sternliste()}>
-            <Text style={{color: activeTab === 'gesternt' ? colActive : colInactive}}>Liste</Text>
+            <Text style={{color: activeTab === 'gesternt' ? colActive : colInactive}}>Sterne</Text>
           </TouchableOpacity>
           {/*<Icon
             iconStyle={styleIcon}

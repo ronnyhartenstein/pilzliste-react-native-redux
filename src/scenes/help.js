@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform } from 'react-native'
+import { View, Text, StyleSheet, Platform, FlatList, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
 // Lists: https://github.com/react-native-community/react-native-elements#lists
@@ -22,12 +22,12 @@ export default class HelpScene extends Component {
         <View style={styles.container}>
             <FlatList containerStyle={styles.list}
                 data={links}
-                renderItem={({item}) => <ListItem title={item.name} onPress={() => this.openLink(item)}/> }
+                renderItem={({item}) => <TouchableOpacity onPress={() => this.openLink(item)}><Text>{item.name}</Text></TouchableOpacity> }
             />
             <Text style={styles.sectionHead}>Demos</Text>
             <FlatList containerStyle={styles.list}
-                      data={demo}
-                      renderItem={({item}) => <ListItem title={item.name} onPress={item.callback}/> }
+                data={demos}
+                renderItem={({item}) => <TouchableOpacity onPress={() => item.callback}><Text>{item.name}</Text></TouchableOpacity> }
             />
         </View>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, ListView, View, RecyclerViewBackedScrollView, Text } from 'react-native'
+import { StyleSheet, SectionList, View, RecyclerViewBackedScrollView, Text } from 'react-native'
 import ListeItem from './ListeItem'
 import { updateNumberItems, setStar, unsetStar } from '../actions/itemActions'
 import { connect } from 'react-redux'
@@ -27,38 +27,7 @@ const styles = StyleSheet.create({
 });
 
 class Liste extends Component {
-  constructor(props) {
-    super(props)
-    // console.log("Liste constructor")
-    const items = this.props.filteredItems
-   const ds = new ListView.DataSource({
-      rowHasChanged: (r1,r2) => this.rowHasChanged(r1,r2),
-      sectionHeaderHasChanged: (s1,s2) => this.sectionHeaderHasChanged(s1,s2)
-    });
-    this.state = {
-      dataSource: ds.cloneWithRowsAndSections(this.getSectionBlob(items)),
-      numberItems: this.props.filteredItems.length
-    }
-  }
-  getSectionBlob(items) {
-    const items_grouped = _.groupBy(items, itm => ( itm.name.substr(0,1) ))
-    // console.log('getSectionBlob', items_grouped)
-    return items_grouped
-  }
-  // kein Neubau der Komponente bei Änderung
-  // sondern per Props-Änderung 
-  // https://github.com/reactjs/redux/issues/683
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.filteredItems !== this.props.filteredItems) {
-      // console.log("Liste componentWillReceiveProps", nextProps)
-      const items = nextProps.filteredItems
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRowsAndSections(this.getSectionBlob(items)),
-        numberItems: nextProps.filteredItems.length,
-      })
-      this.updateNumberItems()  
-    }
-  }
+
   componentWillMount () {
     // hier weiß man wieviele Items wirklich im State sind
     this.updateNumberItems()
@@ -70,77 +39,51 @@ class Liste extends Component {
 
   updateNumberItems() {
     // für Fusszeile die akt. Anzahl Items melden
-    this.props.updateNumberItems(this.state.numberItems)
+    this.props.updateNumberItems(this.props.filteredItems.length)
+  }
+
+  getSectionizedList() {
+      const items = {}
+      this.props.filteredItems.forEach((item) => {
+          const buchstabe = item.name.substr(0, 1).toUpperCase()
+          if (typeof items[buchstabe] === 'undefined') items[buchstabe] = []
+          items[buchstabe].push(item)
+      })
+      const finaleItems = []
+      _.keys(items).forEach((buchstabe) => {
+          finaleItems.push({ title: buchstabe, data: items[buchstabe] })
+      })
+      return finaleItems
   }
 
   render() {
-    const { items, activeTab } = this.state
-    // console.log('render Liste', activeTab)
+      const items = this.getSectionizedList()
+      // console.log('render Liste', items)
 
-    // ==> Lösung vermutlich: separate Komponente für jeden Listentyp ..
     return (
-      <ListView
-          listSize={1000}
-          pageSize={11}
-          // "How early to start rendering rows before they come on screen, in pixels."
-          scrollRenderAheadDistance={300}
-          // offscreen child views are removed from their native backing superview when offscreen.
-          removeClippedSubviews={true}
-          
-          dataSource={this.state.dataSource}
-          renderRow={(item, sectionID, rowID, highlightRow) => this.renderRow(item, sectionID, rowID, highlightRow)}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={this.renderSeparator}
-          renderSectionHeader={this.renderSectionHeader}
-
+      <SectionList
+          renderItem={({item}) => this.renderRow(item)}
+          renderSectionHeader={({section}) => this.renderSectionHeader(section)}
+          sections={items}
           style={styles.container}
-          contentContainerStyle={styles.content}
+          ItemSeparatorComponent={() => (<View style={{ height: 1, backgroundColor: '#CCCCCC'}}/>)}
+          // contentContainerStyle={styles.content}
       />
     );
   }
-  rowHasChanged(r1, r2) {
-    // ändert sich immer - vermutlich Immutable von Redux sei Dank
-    return r1 !== r2
 
-    // ==> Lösung vermutlich: separate Komponente für jeden Listentyp .. 
-
-    // r1 und r2 sind gleich - warum? k.A.
-    // console.log('rowHasChanged?', r1.id, r1.stern, r2.stern, r1, r2)
-    // if (r1.stern !== r2.stern) console.log('rowHasChanged!', r1.id)
-    // return r1.stern !== r2.stern
-
-    // wir ändern eh keine daten - 
-    // aber die Stern-Liste muss beräumt werden
-    // if (this.state.activeTab == 'gesternt') {
-    //   return r1 !== r2
-    // }
-    // return false    
-  }
-  renderRow(item, sectionID, rowID, highlightRow) {
-    // console.log("render",sectionID, rowID)
+  renderRow(item) {
+    // console.log("render",item)
     const { setStar, unsetStar } = this.props
-    const key = `${sectionID}-${rowID}`
-    return <ListeItem key={key} item={item} setStar={setStar} unsetStar={unsetStar} />
+    // const key = `${sectionID}-${rowID}`
+    return <ListeItem key={item.name} item={item} setStar={setStar} unsetStar={unsetStar} />
   }
-  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
-    return (
-      <View
-        key={`${sectionID}-${rowID}`}
-        style={{
-          height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-        }}
-      />
-    )
-  }
-  sectionHeaderHasChanged(s1, s2) {
-    return s1 !== s2
-  }
-  renderSectionHeader(sectionData, sectionID) {
-    // console.log('sectionHeader', sectionData)
+
+  renderSectionHeader(section) {
+    // console.log('sectionHeader', section)
     return (
       <View style={styles.section}>
-        <Text style={styles.sectionText}>{sectionID}</Text>
+        <Text style={styles.sectionText}>{section.title}</Text>
       </View>
     )
   }
