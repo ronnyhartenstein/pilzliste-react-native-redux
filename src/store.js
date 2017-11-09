@@ -8,7 +8,7 @@ import numberItems from './reducers/numberItems';
 import routes from './reducers/routes';
 import _ from 'lodash'
 import { loadItem } from './actions/itemActions';
-import { persistStore, autoRehydrate } from 'redux-persist'
+// import { persistStore, autoRehydrate } from 'redux-persist'
 import { Actions } from 'react-native-router-flux';
 
 // Logging Redux
@@ -62,22 +62,22 @@ const store = createStore(reducers, {
   search: '',
   items: daten_preload, 
   numberItems: 0
-}, autoRehydrate(/*{log: true}*/))
+}) //, autoRehydrate(/*{log: true}*/))
 
-persistStore(store, {
-    storage: AsyncStorage, 
-    whitelist: ['items'], 
-    debounce: 1000
-  }, 
-  function() {
-    const f = function() { 
-      if (typeof Actions.liste == "function") {
-        Actions.liste()
-      } else {
-        window.setTimeout(f, 1000)
-      }
-    }
-    f()
-  })
+// persistStore(store, {
+//     storage: AsyncStorage,
+//     whitelist: ['items'],
+//     debounce: 1000
+//   },
+//   function() {
+//     const f = function() {
+//       if (typeof Actions.liste == "function") {
+//         Actions.liste()
+//       } else {
+//         window.setTimeout(f, 1000)
+//       }
+//     }
+//     f()
+//   })
 
 export default store

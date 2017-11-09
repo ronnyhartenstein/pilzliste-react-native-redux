@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
 import { thumbnailUri } from '../lib/imageUri'
-import { Icon } from 'react-native-elements'
+// import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 
 // Text: https://facebook.github.io/react-native/docs/text.html
@@ -42,12 +42,15 @@ export default class ListeItem extends Component {
                     <Text style={styles.nameText}>{item.name}</Text>
                     <Text style={styles.latText}>{item.lat}</Text>
                 </View>
-                <Icon
+                <TouchableOpacity onPress={() => this.switchStern()} style={styleIconContainer}>
+                    <Text style={[styleIcon, {color: this.state.stern ? 'goldenrod' : 'gold'}]}>{this.state.stern ? '★' : '☆'}</Text>
+                </TouchableOpacity>
+                {/*<Icon
                     containerStyle={styleIconContainer}
                     iconStyle={styleIcon}
                     name={this.state.stern ? 'star' : 'star-border'} 
                     color={this.state.stern ? 'goldenrod' : 'gold'}
-                    onPress={() => this.switchStern()} />
+                    onPress={() => this.switchStern()} />*/}
             </View>
           </TouchableOpacity>
         </View>

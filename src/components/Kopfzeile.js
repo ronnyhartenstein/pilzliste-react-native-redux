@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { SearchBar } from 'react-native-elements'
+import { View, StyleSheet, TouchableHighlight, TextInput } from 'react-native'
+// import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
-import { Icon } from 'react-native-elements'
+// import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 
 // SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
@@ -33,18 +33,29 @@ export default class Kopfzeile extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.row}>
-          <SearchBar
+            {/*<SearchBar
             lightTheme
             onChangeText={(term) => this.onChange(term)}
             placeholder='Name? Farbe? Hut? Unterseite? (mind. 3 Zeichen)'
             inputStyle={styles.inputText}
             containerStyle={styles.inputCont}
-            value={this.state.searchterm} />
-          <Icon
+            value={this.state.searchterm} />*/}
+          <View style={styles.inputCont}>
+            <TextInput
+              inputStyle={styles.inputText}
+              onChangeText={(term) => this.onChange(term)}
+              placeholder='Name? Farbe? Hut? Unterseite? (mind. 3 Zeichen)'
+              value={this.state.searchterm}
+              />
+          </View>
+          <TouchableHighlight onPress={Actions.search}>
+            <Text style={{color: 'darkgray'}}/>
+          </TouchableHighlight>
+          {/*<Icon
             iconStyle={styleIcon}
             name='details'
             color='darkgray'
-            onPress={Actions.search} />
+            onPress={Actions.search} />*/}
         </View>
       </View>
     )

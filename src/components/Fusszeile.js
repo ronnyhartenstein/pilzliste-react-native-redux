@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import { Icon } from 'react-native-elements'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+// import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 
 // Flex Layout: https://facebook.github.io/react-native/docs/flexbox.html
@@ -33,27 +33,39 @@ export default class Fusszeile extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.iconRow}>
-          <Icon
+          {/*<Icon
             iconStyle={styleIcon}
             name='view-list'
             color={activeTab === 'liste' ? colActive : colInactive}
-            onPress={() => Actions.liste()} />
-          <Icon
+            onPress={() => Actions.liste()} />*/}
+          <TouchableOpacity onPress={() => Actions.liste()}>
+            <Text style={{color: activeTab === 'liste' ? colActive : colInactive}}>Liste</Text>
+          </TouchableOpacity>
+          {/*<Icon
             iconStyle={styleIcon}
             name='view-module'
             color={activeTab === 'galerie' ? colActive : colInactive}
-            onPress={() => Actions.galerie()} />
-          <Icon
+            onPress={() => Actions.galerie()} />*/}
+          <TouchableOpacity onPress={() => Actions.galerie()}>
+            <Text style={{color: activeTab === 'galerie' ? colActive : colInactive}}>Galerie</Text>
+          </TouchableOpacity>
+          {/*<Icon
             iconStyle={styleIcon}
             name='star'
             color={activeTab === 'gesternt' ? colActive : colInactive}
-            onPress={() => Actions.sternliste()} />
-          <Icon
+            onPress={() => Actions.sternliste()} />*/}
+          <TouchableOpacity onPress={() => Actions.sternliste()}>
+            <Text style={{color: activeTab === 'gesternt' ? colActive : colInactive}}>Liste</Text>
+          </TouchableOpacity>
+          {/*<Icon
             iconStyle={styleIcon}
             name='help-outline'
             color={colInactive}
-            onPress={Actions.help} />
-            
+            onPress={Actions.help} />*/}
+          <TouchableOpacity onPress={() => Actions.help()}>
+            <Text style={{color: colInactive}}>Hilfe</Text>
+          </TouchableOpacity>
+
           <Text style={styles.treffer}>{numberItems} Pilze</Text>
         </View>
       </View>

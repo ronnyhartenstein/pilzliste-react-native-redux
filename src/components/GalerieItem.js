@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'react-native'
 // import { List, ListItem } from 'react-native-elements'
 import { galerieUri } from '../lib/imageUri'
-import { Icon } from 'react-native-elements'
+// import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 
 // Text: https://facebook.github.io/react-native/docs/text.html
@@ -42,12 +42,15 @@ export default class GalerieItem extends Component {
                     onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
                     // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
                 />
-                <Icon
+                <TouchableOpacity onPress={() => this.switchStern()} style={styleIconContainer}>
+                    <Text style={[styleIcon, {color: item.stern ? 'yellow' : 'goldenrod'}]}>{item.stern ? '★' : '☆'}</Text>
+                </TouchableOpacity>
+                {/*<Icon
                     containerStyle={styleIconContainer}
                     iconStyle={styleIcon}
                     name={item.stern ? 'star' : 'star-border'} 
                     color={item.stern ? 'yellow' : 'goldenrod'}
-                    onPress={() => this.switchStern()} />
+                    onPress={() => this.switchStern()} />*/}
                 <View style={styles.name}>
                     <Text style={styles.nameText}>{item.name}</Text>
                     <Text style={styles.latText}>{item.lat}</Text>

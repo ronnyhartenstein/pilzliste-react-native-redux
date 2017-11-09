@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
-import { List, ListItem } from 'react-native-elements'
 
 // Test: List Grid
 // http://stackoverflow.com/questions/29394297/listview-grid-in-react-native#29395686

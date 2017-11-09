@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform } from 'react-native'
-import { List, ListItem } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 
 // Lists: https://github.com/react-native-community/react-native-elements#lists
@@ -11,8 +10,6 @@ const links = [
 ]
 const demos = [
     { name: 'Fehlermeldung', callback: () => Actions.error('Beispiel für eine Fehlermeldung') },
-    { name: 'Login-Dialog', callback: () => Actions.demo_login() },
-    { name: 'Material-Design-Kit', callback: () => Actions.demo_rnmk() }
 ]
 
 export default class HelpScene extends Component {
@@ -23,25 +20,15 @@ export default class HelpScene extends Component {
   render() {
     return (
         <View style={styles.container}>
-            <List containerStyle={styles.list}>
-            { links.map((l, i) => (
-                <ListItem
-                    key={i}
-                    title={l.name}
-                    onPress={() => this.openLink(l)}
-                />
-                )) }
-            </List>
+            <FlatList containerStyle={styles.list}
+                data={links}
+                renderItem={({item}) => <ListItem title={item.name} onPress={() => this.openLink(item)}/> }
+            />
             <Text style={styles.sectionHead}>Demos</Text>
-            <List containerStyle={styles.list}>
-            { demos.map((d, i) => (
-                <ListItem
-                    key={i}
-                    title={d.name}
-                    onPress={d.callback}
-                />
-                )) }
-            </List>
+            <FlatList containerStyle={styles.list}
+                      data={demo}
+                      renderItem={({item}) => <ListItem title={item.name} onPress={item.callback}/> }
+            />
         </View>
     )
   }
