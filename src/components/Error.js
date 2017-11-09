@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
-import Button from 'react-native-button';
+import { View, Text, StyleSheet, Animated, Dimensions, Button } from 'react-native';
+// import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
 
 const { height: deviceHeight } = Dimensions.get("window");
@@ -38,7 +38,7 @@ export default class extends Component {
                                 alignItems: "center",
                                 backgroundColor:"white" }}>
                     <Text>{this.props.data}</Text>
-                    <Button onPress={this.closeModal.bind(this)}>Schließen</Button>
+                    <Button onPress={this.closeModal.bind(this)} title={"Schließen"}/>
                 </View>
             </Animated.View>
         );
