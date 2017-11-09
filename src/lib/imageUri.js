@@ -1,6 +1,6 @@
 import escapeUri from '../lib/escapeUri'
 
-const domain = 'https://pilze.rh-flow.de'
+const domain = 'http://pilze.rh-flow.de'
 
 export const thumbnailUri = function (name) {
     return domain+'/thumbnails/' + escapeUri(name) + '.jpg'
