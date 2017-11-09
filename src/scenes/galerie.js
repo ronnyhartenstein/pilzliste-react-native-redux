@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
-import ReduxFusszeile from '../components/ReduxFusszeile'
-import ReduxKopfzeile from '../components/ReduxKopfzeile'
-import ReduxGalerie from '../components/ReduxGalerie'
+import Fusszeile from '../components/Fusszeile'
+import Kopfzeile from '../components/Kopfzeile'
+import Galerie from '../components/Galerie'
 
 export default class GalerieScene extends Component {
     constructor(props) {
@@ -12,9 +12,9 @@ export default class GalerieScene extends Component {
   render() {
     return (
         <View style={styles.container}>
-            <ReduxKopfzeile />
-            <ReduxGalerie />
-            <ReduxFusszeile activeTab='galerie' />
+            <Kopfzeile />
+            <Galerie />
+            <Fusszeile activeTab='galerie' />
         </View>
     )
   }

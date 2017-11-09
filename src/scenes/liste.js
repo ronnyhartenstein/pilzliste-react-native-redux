@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
-import ReduxFusszeile from '../components/ReduxFusszeile'
-import ReduxKopfzeile from '../components/ReduxKopfzeile'
-import ReduxListe from '../components/ReduxListe'
+import Fusszeile from '../components/Fusszeile'
+import Kopfzeile from '../components/Kopfzeile'
+import Liste from '../components/Liste'
 
 export default class ListeScene extends Component {
     constructor(props) {
@@ -12,9 +12,9 @@ export default class ListeScene extends Component {
   render() {
     return (
         <View style={styles.container}>
-            <ReduxKopfzeile />
-            <ReduxListe />
-            <ReduxFusszeile activeTab='liste' />
+            <Kopfzeile />
+            <Liste />
+            <Fusszeile activeTab='liste' />
         </View>
     )
   }

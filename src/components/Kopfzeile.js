@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableHighlight, TextInput } from 'react-native'
+import { View, StyleSheet, TouchableHighlight, TextInput, Text } from 'react-native'
 // import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
 // import { Icon } from 'react-native-elements'

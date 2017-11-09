@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
-import ReduxFusszeile from '../components/ReduxFusszeile'
-import ReduxSternliste from '../components/ReduxSternliste'
+import Fusszeile from '../components/Fusszeile'
+import Sternliste from '../components/Sternliste'
 
 export default class SterlisteScene extends Component {
     constructor(props) {
@@ -11,8 +11,8 @@ export default class SterlisteScene extends Component {
   render() {
     return (
         <View style={styles.container}>
-            <ReduxSternliste />
-            <ReduxFusszeile activeTab='gesternt' />
+            <Sternliste />
+            <Fusszeile activeTab='gesternt' />
         </View>
     )
   }
