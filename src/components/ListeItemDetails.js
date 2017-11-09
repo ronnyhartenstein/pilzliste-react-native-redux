@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { ScrollView, View, StyleSheet, Text } from 'react-native'
+import { ScrollView, View, StyleSheet, Text, Image } from 'react-native'
 import { imageUri } from '../lib/imageUri'
-import Image from 'react-native-image-progress'
+// import Image from 'react-native-image-progress'
 import ProgressBar from 'react-native-progress/Bar'
 
 // Text: https://facebook.github.io/react-native/docs/text.html
@@ -46,7 +46,7 @@ export default class ListeItemDetails extends Component {
             <Image 
               style={styles.image} 
               source={{uri: image_uri}}
-              indicator={ProgressBar} 
+              // indicator={ProgressBar}
               />
                     
         </View>
