@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { StyleSheet, ListView, View, RecyclerViewBackedScrollView, Text } from 'react-native'
 import ListeItem from './ListeItem'
+import { updateNumberItems, setStar, unsetStar } from '../actions/itemActions'
+import { connect } from 'react-redux'
+import getVisibleItems from '../selectors/visibleItems'
 import _ from 'lodash'
 
 // ListView https://facebook.github.io/react-native/docs/listview.html
@@ -8,7 +11,22 @@ import _ from 'lodash'
 // ListView vs. ScrollView: http://stackoverflow.com/questions/9820679/difference-between-scrollview-and-listview
 // SectionHeaders in ListView: http://richardkho.com/section-headers-in-react-native-listview-components/
 
-export default class Liste extends Component {
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
+    section: {
+        backgroundColor: '#F0F0F0'
+    },
+    sectionText: {
+        padding: 5,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    }
+});
+
+class Liste extends Component {
   constructor(props) {
     super(props)
     // console.log("Liste constructor")
@@ -128,17 +146,35 @@ export default class Liste extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1, 
-      backgroundColor: 'white'
-    },
-    section: {
-      backgroundColor: '#F0F0F0'
-    },
-    sectionText: {
-      padding: 5,
-      fontWeight: 'bold',
-      textAlign: 'center'
+const mapStateToProps = (state) => {
+    return {
+        filteredItems: getVisibleItems(state)
     }
-});
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // onItemClick: (nr) => {
+        //   console.log("TODO zeige Details-Szene")
+        //   //dispatch(showDetails(nr))
+        // },
+        // wirkliche Anzahl Ergebnisse in Store für Fusszeile zurückfunken
+        updateNumberItems: (number) => {
+            dispatch(updateNumberItems(number))
+        },
+        setStar: (item) => {
+            dispatch(setStar(item.id))
+        },
+        unsetStar: (item) => {
+            dispatch(unsetStar(item.id))
+        }
+    }
+}
+
+const ReduxListe = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Liste);
+
+export default ReduxListe
+

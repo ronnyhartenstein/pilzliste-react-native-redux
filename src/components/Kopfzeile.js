@@ -4,15 +4,44 @@ import { View, StyleSheet, TouchableHighlight, TextInput } from 'react-native'
 import _ from 'lodash'
 // import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
+import { doSearch } from '../actions/searchActions'
+import { connect } from 'react-redux'
 
 // SearchBar: https://github.com/react-native-community/react-native-elements#search-bar
 // erweitert TextInput: https://facebook.github.io/react-native/docs/textinput.html
 // Debounce: http://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
 
-// Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons 
+// Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons
 //   Material Icons: https://design.google.com/icons/
 
-export default class Kopfzeile extends Component {
+const styleIcon = {
+    flex: 0.2,
+    margin: 10,
+    height: 55,
+}
+
+const styles = StyleSheet.create({
+    container: {
+        height: 55,
+        backgroundColor: 'white',
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    inputText: {
+        height: 35,
+        color: 'black',
+        backgroundColor: 'white'
+    },
+    inputCont: {
+        height: 55,
+        backgroundColor: '#EFEFF2',
+        flex: 1
+    },
+});
+
+class Kopfzeile extends Component {
   constructor(props) {
     super(props); 
     this.state = {
@@ -62,29 +91,24 @@ export default class Kopfzeile extends Component {
   }
 }
 
-const styleIcon = {
-    flex: 0.2,
-    margin: 10,
-    height: 55,
+
+const mapStateToProps = (state) => {
+    return {
+        activeSearch: state.search
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    height: 55,
-    backgroundColor: 'white',
-  },
-  row: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  inputText: {
-    height: 35,
-    color: 'black',
-    backgroundColor: 'white'
-  },
-  inputCont: {
-    height: 55,
-    backgroundColor: '#EFEFF2',
-    flex: 1
-  },
-});
+const mapDispatchToProps = (dispatch) => {
+    return {
+        doSearch: (term) => {
+            dispatch(doSearch(term))
+        }
+    }
+}
+
+const ReduxKopfzeile = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Kopfzeile)
+
+export default ReduxKopfzeile

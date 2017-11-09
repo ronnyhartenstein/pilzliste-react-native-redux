@@ -1,13 +1,30 @@
 import React, { Component } from 'react'
 import { StyleSheet, ListView, View, RecyclerViewBackedScrollView, Text } from 'react-native'
 import GalerieItem from './GalerieItem'
+import { updateNumberItems, setStar, unsetStar } from '../actions/itemActions'
+import { connect } from 'react-redux'
+import getVisibleItems from '../selectors/visibleItems'
 import _ from 'lodash'
 
 // ListView https://facebook.github.io/react-native/docs/listview.html
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
 // Grid-Layout in ListView: https://github.com/yelled3/react-native-grid-example
 
-export default class Galerie extends Component {
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        // backgroundColor: 'white'
+    },
+    list: {
+        flex: 1,
+        // justifyContent: 'center',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start'
+    }
+});
+
+class Galerie extends Component {
   constructor(props) {
     super(props)
     // console.log("Liste constructor")
@@ -81,16 +98,30 @@ export default class Galerie extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1, 
-      // backgroundColor: 'white'
-    },
-    list: {
-      flex: 1,
-      // justifyContent: 'center',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignItems: 'flex-start'
+const mapStateToProps = (state) => {
+    return {
+        filteredItems: getVisibleItems(state)
     }
-});
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // wirkliche Anzahl Ergebnisse in Store für Fusszeile zurückfunken
+        updateNumberItems: (number) => {
+            dispatch(updateNumberItems(number))
+        },
+        setStar: (item) => {
+            dispatch(setStar(item.id))
+        },
+        unsetStar: (item) => {
+            dispatch(unsetStar(item.id))
+        }
+    }
+}
+
+const ReduxGalerie = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Galerie);
+
+export default ReduxGalerie

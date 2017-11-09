@@ -2,13 +2,40 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 // import { Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux'
 
 // Flex Layout: https://facebook.github.io/react-native/docs/flexbox.html
 //   alle Props: https://facebook.github.io/react-native/docs/layout-props.html
 // Icons: https://github.com/react-native-community/react-native-elements#icons--icon-buttons 
 //   Material Icons: https://design.google.com/icons/
 
-export default class Fusszeile extends Component {
+const styleIcon = {
+    margin: 5,
+    marginLeft: 10,
+    marginRight: 10
+}
+
+const styles = StyleSheet.create({
+    container: {
+        height: 50,
+        backgroundColor: 'oldlace',
+        borderTopWidth: 1,
+        borderColor: 'olive'
+    },
+    iconRow: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    treffer: {
+        color: 'gray',
+        flex: 1,
+        textAlign: 'right',
+        marginTop: 15,
+        marginRight: 10
+    }
+});
+
+class Fusszeile extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -73,28 +100,21 @@ export default class Fusszeile extends Component {
   }
 }
 
-const styleIcon = {
-    margin: 5,
-    marginLeft: 10,
-    marginRight: 10
-  }
+const mapStateToProps = (state) => {
+    return {
+        numberItems: state.numberItems,
+        routes: state.routes
+    }
+}
 
-const styles = StyleSheet.create({
-  container: {
-    height: 50, 
-    backgroundColor: 'oldlace',
-    borderTopWidth: 1,
-    borderColor: 'olive' 
-  },
-  iconRow: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  treffer: {
-    color: 'gray',
-    flex: 1,
-    textAlign: 'right',
-    marginTop: 15,
-    marginRight: 10
-  }
-});
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+}
+
+const ReduxFusszeile = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Fusszeile)
+
+export default ReduxFusszeile
