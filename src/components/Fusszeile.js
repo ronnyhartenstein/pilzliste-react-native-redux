@@ -32,6 +32,10 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginTop: 15,
         marginRight: 10
+    },
+    icon: {
+      margin: 10,
+      marginTop: 15,
     }
 });
 
@@ -65,7 +69,7 @@ class Fusszeile extends Component {
             name='view-list'
             color={activeTab === 'liste' ? colActive : colInactive}
             onPress={() => Actions.liste()} />*/}
-          <TouchableOpacity onPress={() => Actions.liste()}>
+          <TouchableOpacity style={styles.icon} onPress={() => Actions.liste()}>
             <Text style={{color: activeTab === 'liste' ? colActive : colInactive}}>Liste</Text>
           </TouchableOpacity>
           {/*<Icon
@@ -73,7 +77,7 @@ class Fusszeile extends Component {
             name='view-module'
             color={activeTab === 'galerie' ? colActive : colInactive}
             onPress={() => Actions.galerie()} />*/}
-          <TouchableOpacity onPress={() => Actions.galerie()}>
+          <TouchableOpacity style={styles.icon} onPress={() => Actions.galerie()}>
             <Text style={{color: activeTab === 'galerie' ? colActive : colInactive}}>Galerie</Text>
           </TouchableOpacity>
           {/*<Icon
@@ -81,7 +85,7 @@ class Fusszeile extends Component {
             name='star'
             color={activeTab === 'gesternt' ? colActive : colInactive}
             onPress={() => Actions.sternliste()} />*/}
-          <TouchableOpacity onPress={() => Actions.sternliste()}>
+          <TouchableOpacity style={styles.icon} onPress={() => Actions.sternliste()}>
             <Text style={{color: activeTab === 'gesternt' ? colActive : colInactive}}>Sterne</Text>
           </TouchableOpacity>
           {/*<Icon
@@ -89,7 +93,7 @@ class Fusszeile extends Component {
             name='help-outline'
             color={colInactive}
             onPress={Actions.help} />*/}
-          <TouchableOpacity onPress={() => Actions.help()}>
+          <TouchableOpacity style={styles.icon} onPress={() => Actions.help()}>
             <Text style={{color: colInactive}}>Hilfe</Text>
           </TouchableOpacity>
 

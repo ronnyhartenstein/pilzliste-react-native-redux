@@ -67,7 +67,7 @@ class Liste extends Component {
           sections={items}
           style={styles.container}
           ItemSeparatorComponent={() => (<View style={{ height: 1, backgroundColor: '#CCCCCC'}}/>)}
-          keyExtractor={item => item.id }
+          keyExtractor={item => item.id}
           // contentContainerStyle={styles.content}
       />
     );

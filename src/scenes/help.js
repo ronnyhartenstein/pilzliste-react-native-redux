@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Platform, SectionList, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
 // Lists: https://github.com/react-native-community/react-native-elements#lists
@@ -17,17 +17,28 @@ export default class HelpScene extends Component {
         super(props);
     }
 
+  renderSectionHeader(section) {
+    // console.log('sectionHeader', section)
+    return (
+      <View style={styles.section}>
+        <Text style={styles.sectionText}>{section.title}</Text>
+      </View>
+    )
+  }
+
   render() {
     return (
         <View style={styles.container}>
-            <FlatList containerStyle={styles.list}
-                data={links}
-                renderItem={({item}) => <TouchableOpacity onPress={() => this.openLink(item)}><Text>{item.name}</Text></TouchableOpacity> }
-            />
-            <Text style={styles.sectionHead}>Demos</Text>
-            <FlatList containerStyle={styles.list}
-                data={demos}
-                renderItem={({item}) => <TouchableOpacity onPress={() => item.callback}><Text>{item.name}</Text></TouchableOpacity> }
+            <SectionList
+              renderItem={({item}) => <TouchableOpacity style={styles.item} onPress={() => this.openLink(item)}><Text>{item.name}</Text></TouchableOpacity> }
+                renderSectionHeader={({section}) => this.renderSectionHeader(section)}
+                sections={[
+                  {data: links, title: 'Links'},
+                  {data: demos, title: 'Demos'}
+                ]}
+                style={styles.list}
+                keyExtractor={item => item.name}
+                ItemSeparatorComponent={() => (<View style={{ height: 1, backgroundColor: '#CCCCCC'}}/>)}
             />
         </View>
     )
@@ -45,9 +56,15 @@ const styles = StyleSheet.create({
   list: {
       marginBottom: 20,
   },
-  sectionHead: {
-      fontWeight: 'bold',
-      marginTop: 10,
-      marginLeft: 20
+  section: {
+    backgroundColor: '#F0F0F0'
+  },
+  sectionText: {
+    padding: 5,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  item: {
+    padding: 10,
   }
 });
