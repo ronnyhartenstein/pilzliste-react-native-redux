@@ -67,6 +67,7 @@ class Liste extends Component {
           sections={items}
           style={styles.container}
           ItemSeparatorComponent={() => (<View style={{ height: 1, backgroundColor: '#CCCCCC'}}/>)}
+          keyExtractor={item => item.id }
           // contentContainerStyle={styles.content}
       />
     );
@@ -76,7 +77,7 @@ class Liste extends Component {
     // console.log("render",item)
     const { setStar, unsetStar } = this.props
     // const key = `${sectionID}-${rowID}`
-    return <ListeItem key={item.name} item={item} setStar={setStar} unsetStar={unsetStar} />
+    return <ListeItem item={item} setStar={setStar} unsetStar={unsetStar} />
   }
 
   renderSectionHeader(section) {

@@ -15,17 +15,16 @@ import { Actions } from 'react-native-router-flux';
 // const logger = createLogger();
 // const createStoreWithMiddleware = applyMiddleware(logger)(createStore);
 
-import daten from '../daten/pilze.json'
+import daten_preload from '../daten/pilze.json'
 // erstmal nur Name und Lat und 3 wg. Log
-let daten_preload = daten
 // let daten_preload = _.take(daten, 2)
 // let daten_preload = _.filter(daten, itm => /rasling/.test(itm.name))
 // console.log("daten preload: ", daten_preload)
 
 // Sortieren und Dubletten entfernen...
-daten_preload = _.sortedUniqBy(daten_preload, itm => ( itm.name.trim() ))
+const daten_unique = _.sortedUniqBy(daten_preload, itm => ( itm.name.trim() ))
 // ID hinzu
-_.each(daten_preload, (itm, idx) => { 
+_.each(daten_unique, (itm, idx) => {
   itm.id = idx+1
 })
 
@@ -60,7 +59,7 @@ function reducers(state = {}, action) {
 }
 const store = createStore(reducers, { 
   search: '',
-  items: daten_preload, 
+  items: daten_unique,
   numberItems: 0
 }) //, autoRehydrate(/*{log: true}*/))
 
