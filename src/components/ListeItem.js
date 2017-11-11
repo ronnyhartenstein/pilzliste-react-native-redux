@@ -42,8 +42,8 @@ export default class ListeItem extends Component {
                     <Text style={styles.nameText}>{item.name}</Text>
                     <Text style={styles.latText}>{item.lat}</Text>
                 </View>
-                <TouchableOpacity onPress={() => this.switchStern()} style={styleIconContainer}>
-                    <Text style={[styleIcon, {color: this.state.stern ? 'goldenrod' : 'gold'}]}>{this.state.stern ? '★' : '☆'}</Text>
+                <TouchableOpacity onPress={() => this.switchStern()} style={styles.iconContainer}>
+                    <Text style={[styles.icon, {color: this.state.stern ? 'goldenrod' : 'gold'}]}>{this.state.stern ? '★' : '☆'}</Text>
                 </TouchableOpacity>
                 {/*<Icon
                     containerStyle={styleIconContainer}
@@ -77,14 +77,14 @@ export default class ListeItem extends Component {
   }
 }
 
-const styleIcon = {
-  margin: 5
-}
-const styleIconContainer = {
-  position: 'absolute',
-  top: 0,
-  right: 0
-} 
+// const styleIcon = {
+//   margin: 5
+// }
+// const styleIconContainer = {
+//   position: 'absolute',
+//   top: 0,
+//   right: 0
+// }
 
 const styles = StyleSheet.create({
     // view: {
@@ -107,5 +107,15 @@ const styles = StyleSheet.create({
     latText: {
       color: 'gray',
       fontSize: 10
-    } 
+    },
+    iconContainer: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+    },
+    icon: {
+      marginTop: 10,
+      marginRight: 10,
+      fontSize: 20,
+    }
 });
