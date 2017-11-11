@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableHighlight, TextInput, Text } from 'react-native'
+import { View, StyleSheet, TouchableHighlight, TextInput, Text, Button } from 'react-native'
 // import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
 // import { Icon } from 'react-native-elements'
@@ -23,21 +23,29 @@ const styleIcon = {
 const styles = StyleSheet.create({
     container: {
         height: 55,
-        backgroundColor: 'white',
+        backgroundColor: '#EFEFF2',
+        padding: 10,
     },
     row: {
         flex: 1,
         flexDirection: 'row'
     },
+    inputCont: {
+        // height: 55,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
+        flex: 1
+    },
     inputText: {
         height: 35,
         color: 'black',
-        backgroundColor: 'white'
     },
-    inputCont: {
+    button: {
+        width: 30,
         height: 55,
-        backgroundColor: '#EFEFF2',
-        flex: 1
+        backgroundColor: 'red',
     },
 });
 
@@ -52,6 +60,7 @@ class Kopfzeile extends Component {
     this.doSearch = _.debounce(this.doSearch, 300)
   }
   onChange(term) {
+    if (term.length < 3) term = ''
     this.setState({ activeSearch: term })
     this.doSearch(term)
   }
@@ -71,15 +80,13 @@ class Kopfzeile extends Component {
             value={this.state.searchterm} />*/}
           <View style={styles.inputCont}>
             <TextInput
-              inputStyle={styles.inputText}
-              onChangeText={(term) => this.onChange(term)}
+              style={styles.inputText}
+              onChangeText={term => this.onChange(term)}
               placeholder='Name? Farbe? Hut? Unterseite? (mind. 3 Zeichen)'
               value={this.state.searchterm}
               />
           </View>
-          <TouchableHighlight onPress={Actions.search}>
-            <Text style={{color: 'darkgray'}}/>
-          </TouchableHighlight>
+          {/*<Button onPress={Actions.search} style={styles.button} title={"Suchen"}>*/}
           {/*<Icon
             iconStyle={styleIcon}
             name='details'
