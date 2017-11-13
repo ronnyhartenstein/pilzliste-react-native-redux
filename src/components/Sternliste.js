@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, ListView, View, RecyclerViewBackedScrollView, Text } from 'react-native'
+import { StyleSheet, FlatList, View, Text } from 'react-native'
 import ListeItem from './ListeItem'
 import { updateNumberItems, setStar, unsetStar } from '../actions/itemActions'
 import { connect } from 'react-redux'
@@ -10,43 +10,6 @@ import _ from 'lodash'
 // Layout: https://facebook.github.io/react-native/docs/flexbox.html
 
 class Sternliste extends Component {
-  constructor(props) {
-    super(props)
-    // console.log("Sternliste constructor")
-    const items = this.props.staredItems
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1,r2) => ( r1 !== r2 )
-    });
-    this.state = {
-      dataSource: ds.cloneWithRows(items),
-      numberItems: this.props.staredItems.length
-    }
-  }
-  // kein Neubau der Komponente bei Änderung
-  // sondern per Props-Änderung 
-  // https://github.com/reactjs/redux/issues/683
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.staredItems !== this.props.staredItems) {
-      // console.log("Sternliste componentWillReceiveProps", nextProps)
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(nextProps.staredItems),
-        numberItems: nextProps.staredItems.length,
-      })
-      this.updateNumberItems()  
-    }
-  }
-  componentWillMount () {
-    // hier weiß man wieviele Items wirklich im State sind
-    this.updateNumberItems()
-  }
-  componentDidUpdate () {
-    // und hier dann bei Updates über componentWillReceiveProps
-    this.updateNumberItems()
-  }
-  updateNumberItems() {
-    // für Fusszeile die akt. Anzahl Items melden
-    this.props.updateNumberItems(this.state.numberItems)
-  }
 
   render() {
     // console.log('render Sternliste', activeTab)
@@ -59,15 +22,12 @@ class Sternliste extends Component {
       )
     } else {
       return (
-      <ListView
-          listSize={this.props.staredItems.length}
-          pageSize={11}
-          dataSource={this.state.dataSource}
-          renderRow={(item, sectionID, rowID, highlightRow) => this.renderRow(item, sectionID, rowID, highlightRow)}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-          renderSeparator={this.renderSeparator}
+      <FlatList
+          data={this.props.staredItems}
+          renderItem={({item}) => this.renderRow(item)}
+          ItemSeparatorComponent={() => (<View style={{ height: 1, backgroundColor: '#CCCCCC'}}/>)}
           style={styles.container}
-          contentContainerStyle={styles.content}
+          keyExtractor={item => item.id}
       />
       );
     }
@@ -77,17 +37,6 @@ class Sternliste extends Component {
     const { unsetStar } = this.props
     const key = `${sectionID}-${rowID}`
     return <ListeItem key={key} item={item} setStar={null} unsetStar={unsetStar} />
-  }
-  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
-    return (
-      <View
-        key={`${sectionID}-${rowID}`}
-        style={{
-          height: adjacentRowHighlighted ? 4 : 1,
-          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
-        }}
-      />
-    )
   }
 }
 
@@ -112,10 +61,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // onItemClick: (nr) => {
-        //   console.log("TODO zeige Details-Szene")
-        //   //dispatch(showDetails(nr))
-        // },
         // wirkliche Anzahl Ergebnisse in Store für Fusszeile zurückfunken
         updateNumberItems: (number) => {
             dispatch(updateNumberItems(number))
