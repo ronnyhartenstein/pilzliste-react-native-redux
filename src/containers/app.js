@@ -28,8 +28,8 @@ export default class App extends Component {
           <RouterWithRedux>
             <Scene key="modal" component={Modal} sceneStyle={{backgroundColor:'#F7F7F7'}}>
               <Scene key="root" hideNavBar={true}>
-                {/*<Scene key="init" component={InitScene} initial={true} />*/}
-                <Scene key="liste" component={ListeScene} initial={true} title="Liste" type={ActionConst.REPLACE} />
+                <Scene key="init" component={InitScene} initial={true} />
+                <Scene key="liste" component={ListeScene} title="Liste" type={ActionConst.REPLACE} />
                 <Scene key="galerie" component={GalerieScene} title="Galerie" type={ActionConst.REPLACE} />
                 <Scene key="sternliste" component={SternlisteScene} title="Gesternte" type={ActionConst.REPLACE} />
                 <Scene key="details" hideNavBar={false} component={DetailsScene} title="Details" />

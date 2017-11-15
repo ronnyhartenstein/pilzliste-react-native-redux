@@ -1731,10 +1731,6 @@ image-size@^0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.1.tgz#98122a562d59dcc097ef1b2c8191866eb8f5d663"
 
-immutable@^3.8.1:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
-
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -1947,7 +1943,7 @@ json-stable-stringify@^1.0.1:
   dependencies:
     jsonify "~0.0.0"
 
-json-stringify-safe@~5.0.1:
+json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -2022,7 +2018,7 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.2.1:
+lodash-es@^4.17.4, lodash-es@^4.2.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
 
@@ -2731,16 +2727,6 @@ react-devtools-core@^2.5.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-native-button@^1.7.1:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/react-native-button/-/react-native-button-1.8.2.tgz#49e5cadd22ee443adea52a85539d288aa2117ade"
-
-react-native-elements@^0.5.0:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-0.5.4.tgz#e5df59d6dc32b8239dc0eab4a845b68c200b9acd"
-  dependencies:
-    react-native-tab-navigator "^0.3.3"
-
 react-native-experimental-navigation@^0.29.1:
   version "0.29.1"
   resolved "https://registry.yarnpkg.com/react-native-experimental-navigation/-/react-native-experimental-navigation-0.29.1.tgz#fa14ec95ee5471cfb37f917316073b300f884e48"
@@ -2751,10 +2737,6 @@ react-native-experimental-navigation@^0.29.1:
     clamp "^1.0.1"
     fbjs "^0.8.1"
     prop-types "^15.5.10"
-
-react-native-image-progress@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-image-progress/-/react-native-image-progress-0.6.0.tgz#14614add12beaa247a052e5a52e6a9fee0fb8c67"
 
 react-native-progress@^3.1.0:
   version "3.4.0"
@@ -2772,13 +2754,6 @@ react-native-router-flux@^3.36.0:
     react-native-experimental-navigation "^0.29.1"
     react-native-tabs "^1.0.9"
     react-static-container "^1.0.2"
-
-react-native-tab-navigator@^0.3.3:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"
-  dependencies:
-    immutable "^3.8.1"
-    prop-types "^15.5.10"
 
 react-native-tabs@^1.0.9:
   version "1.0.9"
@@ -2925,9 +2900,13 @@ redux-logger@^2.6.1:
   dependencies:
     deep-diff "0.3.4"
 
-redux-persist@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.3.0.tgz#091e40fd92043cb82b6dfc005ff636d6673b1e83"
+redux-persist@^4.10.0:
+  version "4.10.2"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-4.10.2.tgz#8efdb16cfe882c521a78a6d0bfdfef2437f49f96"
+  dependencies:
+    json-stringify-safe "^5.0.1"
+    lodash "^4.17.4"
+    lodash-es "^4.17.4"
 
 redux@^3.6.0:
   version "3.7.2"
