@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left: 1,
-        opacity: 0.7,
-        backgroundColor: 'black',
+        opacity: 0.9,
+        backgroundColor: 'white',
         width: containerSize - 1
     },
     image: {
@@ -106,10 +106,10 @@ const styles = StyleSheet.create({
     nameText: {
       paddingTop: 5,
       paddingLeft: 5,
-      color: 'rgba(255,255,255,1)',
+      color: 'black',
     },
     latText: {
-      color: 'rgba(255,255,255,1)',
+      color: 'black',
       fontSize: 10,
       paddingBottom: 5,
       paddingLeft: 5

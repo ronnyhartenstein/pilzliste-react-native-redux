@@ -56,7 +56,7 @@ class Galerie extends Component {
       )
     } else {
       const items = this.getGalleriedList()
-      console.log('render Liste', items)
+      //console.log('render Liste', items)
       return (
         <FlatList
           data={items}
@@ -73,8 +73,8 @@ class Galerie extends Component {
     const { setStar, unsetStar } = this.props
     return (
       <View style={styles.list}>
-        <GalerieItem item={item_li} setStar={setStar} unsetStar={unsetStar} />
-        <GalerieItem item={item_re} setStar={setStar} unsetStar={unsetStar} />
+        {item_li ? <GalerieItem item={item_li} setStar={setStar} unsetStar={unsetStar} /> : null}
+        {item_re ? <GalerieItem item={item_re} setStar={setStar} unsetStar={unsetStar} /> : null}
       </View>
     )
   }
