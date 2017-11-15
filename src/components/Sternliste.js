@@ -22,14 +22,14 @@ class Sternliste extends Component {
       )
     } else {
       return (
-      <FlatList
-          data={this.props.staredItems}
-          renderItem={({item}) => this.renderRow(item)}
-          ItemSeparatorComponent={() => (<View style={{ height: 1, backgroundColor: '#CCCCCC'}}/>)}
-          style={styles.container}
-          keyExtractor={item => item.id}
-      />
-      );
+        <FlatList
+            data={this.props.staredItems}
+            renderItem={({item}) => this.renderRow(item)}
+            ItemSeparatorComponent={() => (<View style={{ height: 1, backgroundColor: '#CCCCCC'}}/>)}
+            style={styles.container}
+            keyExtractor={item => item.id}
+        />
+      )
     }
   }
   renderRow(item, sectionID, rowID, highlightRow) {

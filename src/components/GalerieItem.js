@@ -42,8 +42,8 @@ export default class GalerieItem extends Component {
                     onError={({nativeEvent: {error}}) => console.log(image_uri, error)}
                     // onProgress={({nativeEvent: {loaded, total}}) => console.log("loading..",loaded,total)}
                 />
-                <TouchableOpacity onPress={() => this.switchStern()} style={styleIconContainer}>
-                    <Text style={[styleIcon, {color: item.stern ? 'yellow' : 'goldenrod'}]}>{item.stern ? '★' : '☆'}</Text>
+                <TouchableOpacity onPress={() => this.switchStern()} style={styles.iconContainer}>
+                    <Text style={[styles.iconText, {color: item.stern ? 'goldenrod' : 'gold'}]}>{item.stern ? '★' : '☆'}</Text>
                 </TouchableOpacity>
                 {/*<Icon
                     containerStyle={styleIconContainer}
@@ -76,22 +76,13 @@ export default class GalerieItem extends Component {
 }
 
 
-const styleIcon = {
-  margin: 5
-}
-const styleIconContainer = {
-  position: 'absolute',
-  top: 0,
-  right: 0
-} 
-
 const { height, width } = Dimensions.get('window')
 const halfWidth = parseInt(width / 2)
-const containerSize = halfWidth - 15  // padding
+const containerSize = halfWidth - 5  // padding
 
 const styles = StyleSheet.create({
     view: {
-      padding: 5,
+      // padding: 5,
       width: halfWidth, 
       height: halfWidth
     },
@@ -99,7 +90,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left: 1,
-        // opacity: 0.8
+        opacity: 0.7,
         backgroundColor: 'black',
         width: containerSize - 1
     },
@@ -115,12 +106,24 @@ const styles = StyleSheet.create({
     nameText: {
       paddingTop: 5,
       paddingLeft: 5,
-      color: 'white'
+      color: 'rgba(255,255,255,1)',
     },
     latText: {
-      color: 'white',
+      color: 'rgba(255,255,255,1)',
       fontSize: 10,
       paddingBottom: 5,
       paddingLeft: 5
-    } 
+    },
+    iconContainer: {
+      position: 'absolute',
+      top: 0,
+      right: 5,
+      // borderRadius: 10,
+      backgroundColor: 'transparent',
+
+    },
+    iconText: {
+      margin: 5,
+      fontSize: 20,
+    }
 });

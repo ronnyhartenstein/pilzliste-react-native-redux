@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, ListView, View, RecyclerViewBackedScrollView, Text } from 'react-native'
+import { StyleSheet, FlatList, View, Text } from 'react-native'
 import GalerieItem from './GalerieItem'
 import { updateNumberItems, setStar, unsetStar } from '../actions/itemActions'
 import { connect } from 'react-redux'
@@ -16,85 +16,67 @@ const styles = StyleSheet.create({
         // backgroundColor: 'white'
     },
     list: {
+      marginLeft: 5,
         flex: 1,
-        // justifyContent: 'center',
+        justifyContent: 'space-around',
         flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start'
+        //flexWrap: 'nowrap',
+        //alignItems: 'flex-start'
+      // borderColor: 'red',
+      // borderWidth: 1,
+
     }
 });
 
 class Galerie extends Component {
-  constructor(props) {
-    super(props)
-    // console.log("Liste constructor")
-    const items = this.props.filteredItems
-   const ds = new ListView.DataSource({
-      rowHasChanged: (r1,r2) => this.rowHasChanged(r1,r2)
-    });
-    this.state = {
-      dataSource: ds.cloneWithRows(items),
-      numberItems: this.props.filteredItems.length
-    }
-  }
-  // kein Neubau der Komponente bei Änderung
-  // sondern per Props-Änderung 
-  // https://github.com/reactjs/redux/issues/683
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.filteredItems !== this.props.filteredItems) {
-      // console.log("Liste componentWillReceiveProps", nextProps)
-      const items = nextProps.filteredItems
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(items),
-        numberItems: nextProps.filteredItems.length,
-      })
-      this.updateNumberItems()  
-    }
-  }
+
   componentWillMount () {
     // hier weiß man wieviele Items wirklich im State sind
-    this.updateNumberItems()
+    this.props.updateNumberItems(this.props.filteredItems.length)
   }
   componentDidUpdate () {
     // und hier dann bei Updates über componentWillReceiveProps
-    this.updateNumberItems()
+    this.props.updateNumberItems(this.props.filteredItems.length)
   }
 
-  updateNumberItems() {
-    // für Fusszeile die akt. Anzahl Items melden
-    this.props.updateNumberItems(this.state.numberItems)
+  getGalleriedList() {
+    const items = []
+    for (let i = 0; i < this.props.filteredItems.length; i+=2) {
+      items.push({li: this.props.filteredItems[i], re: this.props.filteredItems[i+1]})
+    }
+    return items
   }
 
   render() {
-    const { items, activeTab } = this.state
-    // console.log('render Liste', activeTab)
-    return (
-      <ListView
-          listSize={1000}
-          pageSize={8}
-          // "How early to start rendering rows before they come on screen, in pixels."
-          scrollRenderAheadDistance={200}
-          // offscreen child views are removed from their native backing superview when offscreen.
-          removeClippedSubviews={true}
-          
-          dataSource={this.state.dataSource}
-          renderRow={(item, sectionID, rowID, highlightRow) => this.renderRow(item, sectionID, rowID, highlightRow)}
-          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-
+    if (this.props.filteredItems.length === 0) {
+      return (
+        <View style={styles.empty}>
+          <Text>Keine Pilze gefunden.</Text>
+        </View>
+      )
+    } else {
+      const items = this.getGalleriedList()
+      console.log('render Liste', items)
+      return (
+        <FlatList
+          data={items}
+          renderItem={({item}) => this.renderRow(item)}
+          // ItemSeparatorComponent={() => (<View style={{height: 5}}/>)}
           style={styles.container}
-          contentContainerStyle={styles.list}
-      />
-    );
+          keyExtractor={item => item.li.id}
+        />
+      )
+    }
   }
-  rowHasChanged(r1, r2) {
-    // ändert sich immer - vermutlich Immutable von Redux sei Dank
-    return r1 !== r2
-  }
-  renderRow(item, sectionID, rowID, highlightRow) {
-    // console.log("render",sectionID, rowID)
+  renderRow({li: item_li, re: item_re}) {
+    // console.log("render itms", item_li, item_re)
     const { setStar, unsetStar } = this.props
-    const key = `${sectionID}-${rowID}`
-    return <GalerieItem key={key} item={item} setStar={setStar} unsetStar={unsetStar} />
+    return (
+      <View style={styles.list}>
+        <GalerieItem item={item_li} setStar={setStar} unsetStar={unsetStar} />
+        <GalerieItem item={item_re} setStar={setStar} unsetStar={unsetStar} />
+      </View>
+    )
   }
 }
 

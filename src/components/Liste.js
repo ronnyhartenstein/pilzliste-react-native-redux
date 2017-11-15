@@ -30,15 +30,10 @@ class Liste extends Component {
 
   componentWillMount () {
     // hier weiß man wieviele Items wirklich im State sind
-    this.updateNumberItems()
+    this.props.updateNumberItems(this.props.filteredItems.length)
   }
   componentDidUpdate () {
     // und hier dann bei Updates über componentWillReceiveProps
-    this.updateNumberItems()
-  }
-
-  updateNumberItems() {
-    // für Fusszeile die akt. Anzahl Items melden
     this.props.updateNumberItems(this.props.filteredItems.length)
   }
 
@@ -57,20 +52,27 @@ class Liste extends Component {
   }
 
   render() {
+    if (this.props.filteredItems.length === 0) {
+      return (
+        <View style={styles.empty}>
+          <Text>Keine Pilze gefunden.</Text>
+        </View>
+      )
+    } else {
       const items = this.getSectionizedList()
       // console.log('render Liste', items)
-
-    return (
-      <SectionList
+      return (
+        <SectionList
           renderItem={({item}) => this.renderRow(item)}
           renderSectionHeader={({section}) => this.renderSectionHeader(section)}
           sections={items}
           style={styles.container}
-          ItemSeparatorComponent={() => (<View style={{ height: 1, backgroundColor: '#CCCCCC'}}/>)}
+          ItemSeparatorComponent={() => (<View style={{height: 1, backgroundColor: '#CCCCCC'}}/>)}
           keyExtractor={item => item.id}
           // contentContainerStyle={styles.content}
-      />
-    );
+        />
+      )
+    }
   }
 
   renderRow(item) {

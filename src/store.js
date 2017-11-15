@@ -22,7 +22,9 @@ import daten_preload from '../daten/pilze.json'
 // console.log("daten preload: ", daten_preload)
 
 // Sortieren und Dubletten entfernen...
+// const daten_unique = _.take(daten_preload, 10)
 const daten_unique = _.sortedUniqBy(daten_preload, itm => ( itm.name.trim() ))
+
 // ID hinzu
 _.each(daten_unique, (itm, idx) => {
   itm.id = idx+1
